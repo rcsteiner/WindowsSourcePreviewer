@@ -1,0 +1,10 @@
+Name = "diff"
+Ext = .diff .patch
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "" 
+KeyContinue = "" 
+Group = 
+Keyword = 

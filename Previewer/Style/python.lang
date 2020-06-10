@@ -1,0 +1,11 @@
+Name = "python"
+Ext = .py .pyw
+LineComment ="#"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "ABCDEFGIKLMNOPRSTUVWZabcdefghilmnopqrstvwyz" 
+KeyContinue = "ADEFILNOPRSTWabcdefghijklmnoprstuvwxyz" 
+Group =  instre1 instre2
+Keyword =  ArithmeticError 1 AssertionError 1 AttributeError 1 BaseException 1 BlockingIOError 1 BrokenPipeError 1 BufferError 1 BytesWarning 1 ChildProcessError 1 ConnectionAbortedError 1 ConnectionError 1 ConnectionRefusedError 1 ConnectionResetError 1 DeprecationWarning 1 EOFError 1 Ellipsis 1 EnvironmentError 1 Exception 1 False 1 FileExistsError 1 FileNotFoundError 1 FloatingPointError 1 FutureWarning 1 GeneratorExit 1 IOError 1 ImportError 1 ImportWarning 1 IndentationError 1 IndexError 1 InterruptedError 1 IsADirectoryError 1 KeyError 1 KeyboardInterrupt 1 LookupError 1 MemoryError 1 ModuleNotFoundError 1 NameError 1 None 1 NotADirectoryError 1 NotImplemented 1 NotImplementedError 1 OSError 1 OverflowError 1 PendingDeprecationWarning 1 PermissionError 1 ProcessLookupError 1 RecursionError 1 ReferenceError 1 ResourceWarning 1 RuntimeError 1 RuntimeWarning 1 StopAsyncIteration 1 StopIteration 1 SyntaxError 1 SyntaxWarning 1 SystemError 1 SystemExit 1 TabError 1 TimeoutError 1 True 1 TypeError 1 UnboundLocalError 1 UnicodeDecodeError 1 UnicodeEncodeError 1 UnicodeError 1 UnicodeTranslateError 1 UnicodeWarning 1 UserWarning 1 ValueError 1 Warning 1 WindowsError 1 ZeroDivisionError 1 abs 1 all 1 and 0 any 1 as 0 ascii 1 assert 0 async 0 await 0 bin 1 bool 1 break 0 breakpoint 1 bytearray 1 bytes 1 callable 1 chr 1 class 0 classmethod 1 compile 1 complex 1 continue 0 copyright 1 credits 1 def 0 del 0 delattr 1 dict 1 dir 1 divmod 1 elif 0 else 0 enumerate 1 eval 1 except 0 exec 1 exit 1 filter 1 finally 0 float 1 for 0 format 1 from 0 frozenset 1 getattr 1 global 0 globals 1 hasattr 1 hash 1 help 1 hex 1 id 1 if 0 import 0 in 0 input 1 int 1 is 0 isinstance 1 issubclass 1 iter 1 lambda 0 len 1 license 1 list 1 locals 1 map 1 max 1 memoryview 1 min 1 next 1 nonlocal 0 not 0 object 1 oct 1 open 1 or 0 ord 1 pass 0 pow 1 print 1 property 1 quit 1 raise 0 range 1 repr 1 return 0 reversed 1 round 1 set 1 setattr 1 slice 1 sorted 1 staticmethod 1 str 1 sum 1 super 1 try 0 tuple 1 type 1 vars 1 while 0 with 0 yield 0 zip 1

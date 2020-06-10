@@ -1,0 +1,11 @@
+Name = "makefile"
+Ext = .mak .mk
+LineComment ="#"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "" 
+KeyContinue = "" 
+Group = 
+Keyword = 

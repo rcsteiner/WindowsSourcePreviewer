@@ -1,0 +1,11 @@
+Name = "matlab"
+Ext = .m
+LineComment ="%"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "bcefgioprstw" 
+KeyContinue = "abcdefhiklnorstuwy" 
+Group =  instre1
+Keyword =  break 0 case 0 catch 0 classdef 0 continue 0 else 0 elseif 0 end 0 for 0 function 0 global 0 if 0 otherwise 0 parfor 0 persistent 0 return 0 switch 0 try 0 while 0

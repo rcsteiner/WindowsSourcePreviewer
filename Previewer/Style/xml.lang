@@ -1,0 +1,12 @@
+Name = "xml"
+Ext = .xml .xaml .xsl .xslt .xsd .xul .kml .svg .mxml .xsml .wsdl .xlf .xliff .xbl .sxbl .sitemap .gml .gpx .plist .vcproj .vcxproj .csproj .csxproj .vbproj .dbproj
+LineComment =""
+BlockComment = "<!--" "-->"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "" 
+KeyContinue = "" 
+Group = 
+Keyword = xml 0 version 0

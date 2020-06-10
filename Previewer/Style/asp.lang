@@ -1,0 +1,11 @@
+Name = "asp"
+Ext = .asp
+LineComment ="'"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "abcdefghilmnoprstuvwx" 
+KeyContinue = "abcdefghijklmnoprstuvwxy" 
+Group =  instre1
+Keyword =  addhandler 0 addressof 0 alias 0 and 0 andalso 0 ansi 0 as 0 assembly 0 attribute 0 auto 0 begin 0 boolean 0 byref 0 byte 0 byval 0 call 0 case 0 catch 0 cbool 0 cbyte 0 cchar 0 cdate 0 cdbl 0 cdec 0 char 0 cint 0 class 0 clng 0 cobj 0 compare 0 const 0 continue 0 cshort 0 csng 0 cstr 0 ctype 0 currency 0 date 0 decimal 0 declare 0 default 0 delegate 0 dim 0 do 0 double 0 each 0 else 0 elseif 0 end 0 enum 0 erase 0 error 0 event 0 exit 0 explicit 0 false 0 finally 0 for 0 friend 0 function 0 get 0 gettype 0 global 0 gosub 0 goto 0 handles 0 if 0 implement 0 implements 0 imports 0 in 0 inherits 0 integer 0 interface 0 is 0 let 0 lib 0 like 0 load 0 long 0 loop 0 lset 0 me 0 mid 0 mod 0 module 0 mustinherit 0 mustoverride 0 mybase 0 myclass 0 namespace 0 new 0 next 0 not 0 nothing 0 notinheritable 0 notoverridable 0 object 0 on 0 option 0 optional 0 or 0 orelse 0 overloads 0 overridable 0 overrides 0 paramarray 0 preserve 0 private 0 property 0 protected 0 public 0 raiseevent 0 readonly 0 redim 0 rem 0 removehandler 0 resume 0 return 0 rset 0 select 0 set 0 shadows 0 shared 0 short 0 single 0 static 0 step 0 stop 0 string 0 structure 0 sub 0 synclock 0 then 0 throw 0 to 0 true 0 try 0 type 0 typeof 0 unicode 0 unload 0 until 0 variant 0 wend 0 when 0 while 0 with 0 withevents 0 writeonly 0 xor 0

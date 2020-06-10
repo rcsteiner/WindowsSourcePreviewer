@@ -1,0 +1,12 @@
+Name = "cs"
+Ext = .cs
+LineComment ="//"
+BlockComment = "/*" "*/"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "abcdefgijlnoprstuvwy" 
+KeyContinue = "abcdefghijklmnoprstuvwxyz" 
+Group =  instre1 type1
+Keyword =  abstract 0 add 0 alias 0 as 0 ascending 0 async 0 await 0 base 0 bool 1 break 0 byte 1 case 0 catch 0 char 1 checked 0 class 1 const 1 continue 0 decimal 1 default 0 delegate 0 descending 0 do 0 double 1 dynamic 0 else 0 enum 1 event 0 explicit 0 extern 0 false 0 finally 0 fixed 0 float 1 for 0 foreach 0 from 0 get 0 global 0 goto 0 group 0 if 0 implicit 0 in 0 int 1 interface 0 internal 0 into 0 is 0 join 0 let 0 lock 0 long 1 namespace 0 new 0 null 0 object 0 operator 0 orderby 0 out 0 override 0 params 0 partial 0 private 0 protected 0 public 0 readonly 0 ref 0 remove 0 return 0 sbyte 1 sealed 0 select 0 set 0 short 1 sizeof 0 stackalloc 0 static 1 string 1 struct 1 switch 0 this 0 throw 0 true 0 try 0 typeof 0 uint 1 ulong 1 unchecked 0 unsafe 0 ushort 1 using 0 value 0 var 1 virtual 0 void 1 where 0 while 0 yield 0

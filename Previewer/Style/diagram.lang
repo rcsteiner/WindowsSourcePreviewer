@@ -1,0 +1,11 @@
+Name = "diagram"
+Ext = .diagram
+LineComment ="//"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-=><|^%&/!~"
+Punctuation =":;.,][{})($#@\`"
+KeyStart = "1ABCDEFGILMNOPRSTVs" 
+KeyContinue = "*+01?ACDEGIKLMNOPQRSTVWabcdefghiklmnopqrstuxyz" 
+Group =  Keywords1 Keywords2 Keywords3 Keywords4 Keywords5 Keywords6 Keywords7 Keywords8
+Keyword =  1ST 1 A 0 ALT 1 AliasSection 5 Alternate 0 Author 5 BRK 1 C 7 CASE 1 COM 1 CONT 1 Connection 7 DL 4 E 1 ES 7 Enum 6 EnumProduction 1 EscapeSequence 7 Extension 5 Extensions 5 FOPT 1 G 4 GRP 1 GrammarSection 5 Group 4 ID 1 IGNORE 1 IncludeSection 5 LAST 1 LM 7 LMI 7 LN 1 LP 1 LS 4 LST 1 LexCharacter 6 LexMap 7 LexMapItem 7 LexProduction 1 LexRange 6 LexSymbol 6 LexicalSection 5 M 4 MARK 1 Mark 4 MaxChar 5 NEST 1 NT 7 Namespace 5 NonTerminal 7 O 4 OPT 1 Option 4 P 1 Production 1 R 4 R0 4 R1 4 RET 1 RL 4 RL* 4 RL+ 4 RL? 4 RN 4 Reference 6 Repeat 4 Repeat* 4 Repeat+ 4 Repeat? 4 RepeatN 4 S 2 SA 3 SEQ 1 SG 3 SL 3 SPAN 1 SS 3 STREAM 1 SW 1 SectionAlias 3 SectionGrammar 3 SectionLexical 3 SectionSyntax 3 Sequence 2 Start 5 SyntaxSection 5 TE 2 TE 6 TI 6 TOK 1 TR 6 TS 6 TT 2 TV 5 TabSize 5 Terminal 6 Terminal 6 TerminalEmpty 2 TerminalItem 6 TerminalRange 6 TerminalSymbol 6 TerminalToken 2 TerminalValue 5 TokenSection 3 VAR 1 Version 5 specification 5

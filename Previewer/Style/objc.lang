@@ -1,0 +1,12 @@
+Name = "objc"
+Ext = .mm
+LineComment ="//"
+BlockComment = "/*" "*/"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "BCINSabcdefgilnoprstuvw" 
+KeyContinue = "EILMOPUabcdefghiklmnoprstuvwxyz" 
+Group =  instre1 instre2 type1 type2
+Keyword =  BOOL 2 Class 2 IMP 2 NIL 0 NULL 0 SEL 2 auto 2 break 0 bycopy 3 byref 3 case 0 char 2 class 1 const 2 continue 0 default 0 defs 1 do 0 double 2 else 0 encode 1 end 1 enum 2 extern 2 float 2 for 0 goto 0 id 2 if 0 implementation 1 in 3 inout 3 int 2 interface 1 long 2 nil 0 oneway 3 out 3 private 1 protected 1 protocol 1 public 1 register 2 return 0 selector 1 self 0 short 2 signed 2 sizeof 0 static 2 struct 2 super 0 switch 0 typedef 0 union 2 unsigned 2 void 2 volatile 2 while 0

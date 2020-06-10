@@ -1,0 +1,11 @@
+Name = "ini"
+Ext = .ini .inf .url .wer
+LineComment =";"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "" 
+KeyContinue = "" 
+Group = 
+Keyword = 

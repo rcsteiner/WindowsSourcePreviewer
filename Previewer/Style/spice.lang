@@ -1,0 +1,11 @@
+Name = "spice"
+Ext = .scp .out
+LineComment ="*"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.][{})($#@\`"
+KeyStart = "abcdefghijlmnopqrstuvw" 
+KeyContinue = ",01_abcdefghiklmnopqrstuvwxyz" 
+Group =  instre1 instre2 type1
+Keyword =  abs 1 ac 0 alias 0 alter 0 alterparam 0 append 0 askvalue 1 askvalues 0 assertvalid 0 atan 1 autoscale 0 average 1 break 0 ceil 1 compose 0 copy 0 copytodoc 0 cos 1 db 1 dc 0 dcconv 2 delete 0 destroy 0 destroyvec 0 diff 0 differentiate 1 differentiatex 1 display 0 disto 0 dowhile 0 echo 0 else 0 end 0 ends 2 errorstop 0 exp 1 fftinit 0 filter 0 finalvalue 1 floor 1 foreach 0 fourier 0 freqtotime 0 function 0 functionundef 0 getcursorx 1 getcursory 1 getcursory0 1 getcursory1 1 getparam 1 goto 0 homecursors 0 if 0 im 1 include 2 initialvalue 1 integrate 1 integratex 1 interpolate 1 isdef 1 isdisplayed 0 isdisplayed 1 j 1 label 0 length 1 let 0 linearize 0 listing 0 ln 1 load 0 loadaccumulator 0 log 1 mag, 1 makelabel 0 makesmithplot 0 max 1 maxscale 1 mean 1 meanpts 1 min 1 minscale 1 model 2 movecursorleft 0 movecursorright 0 movelabel 0 msgbox 0 nameplot 0 newplot 0 nextparam 0 nextplot 1 nextvector 1 nodeset 2 noise 0 nopoints 0 norm 1 op 0 operatingpoint 1 options 2 param 2 ph 1 phase 1 phaseextend 1 pk_pk 1 plot 0 plotf 0 plotref 0 poly 0 pos 1 print 0 printcursors 0 printevent 0 printname 0 printplot 0 printstatus 0 printtext 0 printtol 0 printunits 0 printval 0 printvector 0 pulse 1 pwl 0 pz 0 quit 0 re 1 removesmithplot 0 rename 0 repeat 0 resume 0 rms 1 rmspts 1 rnd 1 rotate 0 runs 0 rusage 0 sameplot 1 save 0 sendplot 0 sendscript 0 sens 0 set 0 setcursor 0 setdoc 0 setlabel 0 setlabeltype 0 setmargins 0 setnthtrigger 0 setparam 0 setplot 0 setquery 0 setscaletype 0 setsource 0 settracecolor 0 settracestyle 0 settrigger 0 setunits 0 setvec 0 setvec 0 setxlimits 0 setylimits 0 show 0 showmod 0 sin 1 sort 0 sqrt 1 status 0 stddev 1 stddevpts 1 step 0 stop 0 subckt 2 switch 0 tan 1 tf 0 tfall 1 timetofreq 0 timetowave 0 tolerance 1 tran 0 trise 1 unalias 0 unalterparam 0 unitvec 1 unlet 0 unset 0 update 0 vector 1 version 0 view 0 wavefilter 0 wavetotime 0 where 0 while 0 write 0

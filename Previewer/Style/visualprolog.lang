@@ -1,0 +1,12 @@
+Name = "visualprolog"
+Ext = .pro .cl .i .pack .ph
+LineComment ="%"
+BlockComment = "/*" "*/"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "abcdefgilmnopqrstw" 
+KeyContinue = "acdefghilmnopqrstuvwxy" 
+Group =  instre1 instre2 type1 type2
+Keyword =  and 1 anyflow 1 apicall 1 bininclude 2 c 1 catch 1 class 0 clauses 0 constants 0 constructors 0 delegate 0 detail 3 determ 1 digits 1 div 1 do 1 domains 0 else 1 else 2 elseif 1 elseif 2 end 3 endif 2 erroneous 1 error 2 exception 3 export 2 externally 1 externally 2 facts 0 failure 1 finally 1 foreach 1 from 1 goal 0 guard 1 if 1 if 2 implement 0 in 1 include 2 inherits 0 interface 0 language 1 message 2 mod 1 monitor 0 multi 1 namespace 0 nondeterm 1 open 0 options 2 or 1 orelse 1 orrequires 2 otherwise 1 predicates 0 procedure 1 prolog 1 properties 0 quot 1 rem 1 requires 2 resolve 0 short 3 stdcall 1 supports 0 then 1 then 2 thiscall 1 try 1 withdomain 3

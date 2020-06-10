@@ -1,0 +1,11 @@
+Name = "smalltalk"
+Ext = .st
+BlockComment = """ """
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =";?.,][{})($#@\`"
+KeyStart = "inrw" 
+KeyContinue = ":FNTaefhiloprstu" 
+Group =  instre1
+Keyword =  ifFalse: 0 ifNil: 0 ifNotNil: 0 ifTrue: 0 isNil 0 notNil 0 repeat 0 whileFalse 0 whileFalse: 0 whileTrue 0 whileTrue: 0

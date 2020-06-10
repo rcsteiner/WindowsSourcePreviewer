@@ -1,0 +1,12 @@
+Name = "java"
+Ext = .java
+LineComment ="//"
+BlockComment = "/*" "*/"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "abcdefgilnprstvw" 
+KeyContinue = "abcdefghiklmnoprstuvwxyz" 
+Group =  instre1 type1
+Keyword =  abstract 1 assert 0 boolean 1 break 0 byte 1 case 0 catch 0 char 1 class 1 const 1 continue 0 default 0 do 0 double 1 else 0 enum 1 extends 0 false 0 final 1 finally 0 float 1 for 0 goto 0 if 0 implements 0 import 0 instanceof 0 int 1 interface 1 long 1 native 1 new 0 null 0 package 1 private 1 protected 1 public 1 return 0 short 1 static 1 strictfp 1 super 0 switch 0 synchronized 1 this 0 throw 0 throws 0 transient 1 true 0 try 0 void 1 volatile 1 while 0

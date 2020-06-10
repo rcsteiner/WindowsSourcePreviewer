@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{18DEAE7E-2ED1-4E6F-A553-9F036A5F6335}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FileExplorerPreview</RootNamespace>
+    <AssemblyName>FileExplorerPreview</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>3009, 3008</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>StrongNameKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="COMInterop\COLORREF.cs" />
+    <Compile Include="COMInterop\IInitializeWithFile.cs" />
+    <Compile Include="COMInterop\IInitializeWithStream.cs" />
+    <Compile Include="COMInterop\IObjectWithSite.cs" />
+    <Compile Include="COMInterop\IOleWindow.cs" />
+    <Compile Include="COMInterop\IPreviewHandler.cs" />
+    <Compile Include="COMInterop\IPreviewHandlerFrame.cs" />
+    <Compile Include="COMInterop\IPreviewHandlerVisuals.cs" />
+    <Compile Include="COMInterop\LOGFONT.cs" />
+    <Compile Include="COMInterop\MSG.cs" />
+    <Compile Include="COMInterop\RECT.cs" />
+    <Compile Include="FileBasedPreviewHandler.cs" />
+    <Compile Include="FileBasedPreviewHandlerControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Installation.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Previewer\Buffer\GetCharacterMethod.cs" />
+    <Compile Include="Previewer\Buffer\ReadBuffer.cs" />
+    <Compile Include="Previewer\Buffer\Buffer.cs" />
+    <Compile Include="Previewer\Buffer\IBuffer.cs" />
+    <Compile Include="Previewer\Draw\ITextContext.cs" />
+    <Compile Include="Previewer\Buffer\StreamBuffer.cs" />
+    <Compile Include="Previewer\Draw\TextContext.cs" />
+    <Compile Include="Previewer\Builder\InfoBuilder.cs" />
+    <Compile Include="Previewer\Controls\ScrollBar\HScrollBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Previewer\Controls\ScrollBar\ScrollBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Previewer\Controls\ScrollBar\ScrollBar.Designer.cs">
+      <DependentUpon>ScrollBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Previewer\Controls\ScrollBar\VScrollBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Previewer\Controls\StatusBar\DocStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Previewer\Controls\StatusBar\DocStatus.Designer.cs">
+      <DependentUpon>DocStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Previewer\Controls\ViewerPanel\ViewerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Previewer\Controls\ViewerPanel\ViewerPanel.Designer.cs">
+      <DependentUpon>ViewerPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Previewer\Draw\ColorMap.cs" />
+    <Compile Include="Previewer\Draw\LineFlags.cs" />
+    <Compile Include="Previewer\Draw\Palette.cs" />
+    <Compile Include="Previewer\Draw\TextDraw.cs" />
+    <Compile Include="Previewer\Editor\EditCommands.cs" />
+    <Compile Include="Previewer\Language\Delimiter.cs" />
+    <Compile Include="Previewer\Language\ILanguage.cs" />
+    <Compile Include="Previewer\Language\Language.cs" />
+    <Compile Include="Previewer\Language\LanguageManager.cs" />
+    <Compile Include="Previewer\Scanner\BlockCommentCharClassifier.cs" />
+    <Compile Include="Previewer\Scanner\CharClassifier.cs" />
+    <Compile Include="Previewer\Scanner\ColorManager.cs" />
+    <Compile Include="Previewer\Scanner\HtmlCharClassifier.cs" />
+    <Compile Include="Previewer\Scanner\ICharClassifier.cs" />
+    <Compile Include="Previewer\Scanner\InfoScanner.cs" />
+    <Compile Include="Previewer\Scanner\IScanner.cs" />
+    <Compile Include="Previewer\Scanner\IToken.cs" />
+    <Compile Include="Previewer\Scanner\Scanner.cs" />
+    <Compile Include="Previewer\Scanner\Token.cs" />
+    <Compile Include="Previewer\Scanner\TokenType.cs" />
+    <Compile Include="Previewer\Win32\Color.cs" />
+    <Compile Include="Previewer\Win32\ColorExtension.cs" />
+    <Compile Include="PreviewHandler.cs" />
+    <Compile Include="PreviewHandlerAttribute.cs" />
+    <Compile Include="PreviewHandlerControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewHandlerResources.Designer.cs" />
+    <Compile Include="PreviewHandlers\BinPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\CsvPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\FileTypeIconProvider.cs" />
+    <Compile Include="PreviewHandlers\InternetExplorerPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\MsiPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\PdfPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\ResourcesPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\ResxPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\SnkPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\SourcePreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\ZipPreviewHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreamBasedPreviewHandler.cs" />
+    <Compile Include="StreamBasedPreviewHandlerControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinUserInterop\Enums\DeviceCapabilities.cs" />
+    <Compile Include="WinUserInterop\Enums\DeviceContextType.cs" />
+    <Compile Include="WinUserInterop\Enums\DrawFormat.cs" />
+    <Compile Include="WinUserInterop\Enums\FontCharSet.cs" />
+    <Compile Include="WinUserInterop\Enums\FontClipPrecision.cs" />
+    <Compile Include="WinUserInterop\Enums\FontPitchAndFamily.cs" />
+    <Compile Include="WinUserInterop\Enums\FontPrecision.cs" />
+    <Compile Include="WinUserInterop\Enums\FontQuality.cs" />
+    <Compile Include="WinUserInterop\Enums\FontWeight.cs" />
+    <Compile Include="WinUserInterop\Enums\PenStyle.cs" />
+    <Compile Include="WinUserInterop\Enums\TextFormatFlags.cs" />
+    <Compile Include="WinUserInterop\Structures\CWPRETSTRUCT.cs" />
+    <Compile Include="WinUserInterop\Structures\DRAWTEXTPARAMS.cs" />
+    <Compile Include="WinUserInterop\Structures\LOGFONT.cs" />
+    <Compile Include="WinUserInterop\Structures\RECT.cs" />
+    <Compile Include="WinUserInterop\Structures\TEXTMETRIC.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Previewer\Controls\ScrollBar\ScrollBar.resx">
+      <DependentUpon>ScrollBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Previewer\Controls\StatusBar\DocStatus.resx">
+      <DependentUpon>DocStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Previewer\Controls\ViewerPanel\ViewerPanel.resx">
+      <DependentUpon>ViewerPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewHandlerResources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="install.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="installdebug.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="Previewer\Style\actionscript.lang" />
+    <EmbeddedResource Include="Previewer\Style\ada.lang" />
+    <EmbeddedResource Include="Previewer\Style\asm.lang" />
+    <EmbeddedResource Include="Previewer\Style\asn1.lang" />
+    <EmbeddedResource Include="Previewer\Style\asp.lang" />
+    <EmbeddedResource Include="Previewer\Style\autoit.lang" />
+    <EmbeddedResource Include="Previewer\Style\avs.lang" />
+    <EmbeddedResource Include="Previewer\Style\bash.lang" />
+    <EmbeddedResource Include="Previewer\Style\batch.lang" />
+    <EmbeddedResource Include="Previewer\Style\blitzbasic.lang" />
+    <EmbeddedResource Include="Previewer\Style\caml.lang" />
+    <EmbeddedResource Include="Previewer\Style\cmake.lang" />
+    <EmbeddedResource Include="Previewer\Style\cobol.lang" />
+    <EmbeddedResource Include="Previewer\Style\coffeescript.lang" />
+    <EmbeddedResource Include="Previewer\Style\cpp.lang" />
+    <EmbeddedResource Include="Previewer\Style\cs.lang" />
+    <EmbeddedResource Include="Previewer\Style\csound.lang" />
+    <EmbeddedResource Include="Previewer\Style\css.lang" />
+    <EmbeddedResource Include="Previewer\Style\d.lang" />
+    <EmbeddedResource Include="Previewer\Style\Default.lang" />
+    <EmbeddedResource Include="Previewer\Style\Default.palette" />
+    <EmbeddedResource Include="Previewer\Style\diagram.lang" />
+    <EmbeddedResource Include="Previewer\Style\diff.lang" />
+    <EmbeddedResource Include="Previewer\Style\erlang.lang" />
+    <EmbeddedResource Include="Previewer\Style\escript.lang" />
+    <EmbeddedResource Include="Previewer\Style\Extension.Map" />
+    <EmbeddedResource Include="Previewer\Style\forth.lang" />
+    <EmbeddedResource Include="Previewer\Style\fortran.lang" />
+    <EmbeddedResource Include="Previewer\Style\fortran77.lang" />
+    <EmbeddedResource Include="Previewer\Style\freebasic.lang" />
+    <EmbeddedResource Include="Previewer\Style\grammar.lang" />
+    <EmbeddedResource Include="Previewer\Style\gui4cli.lang" />
+    <EmbeddedResource Include="Previewer\Style\haskell.lang" />
+    <EmbeddedResource Include="Previewer\Style\html.lang" />
+    <EmbeddedResource Include="Previewer\Style\ihex.lang" />
+    <EmbeddedResource Include="Previewer\Style\ini.lang" />
+    <EmbeddedResource Include="Previewer\Style\inno.lang" />
+    <EmbeddedResource Include="Previewer\Style\java.lang" />
+    <EmbeddedResource Include="Previewer\Style\javascript.js.lang" />
+    <EmbeddedResource Include="Previewer\Style\javascript.lang" />
+    <EmbeddedResource Include="Previewer\Style\json.lang" />
+    <EmbeddedResource Include="Previewer\Style\jsp.lang" />
+    <EmbeddedResource Include="Previewer\Style\kix.lang" />
+    <EmbeddedResource Include="Previewer\Style\latex.lang" />
+    <EmbeddedResource Include="Previewer\Style\lisp.lang" />
+    <EmbeddedResource Include="Previewer\Style\LLVM IR.lang" />
+    <EmbeddedResource Include="Previewer\Style\lua.lang" />
+    <EmbeddedResource Include="Previewer\Style\makefile.lang" />
+    <EmbeddedResource Include="Previewer\Style\Markdown %28Default%29.lang" />
+    <EmbeddedResource Include="Previewer\Style\matlab.lang" />
+    <EmbeddedResource Include="Previewer\Style\mmixal.lang" />
+    <EmbeddedResource Include="Previewer\Style\nimrod.lang" />
+    <EmbeddedResource Include="Previewer\Style\nncrontab.lang" />
+    <EmbeddedResource Include="Previewer\Style\normal.lang" />
+    <EmbeddedResource Include="Previewer\Style\nsis.lang" />
+    <EmbeddedResource Include="Previewer\Style\objc.lang" />
+    <EmbeddedResource Include="Previewer\Style\oscript.lang" />
+    <EmbeddedResource Include="Previewer\Style\pascal.lang" />
+    <EmbeddedResource Include="Previewer\Style\perl.lang" />
+    <EmbeddedResource Include="Previewer\Style\php.lang" />
+    <EmbeddedResource Include="Previewer\Style\postscript.lang" />
+    <EmbeddedResource Include="Previewer\Style\powershell.lang" />
+    <EmbeddedResource Include="Previewer\Style\props.lang" />
+    <EmbeddedResource Include="Previewer\Style\pseudo.lang" />
+    <EmbeddedResource Include="Previewer\Style\purebasic.lang" />
+    <EmbeddedResource Include="Previewer\Style\python.lang" />
+    <EmbeddedResource Include="Previewer\Style\r.lang" />
+    <EmbeddedResource Include="Previewer\Style\rc.lang" />
+    <EmbeddedResource Include="Previewer\Style\rebol.lang" />
+    <EmbeddedResource Include="Previewer\Style\registry.lang" />
+    <EmbeddedResource Include="Previewer\Style\ruby.lang" />
+    <EmbeddedResource Include="Previewer\Style\rust.lang" />
+    <EmbeddedResource Include="Previewer\Style\scheme.lang" />
+    <EmbeddedResource Include="Previewer\Style\searchResult.lang" />
+    <EmbeddedResource Include="Previewer\Style\smalltalk.lang" />
+    <EmbeddedResource Include="Previewer\Style\spice.lang" />
+    <EmbeddedResource Include="Previewer\Style\sql.lang" />
+    <EmbeddedResource Include="Previewer\Style\srec.lang" />
+    <EmbeddedResource Include="Previewer\Style\swift.lang" />
+    <EmbeddedResource Include="Previewer\Style\tcl.lang" />
+    <EmbeddedResource Include="Previewer\Style\tehex.lang" />
+    <EmbeddedResource Include="Previewer\Style\tex.lang" />
+    <EmbeddedResource Include="Previewer\Style\txt2tags.lang" />
+    <EmbeddedResource Include="Previewer\Style\vb.lang" />
+    <EmbeddedResource Include="Previewer\Style\verilog.lang" />
+    <EmbeddedResource Include="Previewer\Style\vhdl.lang" />
+    <EmbeddedResource Include="Previewer\Style\visualprolog.lang" />
+    <EmbeddedResource Include="Previewer\Style\xml.lang" />
+    <EmbeddedResource Include="Previewer\Style\yaml.lang" />
+    <EmbeddedResource Include="Previewer\Style\z.lang" />
+    <EmbeddedResource Include="Previewer\Style\c.lang" />
+    <None Include="StrongNameKey.snk" />
+    <None Include="uninstall.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MSDN.ico" />
+    <Content Include="Resources\TreeView_XP_Explorer_ParentNode.gif" />
+    <Content Include="WinUserInterop\Todo.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Previewer\NotUsed\" />
+    <Folder Include="Previewer\Parser\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,11 @@
+Name = "props"
+Ext = .properties
+LineComment =";"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "" 
+KeyContinue = "" 
+Group = 
+Keyword = 

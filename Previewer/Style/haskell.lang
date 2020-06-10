@@ -1,0 +1,11 @@
+Name = "haskell"
+Ext = .hs .lhs .las
+LineComment ="--"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "_acdehilmnopqrtw" 
+KeyContinue = "acdefghilmnoprstuvwxy" 
+Group =  instre1
+Keyword =  _ 0 as 0 case 0 class 0 data 0 default 0 deriving 0 do 0 else 0 hiding 0 if 0 import 0 in 0 infix 0 infixl 0 infixr 0 instance 0 let 0 module 0 newtype 0 of 0 proc 0 qualified 0 rec 0 then 0 type 0 where 0

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ArrayOfTodoItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TodoItem>
+    <Completion>0</Completion>
+    <Finished>false</Finished>
+    <Title>Merge with IntelliEditor project</Title>
+  </TodoItem>
+  <TodoItem>
+    <Completion>0</Completion>
+    <Finished>false</Finished>
+    <Title>Merge Position/Offset etc to single system</Title>
+  </TodoItem>
+  <TodoItem>
+    <Completion>0</Completion>
+    <Finished>false</Finished>
+    <Title>Merge in GCore routines for editor i.e. keep preview simple though.</Title>
+  </TodoItem>
+  <TodoItem>
+    <Completion>0</Completion>
+    <Finished>false</Finished>
+    <Title>add task here</Title>
+  </TodoItem>
+</ArrayOfTodoItem>

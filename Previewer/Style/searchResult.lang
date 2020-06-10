@@ -1,0 +1,10 @@
+Name = "searchResult"
+Ext = .
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "" 
+KeyContinue = "" 
+Group =  instre1 instre2 type1
+Keyword = 

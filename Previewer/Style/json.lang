@@ -1,0 +1,11 @@
+Name = "json"
+Ext = .json
+LineComment =""
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#\`"
+KeyStart = "@fnt" 
+KeyContinue = "abcdeghilnoprstuvxy" 
+Group =  instre1 instre2
+Keyword =  @base 1 @container 1 @context 1 @graph 1 @id 1 @index 1 @language 1 @list 1 @reverse 1 @set 1 @type 1 @value 1 @vocab 1 false 0 null 0 true 0

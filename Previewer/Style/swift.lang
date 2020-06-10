@@ -1,0 +1,12 @@
+Name = "swift"
+Ext = .swift
+LineComment ="//"
+BlockComment = "/*" "*/"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+><|^%*&/!~"
+Punctuation =":;?,][{})($#@\`"
+KeyStart = "PST_acdefgiklmnoprstuvw" 
+KeyContinue = ".=CEFILMNOSTU_abcdefghiklmnopqrstuvwxyz" 
+Group =  instre1 type1 type2
+Keyword =  Protocol 2 Self 1 Type 2 __COLUMN__ 1 __FILE__ 1 __FUNCTION__ 1 __LINE__ 1 as 1 associativity 2 case 0 class 0 continue 0 convenience 2 default 0 deinit 0 didSet 2 do 0 dynamic 2 dynamicType 1 else 0 enum 0 extension 0 fallthrough 0 false 1 final 2 for 0 func 0 get 2 if 0 import 0 in 0 infix 2 init 0 inout 2 internal 0 is 1 keywordclass.swift.statements=break 0 lazy 2 left 2 let 0 mutating 2 nil 1 none 2 nonmutating 2 operator 0 optional 2 override 2 postfix 2 precedence 2 prefix 2 private 0 protocol 0 public 0 required 2 return 0 right 2 self 1 set 2 static 0 struct 0 subscript 0 super 1 switch 0 true 1 typealias 0 unowned 2 var 0 weak 2 where 0 while 0 willSet 2

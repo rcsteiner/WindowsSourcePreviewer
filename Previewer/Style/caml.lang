@@ -1,0 +1,12 @@
+Name = "caml"
+Ext = .ml .mli .sml .thy
+LineComment =""
+BlockComment = "(*" "*)"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "NSabcdefilmnoprstuvw" 
+KeyContinue = "abcdefghijlmnoprstuvwxyz" 
+Group =  instre1 instre2 type1
+Keyword =  None 1 Some 1 and 0 array 2 as 0 asr 0 assert 0 begin 0 bool 2 char 2 class 0 constraint 0 do 0 done 0 downto 0 else 0 end 0 exception 0 external 0 false 0 float 2 for 0 fun 0 function 0 functor 0 if 0 ignore 1 in 0 include 0 inherit 0 initializer 0 int 2 land 0 lazy 0 let 0 list 2 lnot 1 lor 0 lsl 0 lsr 0 lxor 0 match 0 method 0 mod 0 module 0 mutable 0 new 0 object 0 of 0 open 0 option 1 or 0 pred 1 private 0 rec 0 ref 1 sig 0 string 2 struct 0 succ 1 then 0 to 0 true 0 try 0 type 0 unit 2 val 0 virtual 0 when 0 while 0 with 0

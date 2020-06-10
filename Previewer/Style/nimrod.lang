@@ -1,0 +1,11 @@
+Name = "nimrod"
+Ext = .nim
+LineComment ="#"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "abcdefgilmnoprstvwxy" 
+KeyContinue = "abcdefhijklmnoprstuvxy" 
+Group =  instre1
+Keyword =  addr 0 and 0 as 0 asm 0 block 0 break 0 case 0 cast 0 const 0 continue 0 converter 0 discard 0 div 0 elif 0 else 0 end 0 enum 0 except 0 exception 0 finally 0 for 0 from 0 generic 0 if 0 implies 0 import 0 in 0 include 0 is 0 isnot 0 iterator 0 lambda 0 macro 0 method 0 mod 0 nil 0 not 0 notin 0 object 0 of 0 or 0 out 0 proc 0 ptr 0 raise 0 ref 0 return 0 shl 0 shr 0 template 0 try 0 tuple 0 type 0 var 0 when 0 where 0 while 0 with 0 without 0 xor 0 yield 0

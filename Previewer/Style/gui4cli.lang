@@ -1,0 +1,10 @@
+Name = "gui4cli"
+Ext = .
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "" 
+KeyContinue = "" 
+Group =  instre1 instre2 type1 type2 type3
+Keyword = 

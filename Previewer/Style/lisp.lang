@@ -1,0 +1,11 @@
+Name = "lisp"
+Ext = .lsp .lisp
+LineComment =";"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "|^%&!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "*+-/<=>abcdefghilmnopqrstvz" 
+KeyContinue = "12=abcdefghiklmnopqrstuvwxy" 
+Group =  instre1 instre2
+Keyword =  * 0 + 0 - 0 / 0 < 0 <= 0 = 0 > 0 >= 0 abs 0 and 0 append 0 apply 0 aref 0 array 0 assoc 0 atom 0 backquote 0 baktrace 0 bignums 0 boundp 0 break 0 caaaar 0 caaadr 0 caaar 0 caadar 0 caaddr 0 caadr 0 caar 0 cadaar 0 cadadr 0 cadar 0 caddar 0 cadddr 0 caddr 0 cadr 0 car 0 case 0 catch 0 cdaaar 0 cdaadr 0 cdaar 0 cdadar 0 cdaddr 0 cdadr 0 cdar 0 cddaar 0 cddadr 0 cddar 0 cdddar 0 cddddr 0 cdddr 0 cddr 0 cdr 0 cerror 0 complement 0 cond 0 cons 0 consp 0 continue 0 cos 0 defmacro 0 defun 0 delete 0 do 0 dolist 0 dotimes 0 eq 0 eql 0 equal 0 error 0 errset 0 eval 0 evalhook 0 evenp 0 exp 0 expt 0 float 0 funcall 0 function 0 gensym 0 get 0 getf 0 go 0 hash 0 identity 0 if 0 integer 0 intern 0 l 0 lambda 0 last 0 length 0 let 0 list 0 listp 0 logand 0 logbitp 0 logcount 0 logeqv 0 logior 0 lognand 0 lognor 0 lognot 0 logorc2 0 logtest 0 logxor 0 make 0 mapc 0 mapcan 0 mapcar 0 mapcon 0 mapl 0 maplist 0 max 0 member 0 min 0 minusp 0 name 0 nconc 0 nil 0 not 0 nsublis 0 nsubst 0 nth 0 nthcdr 0 null 0 numberp 0 oddp 0 or 0 plist 0 plusp 0 princ 0 prog 0 prog1 0 prog2 0 progn 0 putprop 0 quote 0 random 0 rem 0 remove 0 remprop 0 return 0 reverse 0 rplaca 0 rplacd 0 set 0 setf 0 setq 0 sin 0 sqrt 0 sublis 0 subst 0 symbol 0 symbolp 0 tan 0 throw 0 truncate 0 value 0 zerop 0

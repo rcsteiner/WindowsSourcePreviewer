@@ -1,0 +1,11 @@
+Name = "batch"
+Ext = .bat .cmd .nt
+LineComment ="REM"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "abcdefgilmnprstv" 
+KeyContinue = "1234acdefghiklmnoprstuvxy" 
+Group =  instre1
+Keyword =  assoc 0 aux 0 break 0 call 0 cd 0 chcp 0 chdir 0 choice 0 cls 0 cmdextversion 0 color 0 com 0 com1 0 com2 0 com3 0 com4 0 con 0 copy 0 country 0 ctty 0 date 0 defined 0 del 0 dir 0 do 0 dpath 0 echo 0 else 0 endlocal 0 erase 0 errorlevel 0 exist 0 exit 0 for 0 ftype 0 goto 0 if 0 in 0 loadfix 0 loadhigh 0 lpt 0 lpt1 0 lpt2 0 lpt3 0 lpt4 0 md 0 mkdir 0 move 0 not 0 nul 0 path 0 pause 0 popd 0 prn 0 prompt 0 pushd 0 rd 0 rem 0 ren 0 rename 0 rmdir 0 set 0 setlocal 0 shift 0 start 0 time 0 title 0 type 0 ver 0 verify 0 vol 0

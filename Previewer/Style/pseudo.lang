@@ -1,0 +1,11 @@
+Name = "pseudo"
+Ext = .pc
+LineComment ="//"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =";?.,][{})($#@\`"
+KeyStart = ""ABCDEFIMNOPRSTUWe" 
+KeyContinue = "":DNORSTabcdefghijlmnoprstuvwxy" 
+Group =  Keywords1 Keywords2 Keywords3 Keywords4 Keywords5 Keywords6
+Keyword =  "RunTime 5 "Semantic 5 "Syntax 5 AND 1 Boolean 0 Boolean 3 Call 0 Case 0 Char 3 Class 0 Constant 0 Declare 0 Default 0 Display 0 Do 0 Else 0 End 0 Extends 0 False 2 For 0 Function 0 If 0 Input 0 Integer 3 Module 0 NOT 1 New 0 OR 1 Object 3 Private 0 Program 0 Protected 0 Public 0 Real 3 Ref 0 Return 0 Select 0 Set 0 String 3 Switch 0 Then 0 To 0 True 2 Until 0 Warning: 4 While 0 error:" 5 error:" 5 error:" 5

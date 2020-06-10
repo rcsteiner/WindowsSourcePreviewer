@@ -1,0 +1,11 @@
+ame = "pascal"
+Ext = .pas .pp .p .inc .lpr
+BlockComment = "{" "}"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?,][{})($#@\`"
+KeyStart = "abcdefgilmnoprstuvwx" 
+KeyContinue = ".abcdefghijklmnoprstuvwxyz" 
+Group =  instre1
+Keyword =  and 0 array 0 asm 0 begin 0 case 0 cdecl 0 class 0 const 0 constructor 0 default 0 destructor 0 div 0 do 0 downto 0 else 0 end 0 end. 0 except 0 exit 0 exports 0 external 0 far 0 file 0 finalization 0 finally 0 for 0 function 0 goto 0 if 0 implementation 0 in 0 index 0 inherited 0 initialization 0 inline 0 interface 0 label 0 library 0 message 0 mod 0 near 0 nil 0 not 0 object 0 of 0 on 0 or 0 out 0 overload 0 override 0 packed 0 pascal 0 private 0 procedure 0 program 0 property 0 protected 0 public 0 published 0 raise 0 read 0 record 0 register 0 repeat 0 resourcestring 0 safecall 0 set 0 shl 0 shr 0 stdcall 0 stored 0 string 0 then 0 threadvar 0 to 0 try 0 type 0 unit 0 until 0 uses 0 var 0 virtual 0 while 0 with 0 write 0 xor 0

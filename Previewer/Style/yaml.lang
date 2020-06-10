@@ -1,0 +1,11 @@
+Name = "yaml"
+Ext = .yml .yaml
+LineComment ="#"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "fnty" 
+KeyContinue = "aelorsu" 
+Group =  instre1
+Keyword =  false 0 no 0 true 0 yes 0
