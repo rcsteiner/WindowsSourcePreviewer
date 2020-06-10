@@ -7,10 +7,10 @@ as mx ada ads adb asm mib asp au3 avs avsi bash sh bsh csh bash_profile bashrc p
 
 # Snapshots
 The include test program can show a file in the viewer panel.
-![](Snapshots\TestProgram.png)
+![](Snapshots/TestProgram.png)
 
 In File Explorer.
-![](Snapshots\FileExplorerPreview.png)
+![](Snapshots/FileExplorerPreview.png)
 
 # Building
 The project is built in Visual Studio 2019.  Open the solution and compile.  In the bin folder (debug or release), are batch files  to install (install.bat) and uninstall (uninstall.bat) the previewer into windows.  The TestViewer project is an executable that can be used to test the viewer and run it.
