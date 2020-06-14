@@ -109,7 +109,7 @@ namespace Scan
             if (Text[0] == 0xff && Text[1] == 0xfe)
             {
                 IsUnicode     = true;
-                _position     = 1;
+                _position     = 2;
                 _getCharacter = GetCharacterLittleEndian;
                 return;
             }
@@ -117,7 +117,7 @@ namespace Scan
             {
                 IsUnicode     = true;
                 LittleEndian  = false;
-                _position     = 1;
+                _position     = 2;
                 _getCharacter = GetCharacterBigEndian;
                 return;
             }
