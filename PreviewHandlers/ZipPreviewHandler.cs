@@ -1,48 +1,64 @@
-// Stephen Toub
-
-using System.IO;
-using System.IO.Compression;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace MsdnMag
 {
-    [PreviewHandler("MSDN Magazine ZIP Preview Handler", ".zip;.gadget", "{c0a64ec6-729b-442d-88ce-d76a9fc69e44}")]
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    ///  The Zip Preview Handler Class definition.
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    [PreviewHandler("MSDN Magazine ZIP Preview Handler", ".zip;.gadget", "{D694DE84-EE56-46E2-8EEC-69B44C86BDA5}")]
     [ProgId("MsdnMag.ZipPreviewHandler")]
-    [Guid("853f35e3-bd13-417b-b859-1df25be6c834")]
+    [Guid("AC73332B-6C6F-4250-957A-2B2813CC3FD1")]
     [ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
     public sealed class ZipPreviewHandler : FileBasedPreviewHandler
     {
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Create Preview Handler Control.
+        /// </summary>
+        /// <returns>
+        ///  The MsdnMag.PreviewHandlerControl value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         protected override PreviewHandlerControl CreatePreviewHandlerControl()
         {
             return new ZipPreviewHandlerControl();
         }
-
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  The Zip Preview Handler Control Class definition.
+        /// </summary>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private sealed class ZipPreviewHandlerControl : FileBasedPreviewHandlerControl
         {
+            private FileTypeIconProvider _iconProvider = new FileTypeIconProvider();
+
             public override void Load(FileInfo file)
             {
-                TreeView folderView = new TreeView();
-                folderView.ImageList = _iconProvider.Icons;
-                folderView.Dock = DockStyle.Fill;
-                folderView.FullRowSelect = true;
-                folderView.ShowLines = true;
-                folderView.ShowPlusMinus = true;
-                folderView.ShowRootLines = true;
-                folderView.LabelEdit = false;
-                folderView.BorderStyle = BorderStyle.None;
+                var folderView                = new TreeView();
+                folderView.ImageList          = _iconProvider.Icons;
+                folderView.Dock               = DockStyle.Fill;
+                folderView.FullRowSelect      = true;
+                folderView.ShowLines          = true;
+                folderView.ShowPlusMinus      = true;
+                folderView.ShowRootLines      = true;
+                folderView.LabelEdit          = false;
+                folderView.BorderStyle        = BorderStyle.None;
                 folderView.TreeViewNodeSorter = new NodeSorter();
 
-                List<string> filenames = new List<string>();
+                var filenames = new List<string>();
 
-                using (ZipArchive zip = ZipFile.OpenRead(file.FullName))
+                using (var zip = ZipFile.OpenRead(file.FullName))
                 {
-
                     foreach (var entry in zip.Entries)
                     {
                         {
@@ -51,7 +67,7 @@ namespace MsdnMag
                     }
                 }
 
-                TreeNode root = ConvertFilenamesToTreeRoot(file.Name, filenames);
+                var root = ConvertFilenamesToTreeRoot(file.Name, filenames);
                 folderView.Nodes.Add(root);
                 root.Expand();
 
@@ -59,9 +75,9 @@ namespace MsdnMag
                 {
                     if (folderView.SelectedNode != null && folderView.SelectedNode.Tag as string != null)
                     {
-                        TreeNode selectedNode = folderView.SelectedNode;
-                        ZipArchive zipToOpen =ZipFile.OpenRead(file.FullName);
-                        string tempPath = ExtractZipEntryToFile((string)selectedNode.Tag, zipToOpen);
+                        var selectedNode = folderView.SelectedNode;
+                        var zipToOpen    = ZipFile.OpenRead(file.FullName);
+                        var tempPath     = ExtractZipEntryToFile((string) selectedNode.Tag, zipToOpen);
                         zipToOpen.Dispose();
                         Process.Start(tempPath);
                     }
@@ -70,41 +86,30 @@ namespace MsdnMag
                 Controls.Add(folderView);
             }
 
-            private class NodeSorter : IComparer
-            {
-                int IComparer.Compare(object x, object y)
-                {
-                    TreeNode node1 = (TreeNode)x;
-                    TreeNode node2 = (TreeNode)y;
-
-                    string tag1 = node1.Tag as string;
-                    string tag2 = node2.Tag as string;
-
-                    if (tag1 == null && tag2 == null) return StrCmpLogicalW(node1.Text, node2.Text);
-                    else if (tag1 == tag2) return 0;
-                    else if (tag1 == null) return -1;
-                    else if (tag2 == null) return 1;
-                    else return StrCmpLogicalW(tag1, tag2);
-                }
-
-                [DllImport("shlwapi.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
-                private static extern int StrCmpLogicalW(string strA, string strB);
-            }
-
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// <summary>
+            ///  Method: Convert Filenames To Tree Root.
+            /// </summary>
+            /// <param name="rootName">  The root Name.</param>
+            /// <param name="names">     The names.</param>
+            /// <returns>
+            ///  The System.Windows.Forms.TreeNode value.
+            /// </returns>
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             private TreeNode ConvertFilenamesToTreeRoot(string rootName, IEnumerable<string> names)
             {
-                TreeNode rootNode = new TreeNode(rootName);
+                var rootNode        = new TreeNode(rootName);
                 rootNode.ImageIndex = _iconProvider.FolderIndex;
-                foreach (string name in names)
+                foreach (var name in names)
                 {
-                    string[] pathParts = name.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-                    TreeNode parent = rootNode;
-                    for(int i=0; i<pathParts.Length; i++)
+                    var pathParts = name.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                    var parent = rootNode;
+                    for (var i = 0; i < pathParts.Length; i++)
                     {
-                        string pathPart = pathParts[i];
-                        TreeNode[] foundNodes = parent.Nodes.Find(pathPart, false);
+                        var pathPart = pathParts[i];
+                        var foundNodes = parent.Nodes.Find(pathPart, false);
                         TreeNode partNode;
-                        if (foundNodes.Length == 0 || i == pathParts.Length-1)
+                        if (foundNodes.Length == 0 || i == pathParts.Length - 1)
                         {
                             partNode = new TreeNode(pathPart);
                             partNode.Name = pathPart;
@@ -114,29 +119,48 @@ namespace MsdnMag
                                 partNode.ImageIndex = _iconProvider.GetIconIndexForFile(name);
                                 partNode.Tag = name;
                             }
-                            else partNode.ImageIndex = _iconProvider.FolderIndex;
+                            else
+                            {
+                                partNode.ImageIndex = _iconProvider.FolderIndex;
+                            }
                         }
                         else
                         {
                             partNode = foundNodes[0];
                         }
+
                         partNode.SelectedImageIndex = partNode.ImageIndex;
                         parent = partNode;
                     }
                 }
+
                 return rootNode;
             }
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// <summary>
+            ///  Method: Extract Zip Entry To File.
+            /// </summary>
+            /// <param name="entryName">  The entry Name.</param>
+            /// <param name="zip">        The zip.</param>
+            /// <returns>
+            ///  The string value.
+            /// </returns>
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             private static string ExtractZipEntryToFile(string entryName, ZipArchive zip)
             {
-                ZipArchiveEntry entry = zip.GetEntry(entryName);
-                string tempPath = Path.GetTempPath() + Path.GetFileName(entry.Name);
+                var entry    = zip.GetEntry(entryName);
+                var tempPath = Path.GetTempPath() + Path.GetFileName(entry.Name);
                 entry.ExtractToFile(tempPath);
                 return tempPath;
             }
 
-            private FileTypeIconProvider _iconProvider = new FileTypeIconProvider();
-
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// <summary>
+            ///  Method: Dispose.
+            /// </summary>
+            /// <param name="disposing">  True if disposing.</param>
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             protected override void Dispose(bool disposing)
             {
                 if (disposing && _iconProvider != null)
@@ -144,7 +168,59 @@ namespace MsdnMag
                     _iconProvider.Dispose();
                     _iconProvider = null;
                 }
+
                 base.Dispose(disposing);
+            }
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// <summary>
+            ///  The Node Sorter Class definition.
+            /// </summary>
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            private class NodeSorter : IComparer
+            {
+                int IComparer.Compare(object x, object y)
+                {
+                    var node1 = (TreeNode) x;
+                    var node2 = (TreeNode) y;
+
+                    var tag1 = node1.Tag as string;
+                    var tag2 = node2.Tag as string;
+
+                    if (tag1 == null && tag2 == null)
+                    {
+                        return StrCmpLogicalW(node1.Text, node2.Text);
+                    }
+
+                    if (tag1 == tag2)
+                    {
+                        return 0;
+                    }
+
+                    if (tag1 == null)
+                    {
+                        return -1;
+                    }
+
+                    if (tag2 == null)
+                    {
+                        return 1;
+                    }
+
+                    return StrCmpLogicalW(tag1, tag2);
+                }
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /// <summary>
+                ///  Method: string compare Logical W.
+                /// </summary>
+                /// <param name="strA">  The string A.</param>
+                /// <param name="strB">  The string B.</param>
+                /// <returns>
+                ///  The integer value.
+                /// </returns>
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////
+                [DllImport("shlwapi.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
+                private static extern int StrCmpLogicalW(string strA, string strB);
             }
         }
     }

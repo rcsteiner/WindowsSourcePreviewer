@@ -169,10 +169,17 @@ namespace MsdnMag
             if (t != null && t.IsSubclassOf(typeof(PreviewHandler)))
             {
                 object[] attrs = (object[])t.GetCustomAttributes(typeof(PreviewHandlerAttribute), true);
-                if (attrs != null && attrs.Length == 1)
+                try
                 {
-                    PreviewHandlerAttribute attr = attrs[0] as PreviewHandlerAttribute;
-                    RegisterPreviewHandler(attr.Name, attr.Extension, t.GUID.ToString("B"), attr.AppId);
+                    if (attrs != null && attrs.Length == 1)
+                    {
+                        PreviewHandlerAttribute attr = attrs[0] as PreviewHandlerAttribute;
+                        RegisterPreviewHandler(attr.Name, attr.Extension, t.GUID.ToString("B"), attr.AppId);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Trace.WriteLine(e);
                 }
             }
         }
@@ -183,10 +190,17 @@ namespace MsdnMag
             if (t != null && t.IsSubclassOf(typeof(PreviewHandler)))
             {
                 object[] attrs = (object[])t.GetCustomAttributes(typeof(PreviewHandlerAttribute), true);
-                if (attrs != null && attrs.Length == 1)
+                try
                 {
-                    PreviewHandlerAttribute attr = attrs[0] as PreviewHandlerAttribute;
-                    UnregisterPreviewHandler(attr.Extension, t.GUID.ToString("B"), attr.AppId);
+                    if (attrs != null && attrs.Length == 1)
+                    {
+                        PreviewHandlerAttribute attr = attrs[0] as PreviewHandlerAttribute;
+                        UnregisterPreviewHandler(attr.Extension, t.GUID.ToString("B"), attr.AppId);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Trace.WriteLine(e);
                 }
             }
         }
@@ -243,16 +257,31 @@ namespace MsdnMag
         {
             foreach (string extension in extensions.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                Trace.WriteLine("Unregistering extension '" + extension + "' with previewer '" + previewerGuid + "'");
-                using (RegistryKey shellexKey = Registry.ClassesRoot.OpenSubKey(extension + "\\shellex", true))
+                Trace.WriteLine($"Unregistering extension '{extension}' with previewer '{previewerGuid}'");
+                try
                 {
-                    shellexKey.DeleteSubKey("{8895b1c6-b41f-4c1c-a562-0d564250836f}");
+                    using (RegistryKey shellexKey = Registry.ClassesRoot.OpenSubKey(extension + "\\shellex", true))
+                    {
+                        Trace.WriteLine($"Removing subkey '{extension}' with previewer '{previewerGuid}' on shellexKey={shellexKey}");
+                        shellexKey.DeleteSubKey("{8895b1c6-b41f-4c1c-a562-0d564250836f}");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Trace.WriteLine(e);
                 }
             }
 
-            using (RegistryKey appIdsKey = Registry.ClassesRoot.OpenSubKey("AppID", true))
+            try
             {
-                appIdsKey.DeleteSubKey(appId);
+                using (RegistryKey appIdsKey = Registry.ClassesRoot.OpenSubKey("AppID", true))
+                {
+                    appIdsKey.DeleteSubKey(appId);
+                }
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
             }
 
             using (RegistryKey classesKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PreviewHandlers", true))
