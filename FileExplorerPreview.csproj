@@ -276,6 +276,7 @@
     <EmbeddedResource Include="Previewer\Style\yaml.lang" />
     <EmbeddedResource Include="Previewer\Style\z.lang" />
     <EmbeddedResource Include="Previewer\Style\c.lang" />
+    <EmbeddedResource Include="Previewer\Style\Lang.lang" />
     <None Include="StrongNameKey.snk" />
     <None Include="uninstall.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

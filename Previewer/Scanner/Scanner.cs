@@ -30,6 +30,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using SourcePreview;
 
 namespace Scan
@@ -541,14 +542,13 @@ namespace Scan
                 var end = c;
                 c =AppendMoveNext(c);       // add delimiters so caller can take them off if trim is true.
 
-                while (!AtEnd && c != '\r' && c != '\n')
+                while (!AtEnd && c != '\r' && c != '\n' && c!=end)
                 {
                     if (c == escape)
                     {
                         c = MoveNext();
                     }
                     c = AppendMoveNext(c);
-                    if (c == end) break;
                 }
                 if (c == end)
                 {

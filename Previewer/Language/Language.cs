@@ -206,9 +206,10 @@ namespace Scan
                             var d = new Delimiter();
                             d.Name = _scanner.ParseText();
                             d.Start = _scanner.ParseString(true);
-                            d.Escape = _scanner.ParseString(true);
+                            d.Escape= _scanner.ParseString(true);
                             d.End = _scanner.ParseString(true);
-                            Delimiters.Add(d);
+                            if (string.IsNullOrEmpty(d.Escape)) d.Escape = "\0";
+                           Delimiters.Add(d);
                         }
                         break;
                     case "Operators":

@@ -1,0 +1,11 @@
+﻿Name = "lang"
+Ext = .lang
+LineComment = ""
+Delimiter = DQuote "\"" ""  "\""
+Delimiter = SQuote "'"  ""  "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($#@\`"
+KeyStart = "BDEGKLNOP" 
+KeyContinue = "abcdefghijklmnoprstuvwxyz"  
+Group =  Gen Com Char Word
+Keyword = Name 0 Ext 0 LineComment 1 BlockComment 1 Delimiter 2 Operators 3 Punctuation 3 KeyStart 0 KeyContinue 0 Group 0 Keyword 0 DQuote 4 SQuote 4

@@ -281,7 +281,7 @@ namespace Scan
 
                 case '\'':
                 case '"':
-                    return Scanner.ScanDelimited(c, TokenType.String);
+                    return Scanner.ScanDelimited(c, TokenType.String,'\0');
 
                 case '\n':
                     return Scanner.ScanEol();
