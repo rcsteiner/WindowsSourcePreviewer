@@ -241,6 +241,21 @@ namespace Scan
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
+        ///  Flush a delimited block. Current character is also the end delimiter. Position is set to the position
+        ///  following the end delimiter. Note that this scans to the end delimiter, carriage return, line feed or end
+        ///  of buffer.
+        /// </summary>
+        /// <param name="c">         The char c.</param>
+         /// <param name="type">   The token type to return.</param>
+       /// <param name="delimiter">  The delimiter.</param>
+        /// <returns>
+        ///  The Scan.TokenType value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        TokenType ScanDelimited(char c,TokenType type,Delimiter delimiter);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
         ///  Method: Scan End of line.
         /// </summary>
         /// <returns>

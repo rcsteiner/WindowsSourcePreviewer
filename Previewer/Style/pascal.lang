@@ -1,4 +1,4 @@
-ame = "pascal"
+Name = "pascal"
 Ext = .pas .pp .p .inc .lpr
 BlockComment = "{" "}"
 Delimiter = DQuote "\"" "\\" "\""

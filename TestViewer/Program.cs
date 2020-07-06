@@ -1,5 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //  Description: Test viewer for source preview control.
+//
+//  reference: https://docs.microsoft.com/en-us/archive/msdn-magazine/2007/january/windows-vista-and-office-writing-your-own-preview-handlers
 // 
 //  Author:      Robert C. Steiner
 // 
@@ -29,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Windows.Forms;
-using MsdnMag;
+using SourcePreview;
 
 namespace TestViewer
 {

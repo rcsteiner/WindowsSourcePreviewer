@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MsdnMag {
+namespace SourcePreview {
     using System;
     
     

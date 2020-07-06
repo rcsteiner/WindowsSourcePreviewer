@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Globalization;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [PreviewHandler("MSDN Magazine CSV Preview Handler", ".csv", "{8CF7761A-E923-470c-926E-8440C06FA8FE}")]
     [ProgId("MsdnMag.CsvPreviewHandler")]

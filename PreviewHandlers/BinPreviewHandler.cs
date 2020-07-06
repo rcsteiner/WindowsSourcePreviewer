@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [PreviewHandler("MSDN Magazine Binary Preview Handler", ".bin;.dat", "{FDFA5AAF-8243-415d-B5E5-AF551336BE7B}")]
     [ProgId("MsdnMag.BinaryPreviewHandler")]

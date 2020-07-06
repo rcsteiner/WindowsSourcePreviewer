@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     public abstract class PreviewHandlerControl : Form
     {

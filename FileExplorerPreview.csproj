@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FileExplorerPreview</RootNamespace>
     <AssemblyName>FileExplorerPreview</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -118,6 +118,7 @@
     <Compile Include="Previewer\Scanner\ColorManager.cs" />
     <Compile Include="Previewer\Scanner\HtmlCharClassifier.cs" />
     <Compile Include="Previewer\Scanner\ICharClassifier.cs" />
+    <Compile Include="Previewer\Scanner\IDMap.cs" />
     <Compile Include="Previewer\Scanner\InfoScanner.cs" />
     <Compile Include="Previewer\Scanner\IScanner.cs" />
     <Compile Include="Previewer\Scanner\IToken.cs" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Previewer\Controls\ScrollBar\ScrollBar.resx">
       <DependentUpon>ScrollBar.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Previewer\Controls\StatusBar\DocStatus.resx">
       <DependentUpon>DocStatus.cs</DependentUpon>
@@ -204,11 +206,10 @@
     <EmbeddedResource Include="Previewer\Style\csound.lang" />
     <EmbeddedResource Include="Previewer\Style\css.lang" />
     <EmbeddedResource Include="Previewer\Style\d.lang" />
-    <EmbeddedResource Include="Previewer\Style\Default.lang" />
+    <EmbeddedResource Include="Previewer\Style\default.lang" />
     <EmbeddedResource Include="Previewer\Style\Default.palette" />
     <EmbeddedResource Include="Previewer\Style\diagram.lang" />
     <EmbeddedResource Include="Previewer\Style\diff.lang" />
-    <EmbeddedResource Include="Previewer\Style\erlang.lang" />
     <EmbeddedResource Include="Previewer\Style\escript.lang" />
     <EmbeddedResource Include="Previewer\Style\Extension.Map" />
     <EmbeddedResource Include="Previewer\Style\forth.lang" />
@@ -216,24 +217,22 @@
     <EmbeddedResource Include="Previewer\Style\fortran77.lang" />
     <EmbeddedResource Include="Previewer\Style\freebasic.lang" />
     <EmbeddedResource Include="Previewer\Style\grammar.lang" />
-    <EmbeddedResource Include="Previewer\Style\gui4cli.lang" />
     <EmbeddedResource Include="Previewer\Style\haskell.lang" />
     <EmbeddedResource Include="Previewer\Style\html.lang" />
     <EmbeddedResource Include="Previewer\Style\ihex.lang" />
     <EmbeddedResource Include="Previewer\Style\ini.lang" />
     <EmbeddedResource Include="Previewer\Style\inno.lang" />
     <EmbeddedResource Include="Previewer\Style\java.lang" />
-    <EmbeddedResource Include="Previewer\Style\javascript.js.lang" />
     <EmbeddedResource Include="Previewer\Style\javascript.lang" />
     <EmbeddedResource Include="Previewer\Style\json.lang" />
     <EmbeddedResource Include="Previewer\Style\jsp.lang" />
     <EmbeddedResource Include="Previewer\Style\kix.lang" />
     <EmbeddedResource Include="Previewer\Style\latex.lang" />
     <EmbeddedResource Include="Previewer\Style\lisp.lang" />
-    <EmbeddedResource Include="Previewer\Style\LLVM IR.lang" />
+    <EmbeddedResource Include="Previewer\Style\llvm.lang" />
     <EmbeddedResource Include="Previewer\Style\lua.lang" />
     <EmbeddedResource Include="Previewer\Style\makefile.lang" />
-    <EmbeddedResource Include="Previewer\Style\Markdown %28Default%29.lang" />
+    <EmbeddedResource Include="Previewer\Style\markdown.lang" />
     <EmbeddedResource Include="Previewer\Style\matlab.lang" />
     <EmbeddedResource Include="Previewer\Style\mmixal.lang" />
     <EmbeddedResource Include="Previewer\Style\nimrod.lang" />
@@ -258,7 +257,6 @@
     <EmbeddedResource Include="Previewer\Style\ruby.lang" />
     <EmbeddedResource Include="Previewer\Style\rust.lang" />
     <EmbeddedResource Include="Previewer\Style\scheme.lang" />
-    <EmbeddedResource Include="Previewer\Style\searchResult.lang" />
     <EmbeddedResource Include="Previewer\Style\smalltalk.lang" />
     <EmbeddedResource Include="Previewer\Style\spice.lang" />
     <EmbeddedResource Include="Previewer\Style\sql.lang" />
@@ -276,7 +274,8 @@
     <EmbeddedResource Include="Previewer\Style\yaml.lang" />
     <EmbeddedResource Include="Previewer\Style\z.lang" />
     <EmbeddedResource Include="Previewer\Style\c.lang" />
-    <EmbeddedResource Include="Previewer\Style\Lang.lang" />
+    <EmbeddedResource Include="Previewer\Style\lang.lang" />
+    <EmbeddedResource Include="Previewer\Style\sln.lang" />
     <None Include="StrongNameKey.snk" />
     <None Include="uninstall.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

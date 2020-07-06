@@ -101,7 +101,61 @@ namespace Win32
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public Color Lighten( double inAmount)
         {
+            if (inAmount >1.0)
+            {
+                var max = MaxComponent();
+
+                if (max == 0 )
+                {
+                    var amount =(byte) (inAmount*255);
+                    return new Color(amount,amount,amount);
+                }
+
+                var mul = 255.0 / max;
+                if (inAmount > mul) inAmount = mul;
+            }
+            else
+            {
+                var min = MinComponent();
+
+                if (min == 255)
+                {
+                    var amount = (byte)(inAmount * 255);
+                    return new Color(amount, amount, amount);
+                }
+
+                var mul = 1 / min;
+                if (inAmount < mul) inAmount = mul;
+
+            }
+
             return new Color(SatMultiply(Red, inAmount), SatMultiply(Green,  inAmount), SatMultiply(Blue , inAmount));
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Mav Component.
+        /// </summary>
+        /// <returns>
+        ///  The uint value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public uint MaxComponent()
+        {
+            return Math.Max(Math.Max(Red, Green), Blue);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: minimum Component.
+        /// </summary>
+        /// <returns>
+        ///  The uint value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public uint MinComponent()
+        {
+            return Math.Min(Math.Min(Red, Green), Blue);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,7 +170,7 @@ namespace Win32
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private int SatMultiply(uint component, double inAmount)
         {
-            return (int)Math.Min(255, component + 255 * inAmount);
+            return (int)Math.Min(255, component * inAmount);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -242,7 +296,7 @@ namespace Win32
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public static implicit operator Color(System.Drawing.Color c)
         {
-            return new Color(c.A, c.R, c.G, c.B);
+            return new Color( c.R, c.G, c.B, c.A);
         }
 
 

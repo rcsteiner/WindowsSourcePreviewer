@@ -1,0 +1,11 @@
+Name = "sln"
+Ext = .sln
+LineComment ="#"
+Delimiter = DQuote "\"" "" "\""
+Delimiter = Guid "{" "" "}"
+Operators = "+=><|^%*&/!~"
+Punctuation =";?.,][($#\`"
+KeyStart = "-@ABCDEFGHILMNOPQRSTUWXYZ" 
+KeyContinue = "_abcdefghiklmnopqrstuvwxyz" 
+Group =  key type 
+Keyword =  Global 0 Project 0 EndProject 0 VisualStudioVersion 0 GlobalSection 0 EndGlobalSection 0 Release 1 Debug 1 EndGlobal 0 TRUE 2 FALSE 2

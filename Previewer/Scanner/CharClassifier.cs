@@ -27,6 +27,9 @@
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using System.Linq.Expressions;
+
 namespace Scan
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,54 +94,57 @@ namespace Scan
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public virtual TokenType ClassifyCharacter(char c)
         {
-            switch (c)
+            if (c == '\n')
             {
-                case '\'':
-                    return Scanner.ScanDelimited(c, TokenType.Char);
-
-                case '"':
-                    return Scanner.ScanDelimited(c, TokenType.String);
-
-                case '\n':
-                    return Scanner.ScanEol();
-
-
-                default:
-
-                    if (char.IsWhiteSpace(c))
-                    {
-                        return Scanner.ScanWhitespace(c);
-                    }
-
-                    if (Scanner.Language?.KeyStart?.IndexOf(c) >= 0)
-                    {
-                        return Scanner.ScanName(c);
-                    }
-
-                    if (char.IsNumber(c))
-                    {
-                        return Scanner.ScanNumber(c);
-                    }
-
-                    if (char.IsLetter(c) || c == '_')
-                    {
-                        return Scanner.ScanVariable(c);
-                    }
-
-                    if (Scanner.Language?.Punctuation.IndexOf(c) >= 0)
-                    {
-                        return Scanner.ScanPunctuation(c);
-                    }
-
-                    if (Scanner.Language?.Operators.IndexOf(c) >= 0)
-                    {
-                        return Scanner.ScanOperator(c);
-                    }
-
-                    Scanner.AppendMoveNext(c);
-
-                    return TokenType.Default;
+                return Scanner.ScanEol();
             }
+
+            if (char.IsWhiteSpace(c))
+            {
+                return Scanner.ScanWhitespace(c);
+            }
+
+
+            if (Scanner.Language.Delimiters != null)
+            {
+                for (var index = 0; index < Scanner.Language.Delimiters.Count; index++)
+                {
+                    var delimiter = Scanner.Language.Delimiters[index];
+                    if (c == delimiter.Start[0])
+                    {
+                        return Scanner.ScanDelimited(c, TokenType.String + index, delimiter);
+                    }
+                }
+            }
+
+            if (Scanner.Language?.KeyStart?.IndexOf(c) >= 0)
+            {
+                return Scanner.ScanName(c);
+            }
+
+            if (char.IsNumber(c))
+            {
+                return Scanner.ScanNumber(c);
+            }
+
+            if (char.IsLetter(c) || c == '_')
+            {
+                return Scanner.ScanVariable(c);
+            }
+
+            if (Scanner.Language?.Punctuation.IndexOf(c) >= 0)
+            {
+                return Scanner.ScanPunctuation(c);
+            }
+
+            if (Scanner.Language?.Operators.IndexOf(c) >= 0)
+            {
+                return Scanner.ScanOperator(c);
+            }
+
+            Scanner.AppendMoveNext(c);
+
+            return TokenType.Default;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

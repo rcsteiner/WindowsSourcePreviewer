@@ -1,85 +1,77 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  Description: File Preview
+//   Copyright 2020 Robert C. Steiner
 // 
-//  Author:      Robert C Steiner
-//
-// Reference: https://docs.microsoft.com/en-us/archive/msdn-magazine/2007/january/windows-vista-and-office-writing-your-own-preview-handlers
-//
+//   Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+//   and associated documentation files (the "Software"), to deal in the Software without restriction,
+//   including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+//   and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+//   subject to the following conditions:
 // 
-//=====================================================[ History ]=====================================================
-//  Date        Who      What
-//  ----------- ------   ----------------------------------------------------------------------------------------------
-//  2/18/2020   RCS      Initial Code.
-//====================================================[ Copyright ]====================================================
+//   The above copyright notice and this permission notice shall be included in
+//   all copies or substantial portions of the Software.
 // 
-//  BSD 3-Clause License
-//  Copyright (c) 2020, Robert C. Steiner
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following
-//  disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
-//  following disclaimer in the documentation and/or other materials provided with the distribution.
-//  3. Neither the name of the copyright holder nor the names of its
-//  contributors may be used to endorse or promote products derived from
-//  this software without specific prior written permission.
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-//  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-//  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-//  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-//  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-//  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
-//  USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.Reserved.
-// 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+//   INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+//   AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+//   OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+//   CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 using System;
 using System.IO;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Reflection;
-using System.Globalization;
+using System.Windows.Forms;
 using PanelSourceView;
 
-
-namespace MsdnMag
+namespace SourcePreview
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    ///  The Source Preview Handler Class definition.
+    ///     The Constants Class definition.
     /// </summary>
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static class Constants
+    {
+        /// <summary>
+        ///     The Extensions field.
+        /// </summary>
+        public const string Extensions =
+            ".ada;.adb;.ads;.as;.asm;.asp;.au3;.avs;.avsi;.bas;.bash;.bash_profile;.bashrc;.bat;.bb;.bi;.bsh;.c;.cbd;.cbl;.cc;.cdb;.cdc;.cl;.cmake;.cmd;.cob;.coffee;.copy;.cpp;.cpy;.cs;.csd;.csh;.csproj;.css;.csxproj;.cxx;.d;.dbproj;.diagram;.diff;.em;.err;.f;.f23;.f2k;.f77;.f90;.f95;.for;.forth;.g;.gml;.gpx;.grammar;.h;.hex;.hh;.hpp;.hs;.hta;.htm;.html;.hxx;.i;.inc;.inf;.ini;.ino;.iss;.java;.js;.jsm;.json;.jsp;.jsx;.kix;.kml;.lang;.las;.lex;.lhs;.lisp;.litcoffee;.ll;.lpr;.lsp;.lst;.lstraw;.lua;.m;.mak;.markdown;.md;.mib;.mk;.ml;.mli;.mm;.mms;.mot;.mx;.mxml;.nim;.nsh;.nsi;.nt;.orc;.osx;.out;.p;.pack;.pas;.patch;.pb;.pc;.ph;.php;.php3;.php4;.php5;.phps;.phpt;.phtml;.pl;.plist;.plx;.pm;.pp;.pro;.production;.profile;.properties;.ps;.ps1;.psm1;.py;.pyw;.r;.r2;.r3;.rb;.rbw;.rc;.reb;.reg;.rs;.s;.scm;.sco;.scp;.sh;.shtm;.shtml;.sitemap;.sln;.smd;.sml;.spf;.splus;.sql;.src;.srec;.ss;.st;.sty;.sv;.svg;.svh;.swift;.sxbl;.t2t;.tab;.tcl;.tek;.tex;.text;.thy;.ts;.tsx;.txt;.url;.v;.vb;.vbproj;.vbs;.vcproj;.vcxproj;.vh;.vhd;.vhdl;.wer;.wsdl;.xaml;.xbl;.xht;.xhtml;.xlf;.xliff;.xml;.xsd;.xsl;.xslt;.xsml;.xul;.yaml;.yml;.z";
+    }
 
-    [PreviewHandler("RCS Source Preview Handler", ".lang;.config;.user;.diagram;.g;.grammar;.err;.lst;.production;.lstraw;.ll;.pc;.z;.md;.markdown;.txt;.as;.mx;.ada;.ads;.adb;.asm;.mib;.asp;.au3;.avs;.avsi;.bc;.cln;.bash;.sh;.bsh;.csh;.bash_profile;.bashrc;.profile;.bat;.cmd;.nt;.bb;.c;.lex;.ml;.mli;.sml;.thy;.cmake;.cbl;.cbd;.cdb;.cdc;.cob;.cpy;.copy;.orc;.sco;.csd;.coffee;.litcoffee;.h;.hh;.hpp;.hxx;.cpp;.cxx;.cc;.ino;.cs;.css;.d;.diff;.patch;.erl;.hrl;.src;.em;.forth;.f;.for;.f90;.f95;.f2k;.f23;.f77;.bas;.bi;.hs;.lhs;.las;.htm;.shtml;.shtm;.xhtml;.xht;.hta;.ini;.inf;.url;.wer;.iss;.hex;.java;.js;.jsm;.jsx;.ts;.tsx;.json;.jsp;.kix;.lsp;.lisp;.tex;.sty;.lua;.mak;.mk;.m;.mms;.nim;.tab;.spf;.nfo;.nsi;.nsh;.osx;.mm;.pas;.pp;.p;.inc;.lpr;.pl;.pm;.plx;.php;.php3;.php4;.php5;.phps;.phpt;.phtml;.ps;.ps1;.psm1;.properties;.pb;.py;.pyw;.r;.s;.splus;.r2;.r3;.reb;.reg;.rc;.rb;.rbw;.rs;.scm;.smd;.ss;.st;.scp;.out;.sql;.mot;.srec;.swift;.tcl;.tek;.vb;.vbs;.t2t;.v;.sv;.vh;.svh;.vhd;.vhdl;.pro;.cl;.i;.pack;.ph;.xml;.xaml;.xsl;.xslt;.xsd;.xul;.kml;.svg;.mxml;.xsml;.wsdl;.xlf;.xliff;.xbl;.sxbl;.sitemap;.gml;.gpx;.plist;.vcproj;.vcxproj;.csproj;.csxproj;.vbproj;.dbproj;.yml;.yaml;.sln", "{0A69F069-3FB1-4E66-B726-0131769541F8}")]
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    ///     The Source Preview Handler Class definition.
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    [PreviewHandler("RCS Source File Preview Handler", Constants.Extensions, "{0A69F069-3FB1-4E66-B726-0131769541F9}")]
     [ProgId("RCS.SourcePreviewHandler")]
-    [Guid("8D97DA9C-76DC-4A37-81E0-27E33822EB22")]
+    [Guid("8D97DA9C-76DC-4A37-81E0-27E33822EB23")]
     [ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
     public sealed class SourcePreviewHandler : FileBasedPreviewHandler
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        ///  Method: Create Preview Handler Control.
+        ///     Method: Create Preview Handler Control.
         /// </summary>
         /// <returns>
-        ///  The MsdnMag.PreviewHandlerControl value.
+        ///     The MsdnMag.PreviewHandlerControl value.
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         protected override PreviewHandlerControl CreatePreviewHandlerControl()
         {
             return new SourcePreviewHandlerControl();
         }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        ///  The Source Preview Handler Control Class definition.
+        ///     The Source Preview Handler Control Class definition.
         /// </summary>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private sealed class SourcePreviewHandlerControl : FileBasedPreviewHandlerControl
         {
-
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /// <summary>
-            ///  Method: load the viewer and file info.
+            ///     Method: load the viewer and file info.
             /// </summary>
             /// <param name="file">  The file.</param>
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,11 +84,11 @@ namespace MsdnMag
                     var viewer = new ViewerPanel();
                     viewer.ShowLineNumbers = false;
                     // viewer.ReadOnly        = true;
-                    viewer.Dock            = DockStyle.Fill;
+                    viewer.Dock = DockStyle.Fill;
                     viewer.LoadFile(file.FullName);
                     Controls.Add(viewer);
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                 }
             }

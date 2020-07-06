@@ -4,7 +4,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct COLORREF

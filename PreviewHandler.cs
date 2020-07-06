@@ -11,7 +11,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Threading;
 using System.Diagnostics;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     public abstract class PreviewHandler : IPreviewHandler, IPreviewHandlerVisuals, IOleWindow, IObjectWithSite
     {

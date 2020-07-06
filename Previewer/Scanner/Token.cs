@@ -88,7 +88,7 @@ namespace Scan
         ///  The integer value or -1 if not found.
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private int BinarySearch(List<string> wordList)
+        private int BinarySearch(List<IDMap> wordList)
         {
             if (wordList == null) return -1;
 
@@ -99,7 +99,7 @@ namespace Scan
             while (min <= max)
             {
                 int mid = (min + max) / 2;
-                d = Compare(wordList[mid]);
+                d = Compare(wordList[mid].Text);
                 if (d == 0)
                 {
                     return mid;
@@ -159,7 +159,7 @@ namespace Scan
         ///  The integer value.
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public int SearchKeyword(List<string> keywords)
+        public int SearchKeyword(List<IDMap> keywords)
         {
             return  BinarySearch(keywords);
         }

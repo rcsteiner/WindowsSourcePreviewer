@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     internal sealed class FileTypeIconProvider : IDisposable
     {

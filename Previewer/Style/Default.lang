@@ -1,11 +1,9 @@
-Name = "Default.lang"
+Name = "default"
 Ext = .txt .text
-Delimiter = "\"" "\\" "\""
-Delimiter = "'" "\\" "'"
+Delimiter = "\"" "" "\""
+Delimiter = "'" "" "'"
 Operators = "-+=><|^%*&/!"
 Punctuation = ":;?.,][{})($#@"
-LineComment = "//"
-BlockComment = "/*" "*/"
 Group = Keyword
 Group = Preprocessor
 Group = Variable

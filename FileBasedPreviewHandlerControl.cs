@@ -3,7 +3,7 @@
 using System;
 using System.IO;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     public abstract class FileBasedPreviewHandlerControl : PreviewHandlerControl
     {

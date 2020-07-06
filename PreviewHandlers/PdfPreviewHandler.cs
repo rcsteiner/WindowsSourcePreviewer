@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Globalization;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [PreviewHandler("MSDN Magazine PDF Preview Handler", ".pdf", "{E1B9A916-BD9E-45e6-9266-E9BD0AF00CB7}")]
     [ProgId("MsdnMag.PdfPreviewHandler")]

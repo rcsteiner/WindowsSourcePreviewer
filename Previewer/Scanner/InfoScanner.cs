@@ -32,6 +32,8 @@ using SourcePreview;
 
 namespace Scan
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     ///  The information Scanner Class definition. Used to parse .lang and .palette files. 
@@ -39,6 +41,7 @@ namespace Scan
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     internal class InfoScanner : Scanner
     {
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -106,10 +109,9 @@ namespace Scan
         ///  Method: Parse Keywords.
         /// </summary>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public List<string> ParseMap(out List<short> map)
+        public List<IDMap> ParseMap()
         {
-            var data = new List<string>(64);
-            map = new List<short>(64);
+            var data = new List<IDMap>(64);
 
             FlushWhitespace();
                 while (!AtEnd)
@@ -123,15 +125,20 @@ namespace Scan
 
                     Token.Clear();
                     ScanWhileNot(CurrentChar, WHITESPACE);
-                    data.Add(Token.ToString());
+                    var text = Token.ToString();
                     FlushWhitespace();
                     Token.Clear();
                     ScanWhile(CurrentChar,DIGITS);
-                    map.Add((short)Token.ToLong());
+                    var id = (int)Token.ToLong();
+                    data.Add(new IDMap(text,id));
                 }
+
+                data.Sort((map, idMap) => map.Text.CompareTo(idMap.Text));
 
             return data;
         }
+
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using PanelSourceView;
+using SourcePreview;
 
 namespace TestViewer
 {
@@ -70,7 +71,6 @@ namespace TestViewer
             this.viewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.viewer.Language = null;
             this.viewer.Location = new System.Drawing.Point(0, 24);
-            this.viewer.Name = "viewer";
             this.viewer.ShowLineNumbers = false;
             this.viewer.Size = new System.Drawing.Size(800, 426);
             this.viewer.TabIndex = 0;
@@ -104,7 +104,7 @@ namespace TestViewer
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private ViewerPanel viewer;
+       private ViewerPanel viewer;
         private ToolStripMenuItem rebuildLanguageMapToolStripMenuItem;
     }
 }

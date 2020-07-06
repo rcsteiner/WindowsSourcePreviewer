@@ -73,7 +73,7 @@ namespace Scan
             var buffer = new StreamBuffer();
             foreach (var name in buffer.GetResourceStreams(".palette"))
             {
-                var p = Load(buffer,this);
+                var p = Load(buffer);
                 PaletteManager.Add(p);
             }
 
@@ -91,12 +91,11 @@ namespace Scan
         ///  Bold = 1,Italic = 2,Underline = 4, Strikeout = 8,
         /// </summary>
         /// <param name="buffer">       The buffer to read from.</param>
-        /// <param name="colorManager">  The color Manager.</param>
         /// <returns>
         ///  True if successful
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public Palette Load(IBuffer buffer, ColorManager colorManager)
+        public Palette Load(IBuffer buffer)
         {
             string typeName;
             var p = new Palette();
@@ -114,7 +113,7 @@ namespace Scan
 
             _scanner.NextLine();
 
-            // Get color pallete slot names and font style
+            // Get color pallete slot names and font style BGR order of bytes.
             //    Name       = "Default.palette"
             //    Default    = 0xffffff Regular
             //    Background = 0x000000 Regular

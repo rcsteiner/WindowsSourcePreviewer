@@ -55,5 +55,15 @@ namespace Scan
         ///  The End field.
         /// </summary>
         public string End;
+
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        public Delimiter(string name, string start, string escape, string end)
+        {
+            Name = name;
+            Start = start;
+            Escape = escape;
+            End = end;
+        }
     }
+
 }

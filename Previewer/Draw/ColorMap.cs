@@ -56,7 +56,7 @@ namespace Scan
         /// <summary>
         ///  Get Dark background version of the color
         /// </summary>
-        public Color Dark { get { return Color.Lighten(.5); } }
+        public Color Dark { get { return Color.Lighten(1.5); } }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>

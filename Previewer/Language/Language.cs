@@ -63,17 +63,12 @@ namespace Scan
         /// <summary>
         ///  Get Key Words.  Sorted list of keywords
         /// </summary>
-        public List<string> KeyWords { get; set; }
+        public List<IDMap> KeyWords { get; set; }
 
         /// <summary>
         ///  Get/Set Groups.
         /// </summary>
         public List<string> Groups { get; set; }
-
-        /// <summary>
-        ///  Get/Set Keyword Group, matching group ids.
-        /// </summary>
-        public List<short>  KeywordGroup { get; set; }
 
         /// <summary>
         ///  Get/Set Line Comment.
@@ -147,14 +142,16 @@ namespace Scan
         /// <param name="name">        The name.</param>
         /// <param name="operators">   The operators.</param>
         /// <param name="punctuation"> The punctuation.</param>
+        /// <param name="delimiters">   The delimiters.</param>
         /// <param name="extensions">  The extensions.</param>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public Language(string name, string operators, string punctuation, params string[] extensions)
+        public Language(string name, string operators, string punctuation, List<Delimiter> delimiters, params string[] extensions)
         {
             Name        = name;
             Extensions  = new List<string>(extensions);
             Operators   = operators;
             Punctuation = punctuation;
+            Delimiters = delimiters;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,7 +173,6 @@ namespace Scan
             _scanner.Initialize(buffer, this);
 
             FilePath = buffer.Path;
-            List<short> map;
 
             string type;
             while ((type = _scanner.ParseType()) != null)
@@ -226,8 +222,7 @@ namespace Scan
                         break;
                     case "Keyword":
 
-                        KeyWords =_scanner.ParseMap(out map);
-                        KeywordGroup = map;
+                        KeyWords =_scanner.ParseMap();
                         break;
 
                     case "Group":
@@ -237,6 +232,11 @@ namespace Scan
                         break;
                 }
                 _scanner.NextLine();
+            }
+
+            if (KeyWords != null)
+            {
+                KeyWords.Sort((x, y) => x.Text.CompareTo(y.Text));
             }
 
             return true;

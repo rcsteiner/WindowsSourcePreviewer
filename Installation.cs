@@ -7,7 +7,7 @@ using System.Configuration.Install;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace MsdnMag
+namespace SourcePreview
 {
 	[RunInstaller(true)]
 	public class ComInstaller : Installer

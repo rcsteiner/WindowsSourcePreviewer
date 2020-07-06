@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [PreviewHandler("MSDN Magazine Internet Explorer Preview Handler", ".xml;.xps;.config;.psq;.html", "{88235ab2-bfce-4be8-9ed0-0408cd8da792}")]
     [ProgId("MsdnMag.InternetExplorerPreviewHandler")]

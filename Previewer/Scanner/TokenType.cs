@@ -75,7 +75,7 @@ namespace Scan
         //public static string[] Names =
         //    {
         //        "Default","Background","LineNumber", "End", "EOL", "Whitespace", "Comment", "Operator", "String", "Character", "Number",
-        //        "Punctuation","Preprocessor","Variable", "Keyword1","Keyword2","Keyword3","Keyword4","Keyword5","Keyword6" ,"Keyword7","Keyword8"
+        //        "Punctuation","Preprocessor","Variable", "Keyword1","Keyword2","Keyword3","Keyword4","Keyword5","Keyword6" ,"Keyword7","Keyword8","Keyword9"
         //    };
 
 
@@ -188,6 +188,11 @@ namespace Scan
         /// </summary>
         public const int Keyword8 = 21;
 
+
+        /// <summary>
+        ///     AKeywords that are not types or control.
+        /// </summary>
+        public const int Keyword9 = 22;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>

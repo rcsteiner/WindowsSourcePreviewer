@@ -115,13 +115,13 @@ namespace Scan
             if (lang != null)
             {
                 
-                if (lang.LineComment != null && Scanner.Accept(lang.LineComment,false))
+                if (!string.IsNullOrEmpty( lang.LineComment) && Scanner.Accept(lang.LineComment,false))
                 {
                     Scanner.EndOfLine();
                     return TokenType.Comment;
                 }
 
-                if (lang.BlockComment != null && Scanner.Accept(Scanner.Language.BlockComment[0],false))
+                if (lang.BlockComment!=null && !string.IsNullOrEmpty(lang.BlockComment[0]) && Scanner.Accept(Scanner.Language.BlockComment[0],false))
                 {
                     _inBlockComment = true;
                     return BlockComment(Scanner.CurrentChar);

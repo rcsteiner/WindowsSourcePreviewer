@@ -2,7 +2,7 @@
 
 using System;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public sealed class PreviewHandlerAttribute : Attribute

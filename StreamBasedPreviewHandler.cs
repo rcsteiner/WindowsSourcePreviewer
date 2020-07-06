@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     public abstract class StreamBasedPreviewHandler : PreviewHandler, IInitializeWithStream
     {

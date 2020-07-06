@@ -12,7 +12,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.ComponentModel;
 
-namespace MsdnMag.PreviewHandlers
+namespace SourcePreview.PreviewHandlers
 {
     [PreviewHandler("Preview Handler", ".msi", "{63cf7c29-dd45-4906-ac42-bb117d816f65}")]
     [ProgId("MsdnMag.MsiPreviewHandler")]

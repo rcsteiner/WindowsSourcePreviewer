@@ -6,16 +6,16 @@ using System.IO.Compression;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     ///  The Zip Preview Handler Class definition.
     /// </summary>
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    [PreviewHandler("MSDN Magazine ZIP Preview Handler", ".zip;.gadget", "{D694DE84-EE56-46E2-8EEC-69B44C86BDA5}")]
+    [PreviewHandler("MSDN Magazine ZIP Preview Handler", ".zip;.jar;.gadget", "{D694DE84-EE56-46E2-8EEC-69B44C86BDA6}")]
     [ProgId("MsdnMag.ZipPreviewHandler")]
-    [Guid("AC73332B-6C6F-4250-957A-2B2813CC3FD1")]
+    [Guid("AC73332B-6C6F-4250-957A-2B2813CC3FD2")]
     [ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
     public sealed class ZipPreviewHandler : FileBasedPreviewHandler

@@ -372,17 +372,21 @@ namespace Scan
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private ICharClassifier GetClassifier(ILanguage language)
         {
-            if (language == null || string.IsNullOrEmpty(language.Name) || language.BlockComment==null)
+            if (language != null && !string.IsNullOrEmpty(language.Name))
             {
-                return new CharClassifier(this);
+                if (Language.Name == "html" || Language.Name == "xml")
+                {
+                    return new HtmlCharClassifier(this);
+                }
+
+                if ((language.BlockComment != null || language.LineComment != null))
+                {
+                    return new BlockCommentCharClassifier(this);
+                }
             }
 
-            if (Language.Name == "html" || Language.Name=="xml")
-            {
-                return new HtmlCharClassifier(this);
-            }
+            return new CharClassifier(this);
 
-            return new BlockCommentCharClassifier(this);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -465,6 +469,46 @@ namespace Scan
 
             // todo fix end check here
             return CurrentChar=='\0' ? (TokenType) TokenType.End : (TokenType) CharClassifier.ClassifyCharacter(CurrentChar);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Flush a delimited block. Current character is also the end delimiter. Position is set to the position
+        ///  following the end delimiter. Note that this scans to the end delimiter, carriage return, line feed or end
+        ///  of buffer.
+        /// </summary>
+        /// <param name="c">         The char c.</param>
+        /// <param name="type">      The token type to return.</param>
+        /// <param name="delimiter"> The delimiter.</param>
+        /// <returns>
+        ///  The Scan.TokenType value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public TokenType ScanDelimited(char c, TokenType type, Delimiter delimiter)
+        {
+            var start = delimiter.Start;
+            var end = delimiter.End;
+            var esc = string.IsNullOrEmpty(delimiter.Escape) ?'\0' : delimiter.Escape[0];
+
+            if (Accept(start,false) && !AtEnd)
+            {
+                c =CurrentChar;       // add delimiters so caller can take them off if trim is true.
+
+                while (!AtEnd && c != '\r' && c != '\n')
+                {
+                    if (c ==esc)
+                    {
+                        c = MoveNext();
+                    }
+                    if (Accept(end,false))
+                    {
+                        break;
+                    }
+                    c = AppendMoveNext(c);
+                }
+            }
+
+            return type;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -607,7 +651,10 @@ namespace Scan
             // check for keywords
 
             int id = Token.SearchKeyword(Language.KeyWords);
-            if (id != -1) return Language.KeywordGroup[id]+TokenType.Keyword1;
+            if (id != -1)
+            {
+                return Language.KeyWords[id].Value +TokenType.Keyword1;
+            }
 
             return ScanVariable(c);
         }

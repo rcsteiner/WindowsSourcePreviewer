@@ -1,12 +1,12 @@
 Name = "javascript"
-Ext = .
+Ext = .js .jsm .jsx .ts .tsx
 LineComment ="//"
 BlockComment = "/*" "*/"
 Delimiter = DQuote "\"" "\\" "\""
 Delimiter = SQuote "'" "\\" "'"
 Operators = "-+=><|^%*&/!~"
 Punctuation =":;?.,][{})($#@\`"
-KeyStart = "abcdefgilnoprstvwy" 
-KeyContinue = "abcdefghiklmnoprstuvwxyz" 
-Group =  instre1
-Keyword =  abstract 0 async 0 await 0 boolean 0 break 0 byte 0 case 0 catch 0 char 0 class 0 const 0 continue 0 debugger 0 default 0 delete 0 do 0 double 0 else 0 enum 0 export 0 extends 0 false 0 final 0 finally 0 float 0 for 0 function 0 goto 0 if 0 implements 0 import 0 in 0 instanceof 0 int 0 interface 0 let 0 long 0 native 0 new 0 null 0 of 0 package 0 private 0 protected 0 prototype 0 public 0 return 0 short 0 static 0 super 0 switch 0 synchronized 0 this 0 throw 0 throws 0 transient 0 true 0 try 0 typeof 0 var 0 void 0 volatile 0 while 0 with 0 yield 0
+KeyStart = "ADIMNOSabcdefghilmnoprstuvwy" 
+KeyContinue = "1BCEFHINOPRSTUWXYabcdefghijklmnoprstuvwxyz" 
+Group =  instre1 type1 instre2
+Keyword =  Array 1 Date 1 Infinity 1 Math 1 NaN 1 Number 1 Object 1 String 1 abstract 0 alert 2 all 2 anchor 2 anchors 2 area 2 assign 2 async 0 await 0 blur 2 boolean 0 break 0 button 2 byte 0 case 0 catch 0 char 0 checkbox 2 class 0 clearInterval 2 clearTimeout 2 clientInformation 2 close 2 closed 2 confirm 2 const 0 constructor 2 continue 0 crypto 2 debugger 0 decodeURI 2 decodeURIComponent 2 default 0 defaultStatus 2 delete 0 do 0 document 2 double 0 element 2 elements 2 else 0 embed 2 embeds 2 encodeURI 2 encodeURIComponent 2 enum 0 escape 2 eval 1 event 2 export 0 extends 0 false 0 fileUpload 2 final 0 finally 0 float 0 focus 2 for 0 form 2 forms 2 frame 2 frameRate 2 frames 2 function 0 goto 0 hasOwnProperty 1 hidden 2 history 2 if 0 image 2 images 2 implements 0 import 0 in 0 innerHeight 2 innerWidth 2 instanceof 0 int 0 interface 0 isFinite 1 isNaN 1 isPrototypeOf 1 layer 2 layers 2 let 0 link 2 location 2 long 0 mimeTypes 2 native 0 navigate 2 navigator 2 new 0 null 0 of 0 offscreenBuffering 2 onblur 2 onclick 2 onerror 2 onfocus 2 onkeydown 2 onkeypress 2 onkeyup 2 onload 2 onmousedown 2 onmouseover 2 onmouseup 2 onsubmit 2 open 2 opener 2 option 2 outerHeight 2 outerWidth 2 package 0 packages 2 pageXOffset 2 pageYOffset 2 parent 2 parseFloat 2 parseInt 2 password 2 pkcs11 2 plugin 2 private 0 prompt 2 propertyIsEnum 2 protected 0 prototype 0 prototype 1 public 0 radio 2 reset 2 return 0 screenX 2 screenY 2 scroll 2 secure 2 select 2 self 2 setInterval 2 setTimeout 2 short 0 static 0 status 2 submit 2 super 0 switch 0 synchronized 0 taint 2 text 2 textarea 2 this 0 throw 0 throws 0 toString 1 top 2 transient 0 true 0 try 0 typeof 0 undefined 1 unescape 2 untaint 2 valueOf 1 var 0 void 0 volatile 0 while 0 window 2 with 0 yield 0

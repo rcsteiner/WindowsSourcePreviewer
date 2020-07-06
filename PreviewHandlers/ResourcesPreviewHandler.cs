@@ -10,7 +10,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [PreviewHandler("MSDN Magazine Resources Preview Handler", ".resources", "{5679D180-540C-4db3-AF0C-97CDE2B7B5E7}")]
     [ProgId("MsdnMag.ResourcesPreviewHandler")]

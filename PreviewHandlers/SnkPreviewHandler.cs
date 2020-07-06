@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Text;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [PreviewHandler("MSDN Magazine Strong Name Key Preview Handler", ".snk;.keys", "{D7CAD297-1D39-478d-8BCC-585D74B234DA}")]
     [ProgId("MsdnMag.SnkPreviewHandler")]

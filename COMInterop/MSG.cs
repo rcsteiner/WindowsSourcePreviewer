@@ -3,7 +3,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct MSG

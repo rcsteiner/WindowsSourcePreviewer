@@ -27,8 +27,11 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 namespace Scan
 {
@@ -39,6 +42,8 @@ namespace Scan
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class LanguageManager
     {
+
+        
         /// <summary>
         ///  Get a language by extension.
         /// </summary>
@@ -47,7 +52,7 @@ namespace Scan
         /// <summary>
         ///  The Extenstion Map field.
         /// </summary>
-        public Dictionary<string, string> ExtenstionMap;
+        public SortedDictionary<string, string> ExtenstionMap;
 
         /// <summary>
         ///  The Languages field.
@@ -94,7 +99,7 @@ namespace Scan
                 var s = buffer.GetResourceStream(EXTENSION_MAP);
                 if (s != null)
                 {
-                    ExtenstionMap = (Dictionary<string, string>)r.Deserialize(s);
+                    ExtenstionMap = (SortedDictionary<string, string>)r.Deserialize(s);
                     s.Close();
                 }
 
@@ -108,13 +113,12 @@ namespace Scan
                 if (!Languages.TryGetValue(langName, out ILanguage lang))
                 {
                     var buffer = new StreamBuffer();
-                    var s = buffer.GetResourceStream(langName + ".lang");
+                    var s = buffer.GetResourceStream(langName.ToLower() + ".lang");
                     if (s != null)
                     {
                         buffer.Initialize(s, langName);
                         lang = new Language(buffer);
                         Languages.Add(langName, lang);
-
                         s.Close();
                     }
                 }
@@ -165,8 +169,18 @@ namespace Scan
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void SaveExtensionList()
         {
-            var s = string.Join(";", ExtenstionMap.Keys);
-            File.WriteAllText("h:\\Extenstions.text",s);
+            var extenstionMapKeys = ExtenstionMap.Keys.ToList();
+          //  extenstionMapKeys.Sort();
+             var b = new StringBuilder(2000);
+            foreach (var k in ExtenstionMap)
+            {
+                b.AppendLine($"{k.Key} = {k.Value} ");
+            }
+
+            var s = string.Join(";", extenstionMapKeys);
+            var keys =  $"\"{s.Trim()}\";" ;
+            b.AppendLine(keys);
+            File.WriteAllText("h:\\Extenstions.text",b.ToString());
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,18 +210,20 @@ namespace Scan
             //    var assembly = typeof(LanguageManager).Assembly;
             //    var names    = assembly.GetManifestResourceNames();
             var buffer = new StreamBuffer();
-            ExtenstionMap = new Dictionary<string, string>(400);
+            ExtenstionMap = new SortedDictionary<string, string>();
 
             foreach (var langName in buffer.GetResourceStreams(LANG_EXTENSION))
             {
                 var lang = new Language(buffer);
                 Languages.Add(langName, lang);
+                Debug.WriteLine($"{langName}: {string.Join(" ", lang.Extensions)}  ");
                 foreach (var e in lang.Extensions)
                 {
                     // b.Append($@" {e}");
                     if (!ExtenstionMap.ContainsKey(e))
                     {
                         ExtenstionMap.Add(e, lang.Name);
+
                     }
                 }
 
@@ -215,7 +231,12 @@ namespace Scan
 
             if (Languages.Count == 0)
             {
-                Languages.Add("Default", new Language("Default", "-+=><|^%*&/!", ":;?.,][{})($#@", "."));
+                var dls = new List<Delimiter>()
+                {
+                    new Delimiter("DQuote", "\"", "\0", "\""),
+                    new Delimiter("SQuote", "'", "\0", "'"),
+                };
+                Languages.Add("default", new Language("default", "-+=><|^%*&/!", ":;?.,][{})($#@",dls, ".txt",".text"));
             }
         }
 

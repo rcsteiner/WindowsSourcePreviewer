@@ -7,7 +7,7 @@ using System.Collections;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace MsdnMag
+namespace SourcePreview
 {
     [PreviewHandler("MSDN Magazine RESX Preview Handler", ".resx", "{A35B7E1D-C922-439d-81F4-6F9681D02F7F}")]
     [ProgId("MsdnMag.ResxPreviewHandler")]

@@ -75,14 +75,9 @@ namespace Scan
         string KeyStart { get; set; }
 
         /// <summary>
-        ///  Get/Set Keyword Group, matching group ids.
-        /// </summary>
-        List<short> KeywordGroup { get; set; }
-
-        /// <summary>
         ///  Get Key Words and mapping table.
         /// </summary>
-        List<string> KeyWords { get; }
+        List<IDMap> KeyWords { get; }
 
         /// <summary>
         ///  The Name field.
