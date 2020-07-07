@@ -132,7 +132,6 @@
     <Compile Include="PreviewHandlerControl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PreviewHandlerResources.Designer.cs" />
     <Compile Include="PreviewHandlers\BinPreviewHandler.cs" />
     <Compile Include="PreviewHandlers\CsvPreviewHandler.cs" />
     <Compile Include="PreviewHandlers\FileTypeIconProvider.cs" />
@@ -141,10 +140,16 @@
     <Compile Include="PreviewHandlers\PdfPreviewHandler.cs" />
     <Compile Include="PreviewHandlers\ResourcesPreviewHandler.cs" />
     <Compile Include="PreviewHandlers\ResxPreviewHandler.cs" />
+    <Compile Include="PreviewHandlers\ShellIcons.cs" />
     <Compile Include="PreviewHandlers\SnkPreviewHandler.cs" />
     <Compile Include="PreviewHandlers\SourcePreviewHandler.cs" />
     <Compile Include="PreviewHandlers\ZipPreviewHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\SourcePreview.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SourcePreview.resx</DependentUpon>
+    </Compile>
     <Compile Include="StreamBasedPreviewHandler.cs" />
     <Compile Include="StreamBasedPreviewHandlerControl.cs">
       <SubType>Form</SubType>
@@ -177,7 +182,13 @@
     <EmbeddedResource Include="Previewer\Controls\ViewerPanel\ViewerPanel.resx">
       <DependentUpon>ViewerPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PreviewHandlerResources.resx" />
+    <EmbeddedResource Include="PreviewHandlerControl.resx">
+      <DependentUpon>PreviewHandlerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SourcePreview.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SourcePreview.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -283,7 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MSDN.ico" />
-    <Content Include="Resources\TreeView_XP_Explorer_ParentNode.gif" />
+    <EmbeddedResource Include="Resources\folderopen.ico" />
     <Content Include="WinUserInterop\Todo.xml" />
   </ItemGroup>
   <ItemGroup>

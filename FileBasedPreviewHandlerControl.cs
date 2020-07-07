@@ -12,7 +12,7 @@ namespace SourcePreview
             string tempPath = Path.GetTempFileName();
             using (FileStream fs = File.OpenWrite(tempPath))
             {
-                const int COPY_BUFFER_SIZE = 1024;
+                const int COPY_BUFFER_SIZE = 4096;
                 byte[] buffer = new byte[COPY_BUFFER_SIZE];
                 int read;
                 while ((read = stream.Read(buffer, 0, buffer.Length)) != 0) fs.Write(buffer, 0, read);

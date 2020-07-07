@@ -1,6 +1,8 @@
 // Stephen Toub
 
 using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -10,7 +12,11 @@ namespace SourcePreview
     {
         protected PreviewHandlerControl()
         {
+            Trace.WriteLine("PreviewHandlerControl constructor End");
+
             FormBorderStyle = FormBorderStyle.None;
+            BackColor = Color.Black;
+            ForeColor = Color.White;
         }
 
         public new abstract void Load(FileInfo file);
@@ -25,6 +31,18 @@ namespace SourcePreview
         protected static string CreateTempPath(string extension)
         {
             return Path.GetTempPath() + Guid.NewGuid().ToString("N") + extension;
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // PreviewHandlerControl
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "PreviewHandlerControl";
+            this.ResumeLayout(false);
+
         }
     }
 }

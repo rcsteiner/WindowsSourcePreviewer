@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SourcePreview {
+namespace FileExplorerPreview.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace SourcePreview {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class PreviewHandlerResources {
+    internal class SourcePreview {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PreviewHandlerResources() {
+        internal SourcePreview() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace SourcePreview {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MsdnMag.PreviewHandlerResources", typeof(PreviewHandlerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileExplorerPreview.Resources.SourcePreview", typeof(SourcePreview).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,12 +61,12 @@ namespace SourcePreview {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Bitmap TreeView_XP_Explorer_ParentNode {
+        internal static System.Drawing.Icon folderopen {
             get {
-                object obj = ResourceManager.GetObject("TreeView_XP_Explorer_ParentNode", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("folderopen", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

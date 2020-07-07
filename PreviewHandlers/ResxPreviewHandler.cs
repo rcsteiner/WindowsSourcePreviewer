@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Resources;
 using System.Collections;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
@@ -37,6 +38,9 @@ namespace SourcePreview
                 listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
                 listView.MultiSelect = false;
                 listView.View = View.Details;
+                listView.BackColor = Color.Black;
+                listView.ForeColor = Color.White;
+
 
                 Environment.CurrentDirectory = Path.GetDirectoryName(((FileStream)previewStream).Name);
                 using (ResXResourceReader reader = new ResXResourceReader(previewStream))

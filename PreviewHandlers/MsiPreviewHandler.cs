@@ -11,6 +11,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Security;
 using System.Security.Permissions;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace SourcePreview.PreviewHandlers
 {
@@ -39,11 +40,15 @@ namespace SourcePreview.PreviewHandlers
                 listView.Dock = DockStyle.Fill;
                 listView.BorderStyle = BorderStyle.None;
 
-                listView.FullRowSelect = true;
-                listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-                listView.MultiSelect = false;
+                listView.FullRowSelect  = true;
+                listView.HeaderStyle    = ColumnHeaderStyle.Nonclickable;
+                listView.MultiSelect    = false;
                 listView.LargeImageList = listView.SmallImageList = _iconProvider.Icons;
-                listView.View = View.Details;
+                listView.View           = View.Details;
+                listView.BackColor      = Color.Black;
+                listView.ForeColor      = Color.White;
+
+
 
                 foreach (MsiFileInfo msiFile in GetFiles(file.FullName))
                 {

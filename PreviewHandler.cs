@@ -24,9 +24,12 @@ namespace SourcePreview
 
         protected PreviewHandler()
         {
+            Trace.WriteLine("ZIP constructor start");
             _previewControl = CreatePreviewHandlerControl(); // NOTE: shouldn't call virtual function from constructor; see article for more information
             IntPtr forceCreation = _previewControl.Handle;
             _previewControl.BackColor = SystemColors.Window;
+            Trace.WriteLine("ZIP constructor end");
+
         }
 
         protected abstract PreviewHandlerControl CreatePreviewHandlerControl();

@@ -88,5 +88,8 @@
       <Name>FileExplorerPreview</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\TreeView_XP_Explorer_ParentNode.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

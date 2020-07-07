@@ -5,6 +5,7 @@ using System.IO;
 using System.Data;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Globalization;
 
@@ -27,9 +28,12 @@ namespace SourcePreview
             public override void Load(Stream stream)
             {
                 DataGridView grid = new DataGridView();
-                grid.DataSource = ParseCsv(stream);
-                grid.ReadOnly = true;
-                grid.Dock = DockStyle.Fill;
+                grid.DataSource   = ParseCsv(stream);
+                grid.ReadOnly     = true;
+                grid.Dock         = DockStyle.Fill;
+                grid.BackColor    = Color.Black;
+                grid.ForeColor    = Color.White;
+
                 grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 Controls.Add(grid);
             }

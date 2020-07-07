@@ -4,11 +4,12 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using System.ComponentModel.Design;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace SourcePreview
 {
-    [PreviewHandler("MSDN Magazine Binary Preview Handler", ".bin;.dat", "{FDFA5AAF-8243-415d-B5E5-AF551336BE7B}")]
+    [PreviewHandler("MSDN Magazine Binary Preview Handler", ".bin;.dat;.class", "{FDFA5AAF-8243-415d-B5E5-AF551336BE7B}")]
     [ProgId("MsdnMag.BinaryPreviewHandler")]
     [Guid("DF9E65B0-7980-4053-9FCF-6E9AF953A9F4")]
     [ClassInterface(ClassInterfaceType.None)]
@@ -26,6 +27,10 @@ namespace SourcePreview
             {
                 ByteViewer viewer = new ByteViewer();
                 viewer.Dock = DockStyle.Fill;
+                viewer.BackColor = Color.Black;
+                viewer.ForeColor = Color.White;
+                viewer.SetDisplayMode(DisplayMode.Auto);
+
                 viewer.SetFile(file.FullName);
                 Controls.Add(viewer);
             }

@@ -1,78 +1,95 @@
-// Stephen Toub
+//   Copyright 2020 Robert C. Steiner
+// 
+//   Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+//   and associated documentation files (the "Software"), to deal in the Software without restriction,
+//   including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+//   and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+//   subject to the following conditions:
+// 
+//   The above copyright notice and this permission notice shall be included in
+//   all copies or substantial portions of the Software.
+// 
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+//   INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+//   AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+//   OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+//   CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using System.IO;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace SourcePreview
 {
-    internal sealed class FileTypeIconProvider : IDisposable
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    ///  The File Type Icon Provider Class definition.
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public sealed class FileTypeIconProvider : IDisposable
     {
-        private ImageList _icons;
-        private Dictionary<string, int> _extensionToIconIndex;
+        /// <summary>
+        ///  Get Folder Index.
+        /// </summary>
+        public int FolderIndex => 0;
 
+        /// <summary>
+        ///  Get Icons.
+        /// </summary>
+        public ImageList Icons { get; private set; }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Default Constructor: For FileTypeIconProvider.
+        /// </summary>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public FileTypeIconProvider()
         {
-            _icons = new ImageList();
-            _extensionToIconIndex = new Dictionary<string, int>();
-            _icons.Images.Add(PreviewHandlerResources.TreeView_XP_Explorer_ParentNode); // Folder index
+            Trace.WriteLine("File Type Icon Constructor");
+
+            Icons = new ImageList();
+            Icons.Images.Add(FileExplorerPreview.Resources.SourcePreview.folderopen); // Folder index
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Dispose.
+        /// </summary>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void Dispose()
         {
-            if (_icons != null)
+            if (Icons != null)
             {
-                _icons.Dispose();
-                _icons = null;
+                Icons.Dispose();
+                Icons = null;
             }
         }
 
-        public ImageList Icons { get { return _icons; } }
-
-        public int FolderIndex { get { return 0; } }
-
-        public int GetIconIndexForFile(string path)
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Get Icon Index For File.
+        /// </summary>
+        /// <param name="path">  The path.</param>
+        /// <returns>
+        ///  The string value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public string GetIconIndexForFile(string path)
         {
-            // Get the extension.  This will work for either file paths or urls.
-            if (path == null) return -1;
-            string ext = Path.GetExtension(path.Trim());
 
-            int index;
-            if (!_extensionToIconIndex.TryGetValue(ext, out index))
+            var ext = Path.GetExtension(path);
+
+            // Check to see if the image collection contains an image
+            // for this extension, using the extension as a key.
+            if (!Icons.Images.ContainsKey(ext))
             {
-                // Get the icon for the file
-                SHFILEINFO shinfo = new SHFILEINFO();
-                const uint SHGFI_ICON = 0x100, SHGFI_SMALLICON = 0x1, SHGFI_USEFILEATTRIBUTES = 0x10;
-                IntPtr rv = SHGetFileInfo(path, 0, ref shinfo, (uint)Marshal.SizeOf(shinfo),
-                    SHGFI_ICON | SHGFI_SMALLICON | SHGFI_USEFILEATTRIBUTES);
-                if (rv == IntPtr.Zero) return -1;
-
-                // The icon is returned in the hIcon member of the shinfo struct
-                _icons.Images.Add(Icon.FromHandle(shinfo.hIcon));
-                int pos = _icons.Images.Count - 1;
-                _extensionToIconIndex[ext] = pos;
-                index = pos;
+                // If not, add the image to the image list.
+                Icons.Images.Add(ext, ShellIcons.GetIconFromExt(ext, true));
             }
 
-            // Return the mapped index.
-            return index;
+            return ext;
         }
-
-        private struct SHFILEINFO
-        {
-            public IntPtr hIcon;
-            public IntPtr iIcon;
-            public uint dwAttributes;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-            public string szDisplayName;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
-            public string szTypeName;
-        };
-
-        [DllImport("shell32.dll")]
-        private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
     }
 }
+
