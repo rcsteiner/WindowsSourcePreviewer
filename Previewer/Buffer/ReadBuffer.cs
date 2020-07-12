@@ -64,6 +64,11 @@ namespace Scan
         public bool LittleEndian { get; set; }
 
         /// <summary>
+        ///  Get Length of byte buffer.
+        /// </summary>
+        public int Length { get { return Text.Length; } }
+
+        /// <summary>
         ///  The utf8 File Types field.
         /// </summary>
         private List<string> _utf8FileTypes = new List<string>() { ".html", ".xml" };
@@ -85,7 +90,7 @@ namespace Scan
         /// <summary>
         ///  The text field.
         /// </summary>
-        protected byte[] Text;
+        public byte[] Text;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>

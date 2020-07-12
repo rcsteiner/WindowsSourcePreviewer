@@ -37,7 +37,7 @@ namespace SourcePreview
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    ///  The Source Draw Class definition.   Draws a source file based on language and palette to highlight it.
+    ///  The Source Draw Class definition. Draws a source file based on language and palette to highlight it.
     /// </summary>
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class TextDraw
@@ -120,7 +120,12 @@ namespace SourcePreview
         /// <summary>
         ///  The tc field.
         /// </summary>
-        TextContext tc = new TextContext();
+        private TextContext tc = new TextContext();
+
+
+        private const string HEX = "0123456789ABCDEF";
+
+        private char[] _binChars;
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -182,7 +187,7 @@ namespace SourcePreview
         /// <param name="rows">   The rows.</param>
         /// <param name="height"> The height.</param>
         /// <returns>
-        ///  The column x coordinate coordinate coordinate coordinate to start drawing text.
+        ///  The column x coordinate to start drawing text.
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private int DrawLineNumbers(int start, int rows, int height)
@@ -207,6 +212,45 @@ namespace SourcePreview
                 startPoint.Y += FontHeight;
             }
             tc.ChangeFormat(old);
+
+            w += 5;
+            tc.SelectSolidPen(1, Color.DIM_GRAY_DIM_GREY);
+            tc.DrawLine(w, 0, w, height);
+            return w + 8;
+
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Draw the address numbers start is the starting line number.
+        /// </summary>
+        /// <param name="startAddr">  The start.</param>
+        /// <param name="rows">   The rows.</param>
+        /// <param name="height"> The height.</param>
+        /// <returns>
+        ///  The column x coordinate to start drawing text.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private int DrawAddressNumbers(int startAddr, int countWidth, int maxAddr, int rows, int height)
+        {
+            if (LinePen == null)
+            {
+                LinePen = new Pen(((TokenType)(TokenType.LineNumber)).Color);
+            }
+
+            var c = SetFont(TokenType.LineNumber);
+            var w = tc.MeasureText("00000000").Width + 3;
+            startPoint = new Point(3, 5);
+
+            for (int i = 0; i < rows; i += countWidth)
+            {
+                var addr = (i + startAddr);
+                if (addr > maxAddr) break;
+                _scanner.Token.Clear();
+                _scanner.Token.Append(addr);
+                Draw(c);
+                startPoint.Y += FontHeight;
+            }
 
             w += 5;
             tc.SelectSolidPen(1, Color.DIM_GRAY_DIM_GREY);
@@ -343,5 +387,109 @@ namespace SourcePreview
 
             RowColSize = new Size(_scanner.MaxLineLength, _scanner.LineCount);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Show Buffer as binary data.
+        /// </summary>
+        /// <param name="dev">        The dev.</param>
+        /// <param name="scanner">    The buffer.</param>
+        /// <param name="buffer">      The buffer.</param>
+        /// <param name="clientSize"> The client Size.</param>
+        /// <param name="rowStart">   The top row 0 based.</param>
+        /// <param name="colStart">   The horizontal Percent.</param>
+        /// <param name="zoom">       The zoom.</param>
+        /// <param name="colCount">   [optional=16] The col Count.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ShowBinBuffer(Graphics dev, IScanner scanner, ReadBuffer buffer, Size clientSize, int rowStart,
+            int colStart, float zoom, int colCount )
+        {
+
+
+            _scanner = scanner;
+
+            if (_binChars == null) _binChars = new char[colCount];
+
+            if (Math.Abs(_zoom - zoom) > .05)
+            {
+                _zoom = zoom;
+                CreateFonts(EmSize);
+            }
+
+            tc.StartDrawing(dev, BackgroundColor, 4, fonts[0]);
+
+            FontSize = tc.MeasureText("M");
+            FontWidth = FontSize.Width;
+            FontHeight = FontSize.Height;
+            var rows = clientSize.Height / FontHeight;
+            var cols = clientSize.Width / FontWidth;
+            var leftSkip = colStart;
+
+            // skip lines above view.
+            _scanner.MoveToLine(rowStart);
+
+            int startAddr = rowStart * colCount;
+            LeftMargin.X = DrawAddressNumbers(startAddr, buffer.Length, colCount, rows, clientSize.Height);
+            startPoint.X = LeftMargin.X - leftSkip * FontWidth;
+            startPoint.Y = LeftMargin.Y;
+
+            // restrict drawing to just the text part.
+            tc.SelectClipRegion(LeftMargin.X - 1, LeftMargin.Y - 1, clientSize.Width, clientSize.Height);
+
+            for (int r = 0; r < rows; ++r)
+            {
+                var lineOffset = 0;
+
+                // format text rows
+                var start = (r + rowStart) * colCount;
+                for (int i = 0; i < colCount && i + start < buffer.Length; ++i)
+                {
+                    byte b = buffer.Text[i + start];
+                    _scanner.Token.Append(HEX[(b >> 4) & 0xf]);
+                    _scanner.Token.Append(HEX[b & 0xf]);
+                    _scanner.Token.Append(' ');
+
+                    _binChars[i] = b < 32 ? '.' : (char) b;
+                }
+
+                // check if visible, skip if not.
+                if ((lineOffset + scanner.Token.Length) < leftSkip || lineOffset > cols)
+                {
+                    continue;
+                }
+
+                var foreColor = SetFont(TokenType.Punctuation);
+                Draw(foreColor);
+                startPoint.X += FontSize.Width;
+
+                int w = startPoint.X;
+                _scanner.Token.Clear();
+
+                _scanner.Token.Append(' ');
+                for (int i = 0; i < colCount; ++i)
+                {
+                    _scanner.Token.Append(_binChars[i]);
+                }
+
+                // check if visible, skip if not.
+                if ((lineOffset + scanner.Token.Length) < leftSkip || lineOffset > cols)
+                {
+                    continue;
+                }
+
+                 foreColor = SetFont(TokenType.Operator);
+                Draw(foreColor);
+                startPoint.X += FontSize.Width;
+
+                tc.SelectSolidPen(1, Color.DIM_GRAY_DIM_GREY);
+                tc.DrawLine(w, 0, w, clientSize.Height);
+
+            }
+
+            tc.EndDrawing(dev);
+
+            RowColSize = new Size(_scanner.MaxLineLength, _scanner.LineCount);
+        }
+
     }
 }

@@ -23,16 +23,18 @@ namespace SourcePreview
 
         private sealed class BinaryPreviewHandlerControl : FileBasedPreviewHandlerControl
         {
+
+            //TODO fix this.
             public override void Load(FileInfo file)
             {
                 ByteViewer viewer = new ByteViewer();
                 viewer.Dock = DockStyle.Fill;
-                viewer.BackColor = Color.Black;
-                viewer.ForeColor = Color.White;
-                viewer.SetDisplayMode(DisplayMode.Auto);
-
+ 
                 viewer.SetFile(file.FullName);
-                Controls.Add(viewer);
+                viewer.BackColor = Color.White;
+                viewer.ForeColor = Color.Black;
+                viewer.SetDisplayMode(DisplayMode.Hexdump);
+               Controls.Add(viewer);
             }
         }
     }

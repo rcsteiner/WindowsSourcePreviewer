@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestViewer", "TestViewer\TestViewer.csproj", "{1AE457C4-1389-45B6-BA97-38943878CB45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipTest", "..\ZipTest\ZipTest.csproj", "{F6EA2D37-234D-40AD-AFF6-3D30ABB9A165}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabTestViewer", "..\ZipTest\TabTestViewer.csproj", "{F6EA2D37-234D-40AD-AFF6-3D30ABB9A165}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
