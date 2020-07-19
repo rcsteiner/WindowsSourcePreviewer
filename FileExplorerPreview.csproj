@@ -76,6 +76,7 @@
     <Compile Include="Previewer\Buffer\ReadBuffer.cs" />
     <Compile Include="Previewer\Buffer\Buffer.cs" />
     <Compile Include="Previewer\Buffer\IBuffer.cs" />
+    <Compile Include="Previewer\Controls\ViewerPanel\Selection.cs" />
     <Compile Include="Previewer\Draw\ITextContext.cs" />
     <Compile Include="Previewer\Buffer\StreamBuffer.cs" />
     <Compile Include="Previewer\Draw\TextContext.cs" />
@@ -295,6 +296,7 @@
   <ItemGroup>
     <Content Include="MSDN.ico" />
     <EmbeddedResource Include="Resources\folderopen.ico" />
+    <None Include="Resources\copy.png" />
     <Content Include="WinUserInterop\Todo.xml" />
   </ItemGroup>
   <ItemGroup>

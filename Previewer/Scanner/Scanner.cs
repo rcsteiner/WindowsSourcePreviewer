@@ -855,5 +855,75 @@ namespace Scan
 
             return TokenType.WhiteSpace;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Scan Token at a position and for a length.
+        /// </summary>
+        /// <param name="position"> The position.</param>
+        /// <param name="length">   The length.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public Token ScanToken(int position, int end)
+        {
+            Buffer.Reset(position);
+            CharClassifier.Reset();
+
+            Token.Clear();
+
+            while (Buffer.Position < end)
+            {
+                //TODO keep tabs for now, if want to expand then do this.
+                //else if (CurrentChar == '\t')
+                //{
+                //    int n = TabSize - (Column % TabSize);
+                //    for (int i = 0; i < n; ++i)
+                //    {
+                //        Token.Append(' ');
+                //    }
+
+                //    MoveNext();
+                //    continue;
+                //}
+                AppendMoveNext(CurrentChar);
+
+            }
+
+            return Token;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Get Position from the row and column.
+        /// </summary>
+        /// <param name="row">     The row in the buffer (line number).</param>
+        /// <param name="column">  The column in the row adjusted for left side clipping.</param>
+        /// <returns>
+        ///  The integer value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public int GetPosition(int row, int column)
+        {
+            MoveToLine(row);
+
+            // move back to start of line and scan to position
+
+            while (Column < column)
+            {
+                if (CurrentChar == '\t')
+                {
+                    Column += TabSize - (Column % TabSize);
+                    if (Column > column)
+                    {
+                        break;
+                    }
+                }
+                MoveNext();
+            }
+
+            return Position - 1;
+        }
+
+
+
     }
 }

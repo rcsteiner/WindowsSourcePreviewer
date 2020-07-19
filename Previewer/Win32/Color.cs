@@ -101,35 +101,36 @@ namespace Win32
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public Color Lighten( double inAmount)
         {
-            if (inAmount >1.0)
-            {
-                var max = MaxComponent();
+            return new Color(255, SatMultiply(Red, inAmount), SatMultiply(Green, inAmount), SatMultiply(Blue, inAmount));
+            //if (inAmount >1.0)
+            //{
+            //    var max = MaxComponent();
 
-                if (max == 0 )
-                {
-                    var amount =(byte) (inAmount*255);
-                    return new Color(amount,amount,amount);
-                }
+            //    if (max == 0 )
+            //    {
+            //        var amount =(byte) (inAmount*255);
+            //        return new Color(amount,amount,amount);
+            //    }
 
-                var mul = 255.0 / max;
-                if (inAmount > mul) inAmount = mul;
-            }
-            else
-            {
-                var min = MinComponent();
+            //    var mul = 255.0 / max;
+            //    if (inAmount > mul) inAmount = mul;
+            //}
+            //else
+            //{
+            //    var min = MinComponent();
 
-                if (min == 255)
-                {
-                    var amount = (byte)(inAmount * 255);
-                    return new Color(amount, amount, amount);
-                }
+            //    if (min == 255)
+            //    {
+            //        var amount = (byte)(inAmount * 255);
+            //        return new Color(amount, amount, amount);
+            //    }
 
-                var mul = 1 / min;
-                if (inAmount < mul) inAmount = mul;
+            //    var mul = 1 / min;
+            //    if (inAmount < mul) inAmount = mul;
 
-            }
+            //}
 
-            return new Color(SatMultiply(Red, inAmount), SatMultiply(Green,  inAmount), SatMultiply(Blue , inAmount));
+            //return new Color(SatMultiply(Red, inAmount), SatMultiply(Green,  inAmount), SatMultiply(Blue , inAmount));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

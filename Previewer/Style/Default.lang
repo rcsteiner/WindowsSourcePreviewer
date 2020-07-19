@@ -1,5 +1,5 @@
 Name = "default"
-Ext = .txt .text
+Ext = .txt .text .log
 Delimiter = "\"" "" "\""
 Delimiter = "'" "" "'"
 Operators = "-+=><|^%*&/!"

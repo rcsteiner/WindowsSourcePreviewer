@@ -30,6 +30,7 @@
 using System;
 using System.Drawing;
 using Scan;
+using UI.Controls;
 using Win32;
 using Color = Win32.Color;
 
@@ -110,7 +111,7 @@ namespace SourcePreview
         /// <summary>
         ///  The Left Margin field.
         /// </summary>
-        private Point LeftMargin = new Point(5, 5);
+        public Point LeftMargin = new Point(5, 5);
 
         /// <summary>
         ///  The start Point field.
@@ -126,6 +127,11 @@ namespace SourcePreview
         private const string HEX = "0123456789ABCDEF";
 
         private char[] _binChars;
+
+        /// <summary>
+        ///  Get/Set Selection Background.
+        /// </summary>
+        public Color SelectionBackground { get; set; }
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,7 +305,7 @@ namespace SourcePreview
         /// <param name="colStart">   The horizontal Percent.</param>
         /// <param name="zoom">       The zoom.</param>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ShowBuffer(Graphics dev, IScanner scanner, Size clientSize, int rowStart, int colStart, float zoom)
+        public void ShowBuffer(Graphics dev, IScanner scanner, Size clientSize, int rowStart, int colStart, float zoom, Selection selection)
         {
             if (scanner == null || scanner.LineCount == 0) return;
 
@@ -310,6 +316,12 @@ namespace SourcePreview
                 _zoom = zoom;
                 CreateFonts(EmSize);
             }
+            SelectionBackground = BackgroundColor.Lighten(.4);
+
+            tc.SetBackgroundMode(true);
+
+            var inSelect = false;
+            var chkSelect = selection.Length > 0;
 
             tc.StartDrawing(dev, BackgroundColor, 4, fonts[0]);
 
@@ -333,7 +345,31 @@ namespace SourcePreview
             // todo fix end check here.
             while(!scanner.AtEnd)
             {
-                var lineOffset = scanner.Position - scanner.StartPositionOfLine;
+                var pos = scanner.Position;
+                var lineOffset =pos - scanner.StartPositionOfLine;
+
+                // handle selection marking
+                if (chkSelect)
+                {
+                    if (!inSelect)
+                    {
+                        if (pos >= selection.Start)
+                        {
+                            //  _selStart = new Point(startPoint.X, startPoint.Y);
+                            inSelect = true;
+                            tc.BackColor = SelectionBackground;
+                            // set background mode correctly for select box.
+                            tc.SetBackgroundMode(false);
+                        }
+                    }
+                    else if (pos >= selection.End)
+                    {
+                        chkSelect = false;
+                        tc.SetBackgroundMode(true);
+                    }
+                }
+
+
                 var type = scanner.NextToken();
 
                 // handle special cases of Eol and not visible
@@ -359,6 +395,11 @@ namespace SourcePreview
                 switch (type)
                 {
                     case TokenType.WhiteSpace:
+                        if (inSelect)
+                        {
+                            goto default;
+                        }
+
                         startPoint.X += scanner.Token.Length * FontWidth;
                         continue;
 
@@ -387,6 +428,7 @@ namespace SourcePreview
 
             RowColSize = new Size(_scanner.MaxLineLength, _scanner.LineCount);
         }
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>

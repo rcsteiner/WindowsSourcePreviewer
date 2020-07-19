@@ -34,6 +34,7 @@ using System.Windows.Forms;
 using Previewer.Controls;
 using Scan;
 using SourcePreview;
+using UI.Controls;
 using HScrollBar = Previewer.Controls.HScrollBar;
 using VScrollBar = Previewer.Controls.VScrollBar;
 
@@ -142,7 +143,19 @@ namespace PanelSourceView
         public ILanguage Language { get { return _scanner.Language; } set { _scanner.Language = value; } }
 
 
-       // private static long _mem;
+        /// <summary>
+        ///  The Selection field.
+        /// </summary>
+        public Selection Selection;
+        // private static long _mem;
+
+
+        /// <summary>
+        ///  The  mouse Down field, true if the mouse is being held down.
+        /// </summary>
+        private bool _mouseDown;
+
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -160,8 +173,10 @@ namespace PanelSourceView
             _buffer                 = new ReadBuffer();
             _scanner                = new Scanner(_buffer);
             _preview                = new TextDraw();
+            Selection               = new Selection(_scanner);
 
-            _status                 = new DocStatus();
+
+            _status = new DocStatus();
             _scrollVertical         = new VScrollBar();
             _scrollHorizontal       = _status.ScrollHorizontal;
 
@@ -181,8 +196,48 @@ namespace PanelSourceView
             _scrollVertical.SmallChange   = 3;
             _scrollHorizontal.SmallChange = 3;
 
+            InitializeContextMenu();
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Get Position.
+        /// </summary>
+        /// <param name="x"> The integer x coordinate.</param>
+        /// <param name="y"> The integer y coordinate.</param>
+        /// <returns>
+        ///  The integer value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private int GetPosition(int x, int y)
+        {
+            int row = (y - _preview.LeftMargin.Y) / _preview.FontHeight + 1;
+            int col = (x - _preview.LeftMargin.X) / _preview.FontWidth;
+
+            return _scanner.GetPosition(row + VScrollValue, col + HScrollValue);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Initialize Context Menu.
+        /// </summary>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void InitializeContextMenu()
+        {
+            ContextMenuStrip = new ContextMenuStrip();
+
+            ContextMenuStrip.BackColor = System.Drawing.Color.FromArgb(255, 40, 40, 40);
+            ContextMenuStrip.ForeColor = System.Drawing.Color.White;
+            ContextMenuStrip.AllowTransparency = true;
+            var copy = new ToolStripMenuItem("&Copy", FileExplorerPreview.Resources.SourcePreview.Copy,OnCopy);
+            copy.ShortcutKeys =  Keys.Control | Keys.C;
+            ContextMenuStrip.Items.Add(copy);
+
+
+            //  var setup = new ToolStripMenuItem("&Setup", UIControls.Resources.Resource.Modify, OnModify, Keys.Control | Keys.M);
+            //  ContextMenuStrip.Items.Add(setup);
+            //  ContextMenuStrip.Opening += ShowContextMenu;
+        }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         ///  Method: Form1 Load.
@@ -194,6 +249,69 @@ namespace PanelSourceView
             _scanner.Load(filePath);
             SetLineAndColumn();
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: On Copy.
+        /// </summary>
+        /// <param name="sender"> The sender.</param>
+        /// <param name="e">      The Event arguments e.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void OnCopy(object sender, EventArgs e)
+        {
+            if (Selection.Length > 0)
+            {
+                var text = Selection.Text.ToString();
+                Clipboard.SetText(text);
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Raises the <see cref="E:System.Windows.Forms.Control.MouseDown" /> event.
+        /// </summary>
+        /// <param name="e"> A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                _mouseDown = true;
+                Selection.SetStart(GetPosition(e.X, e.Y));
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Raises the <see cref="E:System.Windows.Forms.Control.MouseMove" /> event.
+        /// </summary>
+        /// <param name="e"> A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (_mouseDown)
+            {
+                var pos = GetPosition(e.X, e.Y);
+                Selection.Expand(pos);
+                Invalidate();
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Raises the <see cref="E:System.Windows.Forms.Control.MouseUp" /> event.
+        /// </summary>
+        /// <param name="e"> A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            _mouseDown = false;
+            Invalidate();
+        }
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -228,7 +346,7 @@ namespace PanelSourceView
 
             if (DesignMode) return;
 
-            _preview.ShowBuffer(e.Graphics, _scanner, ClientSize, VScrollValue+1, HScrollValue, ZoomValue);
+            _preview.ShowBuffer(e.Graphics, _scanner, ClientSize, VScrollValue+1, HScrollValue, ZoomValue,Selection);
             SetScrollRange(_preview.RowColSize);
             //long totalMemory = GC.GetTotalMemory(false);
             //var after        = (totalMemory - _mem);
@@ -374,7 +492,10 @@ namespace PanelSourceView
                     break;
 
                 case Keys.Escape:
+                    Selection.Clear();
+                    Refresh();
                     break;
+
                 case Keys.End:
                     SetVScrollValue(int.MaxValue);
                     break;

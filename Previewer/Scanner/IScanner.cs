@@ -329,6 +329,31 @@ namespace Scan
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         TokenType ScanWhitespace(char c);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Scan Token at a position and for a length.
+        /// </summary>
+        /// <param name="start">  The start.</param>
+        /// <param name="end">    The end.</param>
+        /// <returns>
+        ///  The UI.Token value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Token ScanToken(int start, int end);
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Get Position from the row and column.
+        /// </summary>
+        /// <param name="row">     The row in the buffer (line number).</param>
+        /// <param name="column">  The column in the row adjusted for left side clipping.</param>
+        /// <returns>
+        ///  The integer value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        int GetPosition(int row, int column);
     }
 }
 

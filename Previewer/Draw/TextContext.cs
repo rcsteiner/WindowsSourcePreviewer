@@ -51,6 +51,11 @@ namespace Win32
         private IntPtr _dc;
 
         /// <summary>
+        ///  Get/Set Back Color.
+        /// </summary>
+        public Color BackColor { set { SetBkColor(_dc, value); } }
+
+        /// <summary>
         ///  Get/Set Current Font.
         /// </summary>
         private Font _currentFont;
@@ -94,6 +99,12 @@ namespace Win32
         ///  Get Size Bounds rectangle.
         /// </summary>
         private static RECT SIZE_BOUNDS => new RECT(0, 0);
+
+        /// <summary>
+        ///  The  Background Mode field.
+        /// </summary>
+        private bool _isTransparent = true;
+
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -392,6 +403,23 @@ namespace Win32
 
             return p;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Set Background transparency or (opaque).
+        /// </summary>
+        /// <param name="transparent">  True if transparent.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void SetBackgroundMode(bool transparent)
+        {
+            if (transparent != _isTransparent)
+            {
+                SetBkMode(_dc, transparent ? BkMode.TRANSPARENT : BkMode.OPAQUE);
+                _isTransparent = transparent;
+            }
+        }
+
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
