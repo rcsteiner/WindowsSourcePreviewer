@@ -53,6 +53,24 @@ namespace Previewer.Controls
     public abstract partial class ScrollBar : UserControl
     {
         /// <summary>
+        ///  Gets or sets the background color for the control. Causes foreground color to change to white or black.
+        ///  Change foreground color after background to get foreground other than the default.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [Category("Display")]
+        [Description("Color of background.  Causes foreground color to change to white or black.")]
+        public override Color BackColor
+        {
+            get => base.BackColor;
+            set
+            {
+                base.BackColor = value;
+                ForeColor = BackColor.IsDark() ? Color.White : Color.Black;
+            }
+        }
+
+        /// <summary>
         ///  Get/Set Large Change.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Always)]

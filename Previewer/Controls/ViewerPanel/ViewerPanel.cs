@@ -197,6 +197,9 @@ namespace PanelSourceView
             _scrollVertical.SmallChange   = 3;
             _scrollHorizontal.SmallChange = 3;
 
+            _scrollVertical.BackColor = System.Drawing.SystemColors.GrayText;
+            _status.BackColor         = System.Drawing.SystemColors.GrayText;
+
             InitializeContextMenu();
         }
 

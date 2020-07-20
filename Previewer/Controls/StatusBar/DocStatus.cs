@@ -55,8 +55,7 @@ namespace Previewer.Controls
             {
                 base.BackColor                        = value;
                 ForeColor                             = BackColor.IsDark() ? Color.White : Color.Black;
-                ScrollHorizontal.BackColor = value;
-                ScrollHorizontal.ForeColor            = ForeColor;
+                ScrollHorizontal.BackColor            = value;
             }
         }
 
