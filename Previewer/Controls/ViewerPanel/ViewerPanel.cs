@@ -29,6 +29,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Previewer.Controls;
@@ -246,6 +247,8 @@ namespace PanelSourceView
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void LoadFile(string filePath)
         {
+            Trace.WriteLine($"Loading {filePath} ");
+
             _scanner.Load(filePath);
             SetLineAndColumn();
         }
@@ -261,7 +264,10 @@ namespace PanelSourceView
             if (Selection.Length > 0)
             {
                 var text = Selection.Text.ToString();
-                Clipboard.SetText(text);
+                if (!string.IsNullOrEmpty(text))
+                {
+                    Clipboard.SetText(text);
+                }
             }
         }
 
@@ -463,6 +469,14 @@ namespace PanelSourceView
         }
 
 
+        /// <summary>Raises the <see cref="E:System.Windows.Forms.Control.KeyDown" /> event.</summary>
+        /// <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.</param>
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            Trace.WriteLine($"Key down {e.KeyData} ");
+            base.OnKeyDown(e);
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         ///  Method: Process command Key.
@@ -479,6 +493,7 @@ namespace PanelSourceView
             //var shift = (ModifierKeys & Keys.Shift) != 0;
             //var alt = (ModifierKeys & Keys.Alt) != 0;
             var pageRows = PageRows;
+            Trace.WriteLine($"Process Cmd Key {keyData} ");
 
             var lastTopLine = _scanner.LineCount - pageRows / 2;
             switch (keyData)
