@@ -16,6 +16,7 @@
 //   CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -92,6 +93,32 @@ namespace SourcePreview
                 {
                 }
             }
+
+            /// <summary>Previews a keyboard message.</summary>
+            /// <param name="m">A <see cref="T:System.Windows.Forms.Message" />, passed by reference, that represents the window message to process.</param>
+            /// <returns>
+            /// <see langword="true" /> if the message was processed by the control; otherwise, <see langword="false" />.</returns>
+            protected override bool ProcessKeyPreview(ref Message m)
+            {
+                Trace.WriteLine($"SourcePreviewHandlerControl:ProcessKeyPreview {m.WParam}");
+                return base.ProcessKeyPreview(ref m);
+            }
+
+            /// <summary>Previews a keyboard message.</summary>
+            /// <param name="m">A <see cref="T:System.Windows.Forms.Message" />, passed by reference, that represents the window message to process.</param>
+            /// <returns>
+            /// <see langword="true" /> if the message was processed by the control; otherwise, <see langword="false" />.</returns>
+            /// <summary>Processes a command key.</summary>
+            /// <param name="msg">A <see cref="T:System.Windows.Forms.Message" />, passed by reference, that represents the Win32 message to process.</param>
+            /// <param name="keyData">One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process.</param>
+            /// <returns>
+            /// <see langword="true" /> if the keystroke was processed and consumed by the control; otherwise, <see langword="false" /> to allow further processing.</returns>
+            protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+            {
+                Trace.WriteLine($"SourcePreviewHandlerControl:ProcessCmdKey {keyData}");
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+
         }
     }
 }

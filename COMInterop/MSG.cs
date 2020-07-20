@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace SourcePreview
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct MSG
+    public struct MSG
     {
         public IntPtr hwnd;
         public int message;

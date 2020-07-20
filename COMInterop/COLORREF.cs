@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace SourcePreview
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct COLORREF
+    public struct COLORREF
     {
         public uint Dword;
         public Color Color

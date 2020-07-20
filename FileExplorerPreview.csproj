@@ -65,6 +65,7 @@
     <Compile Include="COMInterop\LOGFONT.cs" />
     <Compile Include="COMInterop\MSG.cs" />
     <Compile Include="COMInterop\RECT.cs" />
+    <Compile Include="ControlExtension.cs" />
     <Compile Include="FileBasedPreviewHandler.cs" />
     <Compile Include="FileBasedPreviewHandlerControl.cs">
       <SubType>Form</SubType>

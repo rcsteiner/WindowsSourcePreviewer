@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace SourcePreview
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct RECT
+    public struct RECT
     {
         public readonly int left;
         public readonly int top;

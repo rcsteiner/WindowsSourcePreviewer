@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace SourcePreview
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-    internal class LOGFONT
+    public class LOGFONT
     {
         public int lfHeight;
         public int lfWidth;

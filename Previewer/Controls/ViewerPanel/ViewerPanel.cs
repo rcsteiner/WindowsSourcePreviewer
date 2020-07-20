@@ -261,6 +261,16 @@ namespace PanelSourceView
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void OnCopy(object sender, EventArgs e)
         {
+            DoCopy();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Do Copy.
+        /// </summary>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void DoCopy()
+        {
             if (Selection.Length > 0)
             {
                 var text = Selection.Text.ToString();
@@ -280,6 +290,12 @@ namespace PanelSourceView
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
+
+            if (CanFocus)
+            {
+                Focus();
+            }
+
             if (e.Button == MouseButtons.Left)
             {
                 _mouseDown = true;
@@ -357,6 +373,12 @@ namespace PanelSourceView
             //long totalMemory = GC.GetTotalMemory(false);
             //var after        = (totalMemory - _mem);
             //_mem             = totalMemory;
+           var  bounds = this.ClientRectangle;
+            if ( this.Focused)
+            {
+                bounds.Inflate(-3, -3);
+                ControlPaint.DrawFocusRectangle(e.Graphics, bounds);
+            }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -468,32 +490,62 @@ namespace PanelSourceView
             _status.Info = $"Line {VScrollValue} Column {HScrollValue}";
         }
 
-
-        /// <summary>Raises the <see cref="E:System.Windows.Forms.Control.KeyDown" /> event.</summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Raises the <see cref="E:System.Windows.Forms.Control.KeyDown" /> event.
+        /// </summary>
+        /// <param name="e"> A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         protected override void OnKeyDown(KeyEventArgs e)
         {
             Trace.WriteLine($"Key down {e.KeyData} ");
-            base.OnKeyDown(e);
+            if (HandleKey(e.KeyData))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                base.OnKeyDown(e);
+            }
         }
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///// <summary>
+        /////  Method: Process command Key.
+        ///// </summary>
+        ///// <param name="msg">     [ref] The message.</param>
+        ///// <param name="keyData">  The key Data.</param>
+        ///// <returns>
+        /////  True if successful
+        ///// </returns>
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (!HandleKey(keyData))
+        //    {
+        //        return base.ProcessCmdKey(ref msg, keyData);
+        //    }
+
+        //    return true;
+        //}
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        ///  Method: Process command Key.
+        ///  Method: Handle Key.
         /// </summary>
-        /// <param name="msg">     [ref] The message.</param>
         /// <param name="keyData">  The key Data.</param>
         /// <returns>
         ///  True if successful
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        private bool HandleKey(Keys keyData)
         {
-            //var control = (ModifierKeys & Keys.Control) != 0;
+            var control = (ModifierKeys & Keys.Control) != 0;
             //var shift = (ModifierKeys & Keys.Shift) != 0;
             //var alt = (ModifierKeys & Keys.Alt) != 0;
             var pageRows = PageRows;
-            Trace.WriteLine($"Process Cmd Key {keyData} ");
+            Trace.WriteLine($"Process Key {keyData} ");
 
             var lastTopLine = _scanner.LineCount - pageRows / 2;
             switch (keyData)
@@ -519,48 +571,54 @@ namespace PanelSourceView
                     SetVScrollValue(0);
                     break;
 
+                case Keys.C:
+                    if (control) DoCopy();
+                    break;
+
                 default:
-                    return base.ProcessCmdKey(ref msg, keyData);
+                {
+                    return false;
+                }
 
-                    //case Keys.Left:
-                    //    break;
-                    //case Keys.Up:
-                    //    break;
-                    //case Keys.Right:
-                    //    break;
-                    //case Keys.Down:
-                    //    break;
-                    //case Keys.Insert:
-                    //    break;
-                    //case Keys.Delete:
-                    //    break;
-                    //case Keys.F1:
-                    //case Keys.Help:
-                    //    break;
-                    //case Keys.F2:
-                    //    break;
-                    //case Keys.F3:
-                    //    break;
-                    //case Keys.F4:
-                    //    break;
-                    //case Keys.F5:
-                    //    break;
-                    //case Keys.F6:
-                    //    break;
-                    //case Keys.F7:
-                    //    break;
-                    //case Keys.F8:
-                    //    break;
-                    //case Keys.F9:
-                    //    break;
-                    //case Keys.F10:
-                    //    break;
-                    //case Keys.F11:
-                    //    break;
-                    //case Keys.F12:
-                    //    break;
-
+                //case Keys.Left:
+                //    break;
+                //case Keys.Up:
+                //    break;
+                //case Keys.Right:
+                //    break;
+                //case Keys.Down:
+                //    break;
+                //case Keys.Insert:
+                //    break;
+                //case Keys.Delete:
+                //    break;
+                //case Keys.F1:
+                //case Keys.Help:
+                //    break;
+                //case Keys.F2:
+                //    break;
+                //case Keys.F3:
+                //    break;
+                //case Keys.F4:
+                //    break;
+                //case Keys.F5:
+                //    break;
+                //case Keys.F6:
+                //    break;
+                //case Keys.F7:
+                //    break;
+                //case Keys.F8:
+                //    break;
+                //case Keys.F9:
+                //    break;
+                //case Keys.F10:
+                //    break;
+                //case Keys.F11:
+                //    break;
+                //case Keys.F12:
+                //    break;
             }
+
             return true;
         }
     }
