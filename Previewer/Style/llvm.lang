@@ -1,4 +1,4 @@
-Name = "LLVM IR"
+Name = "LLVM"
 Ext = .ll
 LineComment =";"
 Delimiter = DQuote "\"" "\\" "\""

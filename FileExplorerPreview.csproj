@@ -289,7 +289,9 @@
     <EmbeddedResource Include="Previewer\Style\c.lang" />
     <EmbeddedResource Include="Previewer\Style\lang.lang" />
     <EmbeddedResource Include="Previewer\Style\sln.lang" />
-    <None Include="Previewer\Style\erlang.lang" />
+    <EmbeddedResource Include="Previewer\Style\erlang.lang" />
+    <EmbeddedResource Include="Previewer\Style\glsl.lang" />
+    <EmbeddedResource Include="Previewer\Style\hlsl.lang" />
     <None Include="StrongNameKey.snk" />
     <None Include="uninstall.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

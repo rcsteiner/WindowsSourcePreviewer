@@ -397,7 +397,8 @@ namespace ConvertKeywords
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         static void Main(string[] args)
         {
-            var file = File.OpenRead(@"..\..\..\..\keywords\baseKeywords.xml");
+           var file = File.OpenRead(@"..\..\..\..\keywords\baseKeywords.xml");
+     //       var file = File.OpenRead(@"h:\GLSL.xml");
             XmlReader reader = new XmlTextReader(file);
 
             ReadKeywords(reader);
