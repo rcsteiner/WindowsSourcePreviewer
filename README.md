@@ -4,6 +4,14 @@ A windows file explorer extension to show syntax highlighted files in explorer's
 ### Extensions supported:
 user config as mx ada ads adb asm mib asp au3 avs avsi bash sh bsh csh bash_profile bashrc profile bat cmd nt bb ml mli sml thy cmake cbl cbd cdb cdc cob cpy copy lst coffee litcoffee h hh hpp hxx cpp cxx cc ino cs orc sco csd css d txt text diagram diff patch erl hrl src em forth f for f90 f95 f2k f23 f77 bas bi g grammar err production lstraw  hs lhs las html htm shtml shtm xhtml xht hta hex ini inf url wer iss java js jsm jsx ts tsx json jsp kix tex sty lsp lisp ll lua mak mk md markdown m mms nim tab spf nsi nsh mm osx pas pp p inc lpr pl pm plx php php3 php4 php5 phps phpt phtml ps ps1 psm1 properties pc pb py pyw r s splus rc r2 r3 reb reg rb rbw rs scm smd ss st scp out sql mot srec swift tcl tek t2t vb vbs v sv vh svh vhd vhdl pro cl i pack ph xml xaml xsl xslt xsd xul kml svg mxml xsml wsdl xlf xliff xbl sxbl sitemap gml gpx plist vcproj vcxproj csxproj vbproj dbproj yml yaml z c lex
 
+# Installing
+The binary is supplied in the *bin* folder.
+
+ To install:
+
+1) Run the visual studio developer command line tool with *adminstrator permissions*.
+2) In the **bin** folder, run __install.bat__.
+3) To uninstall, run __uninstall.bat__.
 
 # Snapshots
 The include test program can show a file in the viewer panel.
