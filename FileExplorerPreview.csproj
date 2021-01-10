@@ -197,9 +197,6 @@
     <None Include="install.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="installdebug.bat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <EmbeddedResource Include="Previewer\Style\actionscript.lang" />
     <EmbeddedResource Include="Previewer\Style\ada.lang" />
     <EmbeddedResource Include="Previewer\Style\asm.lang" />

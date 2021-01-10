@@ -73,7 +73,7 @@ namespace Scan
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void Append(char c)
         {
-            if (Length < Text.Length)
+            if (c!= '\0' && Length < Text.Length)
             {
                 Text[Length++] = c;
             }

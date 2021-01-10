@@ -42,22 +42,25 @@ namespace Scan
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class Scanner : IScanner
     {
-        
         /// <summary>
         ///  Get At End.
         /// </summary>
         public bool AtEnd { get { return Buffer.AtEnd; } }
 
         /// <summary>
+        ///  Get/Set Column.
+        /// </summary>
+        public int Column { get; private set; }
+
+        /// <summary>
         ///  Get Current Char.
         /// </summary>
         public char CurrentChar { get { return Buffer.CurrentChar; } }
 
-
         /// <summary>
-        ///  Get/Set Column.
+        ///  Get/Set Language.
         /// </summary>
-        public int Column { get; private set; }
+        public ILanguage Language { get; set; }
 
         /// <summary>
         ///  Get Line Count.
@@ -95,6 +98,11 @@ namespace Scan
         public Token Token { get; }
 
         /// <summary>
+        ///  The Char Classifier field.
+        /// </summary>
+        public ICharClassifier CharClassifier;
+
+        /// <summary>
         ///  digits s.
         /// </summary>
         public const string DIGITS = "0123456789";
@@ -109,17 +117,10 @@ namespace Scan
         /// </summary>
         public const string LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-
         /// <summary>
         ///  The LETTER and digits field.
         /// </summary>
-        public const string LETTERS_DIGITS = LETTERS+DIGITS + "_@{}.?/\\*%$#-+><=!:;";
-
-        /// <summary>
-        ///  The WHITESPACE field.
-        /// </summary>
-        protected const string WHITESPACE= " \t\r";
-
+        public const string LETTERS_DIGITS = LETTERS + DIGITS + "_@{}.?/\\*%$#-+><=!:;";
 
         /// <summary>
         ///  The line Count field.
@@ -132,14 +133,9 @@ namespace Scan
         protected IBuffer Buffer;
 
         /// <summary>
-        ///  Get/Set Language.
+        ///  The WHITESPACE field.
         /// </summary>
-        public ILanguage Language { get; set; }
-
-        /// <summary>
-        ///  The Char Classifier field.
-        /// </summary>
-        public ICharClassifier CharClassifier;
+        protected const string WHITESPACE = " \t\r";
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -149,52 +145,10 @@ namespace Scan
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public Scanner(IBuffer buffer)
         {
-            Buffer      = buffer;
-            Token       = new Token();
-            Column      = 0;
-            TabSize     = 4;
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Method: Accept the text if it matches, flushes any whitespace.
-        /// </summary>
-        /// <param name="text">            The text.</param>
-        /// <param name="flushWhitespace"> [optional=true] True if flush Whitespace.</param>
-        /// <returns>
-        ///  True if successful
-        /// </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public bool Accept(string text, bool flushWhitespace = true)
-        {
-            if (flushWhitespace) ScanWhitespace(CurrentChar);
-
-            if (CurrentChar != text[0]) return false;       // fast check!
-
-            // save position
-            // and match the text string.
-            var pos = Buffer.Position-1;
-            var b = Token.Length; 
-
-            char cc = AppendMoveNext(CurrentChar);
-
-            
-            for (var index = 1; index < text.Length; index++)
-            {
-                var c = text[index];
-                if (cc != c)
-                {
-                    // if not matched then restore position and 
-                    // return false
-                    Buffer.Reset(pos);
-                    Token.Length = b;
-                    return false;
-                }
-                cc = AppendMoveNext(cc);
-
-            }
-
-            return true;
+            Buffer = buffer;
+            Token = new Token();
+            Column = 0;
+            TabSize = 4;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -224,6 +178,48 @@ namespace Scan
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
+        ///  Method: Accept the text if it matches, flushes any whitespace.
+        /// </summary>
+        /// <param name="text">            The text.</param>
+        /// <param name="flushWhitespace"> [optional=true] True if flush Whitespace.</param>
+        /// <returns>
+        ///  True if successful
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public bool Accept(string text, bool flushWhitespace = true)
+        {
+            if (flushWhitespace) ScanWhitespace(CurrentChar);
+
+            if (CurrentChar != text[0]) return false;       // fast check!
+
+            // save position
+            // and match the text string.
+            var pos = Buffer.Position - 1;
+            var b = Token.Length;
+
+            char cc = AppendMoveNext(CurrentChar);
+
+
+            for (var index = 1; index < text.Length; index++)
+            {
+                var c = text[index];
+                if (cc != c)
+                {
+                    // if not matched then restore position and 
+                    // return false
+                    Buffer.Reset(pos);
+                    Token.Length = b;
+                    return false;
+                }
+                cc = AppendMoveNext(cc);
+
+            }
+
+            return true;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
         ///  Method: Append to token buffer and Move Next.
         /// </summary>
         /// <param name="c"> The char c.</param>
@@ -236,7 +232,6 @@ namespace Scan
             Token.Append(c);
             return MoveNext();
         }
-
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -306,19 +301,6 @@ namespace Scan
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        ///  Method: Move to start of Next Line.
-        ///  Moves over eol character to first character of next line, clears token.
-        /// </summary>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void NextLine()
-        {
-            EndOfLine();
-            if (CurrentChar == '\n') MoveNext();
-            Token.Clear();
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
         ///  Method: Flush Whitespace and clears the token.
         /// </summary>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -330,42 +312,9 @@ namespace Scan
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        ///  Method: Get Tokens.
-        /// </summary>
-        /// <returns>
-        ///  Fills out the token information on the next token.
-        /// </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public IEnumerable<TokenType> GetTokens()
-        {
-            Reset();
-            while (!AtEnd)
-            {
-                yield return NextToken();
-            }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Method: Initialize.
-        /// </summary>
-        /// <param name="buffer">   The buffer.</param>
-        /// <param name="language">  The language.</param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void Initialize(IBuffer buffer, ILanguage language)
-        {
-            this.Buffer = buffer;
-            Language = language;
-            _lineCount = -1;
-            CharClassifier = GetClassifier(language);
-            Reset();
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
         ///  Method: Get Classifier.
         /// </summary>
-        /// <param name="language">  The language.</param>
+        /// <param name="language"> The language.</param>
         /// <returns>
         ///  The Scan.ICharClassifier value.
         /// </returns>
@@ -391,6 +340,71 @@ namespace Scan
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
+        ///  Method: Get Position from the row and column.
+        /// </summary>
+        /// <param name="row">    The row in the buffer (line number).</param>
+        /// <param name="column"> The column in the row adjusted for left side clipping.</param>
+        /// <returns>
+        ///  The integer value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public int GetPosition(int row, int column)
+        {
+            MoveToLine(row);
+
+            // move back to start of line and scan to position
+
+            while (Column < column)
+            {
+                if (CurrentChar == '\t')
+                {
+                    Column += TabSize - (Column % TabSize);
+                    if (Column > column)
+                    {
+                        break;
+                    }
+                }
+                MoveNext();
+            }
+
+            return Position - 1;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Get Tokens.
+        /// </summary>
+        /// <returns>
+        ///  Fills out the token information on the next token.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public IEnumerable<TokenType> GetTokens()
+        {
+            Reset();
+            while (!AtEnd)
+            {
+                yield return NextToken();
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Initialize.
+        /// </summary>
+        /// <param name="buffer">   The buffer.</param>
+        /// <param name="language"> The language.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void Initialize(IBuffer buffer, ILanguage language)
+        {
+            this.Buffer = buffer;
+            Language = language;
+            _lineCount = -1;
+            CharClassifier = GetClassifier(language);
+            Reset();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
         ///  Method: Load a file and Initialize the scanner.
         /// </summary>
         /// <param name="filePath"> The file Path.</param>
@@ -411,7 +425,7 @@ namespace Scan
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// Move Next character.
+        ///  Move Next character.
         /// </summary>
         /// <returns>
         ///  The char value.
@@ -422,7 +436,6 @@ namespace Scan
             ++Column;
             return Buffer.MoveNext();
         }
-
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -457,6 +470,19 @@ namespace Scan
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
+        ///  Method: Move to start of Next Line.
+        ///  Moves over eol character to first character of next line, clears token.
+        /// </summary>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void NextLine()
+        {
+            EndOfLine();
+            if (CurrentChar == '\n') MoveNext();
+            Token.Clear();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
         ///  Method: Next Token.
         /// </summary>
         /// <returns>
@@ -468,12 +494,43 @@ namespace Scan
             Token.Clear();
 
             // todo fix end check here
-            return CurrentChar=='\0' ? (TokenType) TokenType.End : (TokenType) CharClassifier.ClassifyCharacter(CurrentChar);
+            return CurrentChar == '\0' ? (TokenType)TokenType.End : (TokenType)CharClassifier.ClassifyCharacter(CurrentChar);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        ///  Flush a delimited block. Current character is also the end delimiter. Position is set to the position
+        ///  Look ahead 1 character.
+        /// </summary>
+        /// <returns>
+        ///  The char value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public char PeekNextChar()
+        {
+            return Buffer.PeekNextChar();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Reset to begin processing the buffer. Normally called after changing the buffer source.
+        /// </summary>
+        /// <param name="pos"> [optional=0] The position.</param>
+        /// <returns>
+        ///  The char value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public char Reset(int pos = 0)
+        {
+            Token.Clear();
+            Column = 0;
+            StartPositionOfLine = 0;
+            LineNumber = 1;
+            return Buffer.Reset(pos);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Flush a delimited block. Position is set to the position
         ///  following the end delimiter. Note that this scans to the end delimiter, carriage return, line feed or end
         ///  of buffer.
         /// </summary>
@@ -486,84 +543,10 @@ namespace Scan
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public TokenType ScanDelimited(char c, TokenType type, Delimiter delimiter)
         {
-            var start = delimiter.Start;
-            var end = delimiter.End;
-            var esc = string.IsNullOrEmpty(delimiter.Escape) ?'\0' : delimiter.Escape[0];
-
-            if (Accept(start,false) && !AtEnd)
-            {
-                c =CurrentChar;       // add delimiters so caller can take them off if trim is true.
-
-                while (!AtEnd && c != '\r' && c != '\n')
-                {
-                    if (c ==esc)
-                    {
-                        c = MoveNext();
-                    }
-                    if (Accept(end,false))
-                    {
-                        break;
-                    }
-                    c = AppendMoveNext(c);
-                }
-            }
-
-            return type;
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Method: Scan Eol.
-        /// </summary>
-        /// <returns>
-        ///  The Scan.TokenType value.
-        /// </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public TokenType ScanEol()
-        {
-            Column = 0;
-            ++LineNumber;
-            MoveNext();
-            StartPositionOfLine = Position;
-            return TokenType.Eol;
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Method: Scan Variable.
-        /// </summary>
-        /// <param name="c">  The char c.</param>
-        /// <returns>
-        ///  The Scan.TokenType value.
-        /// </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public TokenType ScanVariable(char c)
-        {
-            //TODO this can be a variable continue too.
-            while (!AtEnd && (char.IsLetterOrDigit(c) || c == '_'))
-            {
-                c = AppendMoveNext(c);
-            }
-            return TokenType.Variable;
-
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Method: Reset to begin processing the buffer. Normally called after changing the buffer source.
-        /// </summary>
-        /// <param name="pos"> [optional=0] The position.</param>
-        /// <returns>
-        ///  The char value.
-        /// </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public char Reset(int pos=0)
-        {
-            Token.Clear();
-            Column = 0;
-            StartPositionOfLine = 0;
-            LineNumber = 1;
-            return Buffer.Reset(pos);
+            //var start = delimiter.Start[0];
+            //var end = delimiter.End[0];
+            var esc = string.IsNullOrEmpty(delimiter.Escape) ? '\0' : delimiter.Escape[0];
+            return ScanDelimited(c, type, esc);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -573,7 +556,7 @@ namespace Scan
         ///  of buffer.
         /// </summary>
         /// <param name="c">      The char c.</param>
-        /// <param name="type">    The token type to return.</param>
+        /// <param name="type">   The token type to return.</param>
         /// <param name="escape"> The escape character (defaults to '\'.</param>
         /// <returns>
         ///  The Scan.TokenType value.
@@ -584,15 +567,16 @@ namespace Scan
             if (!AtEnd)
             {
                 var end = c;
-                c =AppendMoveNext(c);       // add delimiters so caller can take them off if trim is true.
+                c = AppendMoveNext(c);       // add delimiters so caller can take them off if trim is true.
 
-                while (!AtEnd && c != '\r' && c != '\n' && c!=end)
+                while (!AtEnd && c != '\r' && c != '\n' && c != end)
                 {
-                    if (c == escape)
+                    if (c == escape)          // always accept charactter after delimiter.
                     {
-                        c = MoveNext();
+                       c = AppendMoveNext(c);
                     }
                     c = AppendMoveNext(c);
+
                 }
                 if (c == end)
                 {
@@ -611,6 +595,23 @@ namespace Scan
         public void ScanDigits(char c)
         {
             ScanWhile(c, DIGITS);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Scan Eol.
+        /// </summary>
+        /// <returns>
+        ///  The Scan.TokenType value.
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public TokenType ScanEol()
+        {
+            Column = 0;
+            ++LineNumber;
+            MoveNext();
+            StartPositionOfLine = Position;
+            return TokenType.Eol;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -653,26 +654,11 @@ namespace Scan
             int id = Token.SearchKeyword(Language.KeyWords);
             if (id != -1)
             {
-                return Language.KeyWords[id].Value +TokenType.Keyword1;
+                return Language.KeyWords[id].Value + TokenType.Keyword1;
             }
 
             return ScanVariable(c);
         }
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Look ahead 1 character.
-        /// </summary>
-        /// <returns>
-        ///  The char value.
-        /// </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public char PeekNextChar()
-        {
-            return Buffer.PeekNextChar();
-        }
-
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -759,17 +745,16 @@ namespace Scan
         ///  The SourcePreview.TokenType value.
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public TokenType ScanPunctuation(char c)
+        public TokenType ScanOperator(char c)
         {
-            //TODO merge this pattern of punct and ops
             int i = Position;
             while (!AtEnd)
             {
                 c = AppendMoveNext(c);
-                if (Language.Punctuation.IndexOf(c)<0) break;
+                if (Language.Operators.IndexOf(c) < 0) break;
             }
 
-            return TokenType.Punctuation; 
+            return TokenType.Operator;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -781,79 +766,17 @@ namespace Scan
         ///  The SourcePreview.TokenType value.
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public TokenType ScanOperator(char c)
+        public TokenType ScanPunctuation(char c)
         {
+            //TODO merge this pattern of punct and ops
             int i = Position;
             while (!AtEnd)
             {
                 c = AppendMoveNext(c);
-                if (Language.Operators.IndexOf(c) < 0) break;
+                if (Language.Punctuation.IndexOf(c) < 0) break;
             }
 
-            return TokenType.Operator; 
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Scans a while.
-        /// </summary>
-        /// <param name="c">      The char c.</param>
-        /// <param name="valid"> string containing ASCII characters to scan the char Text.</param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ScanWhile(char c, string valid)
-        {
-            while (!AtEnd && valid.IndexOf(c) >= 0)
-            {
-                c = AppendMoveNext(c);
-            }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Scans up to the next occurrence of any of the characters in the valid string.
-        /// </summary>
-        /// <param name="c">      The char c.</param>
-        /// <param name="invalid"> string containing ASCII characters to stop On.</param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ScanWhileNot(char c, string invalid)
-        {
-            while (!AtEnd && c!= '\n' && invalid.IndexOf(c) < 0)
-            {
-                c = AppendMoveNext(c);
-            }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        ///  Method: Scan Whitespace.
-        /// </summary>
-        /// <param name="c"> The char c.</param>
-        /// <returns>
-        ///  True if successful
-        /// </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public TokenType ScanWhitespace(char c)
-        {
-            while (!AtEnd && c != '\n' && char.IsWhiteSpace(c))
-            {
-                if (c == '\r')
-                {
-                    c = MoveNext();
-                    continue;
-                }
-                if (c == '\t')
-                {
-                    int n   = TabSize - (Column % TabSize);
-                    for (int i = 0; i < n; ++i)
-                    {
-                        Token.Append(' ');
-                    }
-                    c = MoveNext();
-                    break;
-                }
-                c = AppendMoveNext(c);
-            }
-
-            return TokenType.WhiteSpace;
+            return TokenType.Punctuation;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -861,7 +784,10 @@ namespace Scan
         ///  Method: Scan Token at a position and for a length.
         /// </summary>
         /// <param name="position"> The position.</param>
-        /// <param name="length">   The length.</param>
+        /// <param name="end">       The end.</param>
+        /// <returns>
+        ///  The Scan.Token value.
+        /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public Token ScanToken(int position, int end)
         {
@@ -893,37 +819,87 @@ namespace Scan
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        ///  Method: Get Position from the row and column.
+        ///  Method: Scan Variable.
         /// </summary>
-        /// <param name="row">     The row in the buffer (line number).</param>
-        /// <param name="column">  The column in the row adjusted for left side clipping.</param>
+        /// <param name="c"> The char c.</param>
         /// <returns>
-        ///  The integer value.
+        ///  The Scan.TokenType value.
         /// </returns>
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public int GetPosition(int row, int column)
+        public TokenType ScanVariable(char c)
         {
-            MoveToLine(row);
-
-            // move back to start of line and scan to position
-
-            while (Column < column)
+            //TODO this can be a variable continue too.
+            while (!AtEnd && (char.IsLetterOrDigit(c) || c == '_'))
             {
-                if (CurrentChar == '\t')
-                {
-                    Column += TabSize - (Column % TabSize);
-                    if (Column > column)
-                    {
-                        break;
-                    }
-                }
-                MoveNext();
+                c = AppendMoveNext(c);
             }
+            return TokenType.Variable;
 
-            return Position - 1;
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Scans a while.
+        /// </summary>
+        /// <param name="c">     The char c.</param>
+        /// <param name="valid"> string containing ASCII characters to scan the char Text.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ScanWhile(char c, string valid)
+        {
+            while (!AtEnd && valid.IndexOf(c) >= 0)
+            {
+                c = AppendMoveNext(c);
+            }
+        }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Scans up to the next occurrence of any of the characters in the valid string.
+        /// </summary>
+        /// <param name="c">       The char c.</param>
+        /// <param name="invalid"> string containing ASCII characters to stop On.</param>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ScanWhileNot(char c, string invalid)
+        {
+            while (!AtEnd && c != '\n' && invalid.IndexOf(c) < 0)
+            {
+                c = AppendMoveNext(c);
+            }
+        }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  Method: Scan Whitespace.
+        /// </summary>
+        /// <param name="c"> The char c.</param>
+        /// <returns>
+        ///  True if successful
+        /// </returns>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public TokenType ScanWhitespace(char c)
+        {
+            while (!AtEnd && c != '\n' && char.IsWhiteSpace(c))
+            {
+                if (c == '\r')
+                {
+                    c = MoveNext();
+                    continue;
+                }
+                if (c == '\t')
+                {
+                    int n = TabSize - (Column % TabSize);
+                    for (int i = 0; i < n; ++i)
+                    {
+                        Token.Append(' ');
+                    }
+                    c = MoveNext();
+                    break;
+                }
+                c = AppendMoveNext(c);
+            }
+
+            return TokenType.WhiteSpace;
+        }
     }
 }
+
