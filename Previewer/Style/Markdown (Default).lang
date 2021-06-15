@@ -1,0 +1,11 @@
+Name = "Markdown (Default)"
+Ext = .md .markdown
+LineComment ="#"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = "+><|^%&!~"
+Punctuation =";?.,][{})$#@\`"
+KeyStart = "(*-/=_fhm" 
+KeyContinue = "*-/:=_afhilmopst" 
+Group =  Keywords1 Keywords2 Keywords3 Keywords4 Keywords5 Keywords6 Keywords7 Keywords8
+Keyword =  (/ 0 (ftp:// 0 (ftps:// 0 (http:// 0 (https:// 0 (mailto: 0 * 4 * 6 ** 3 ** 5 *** 2 ---- 1 / 0 ==== 1 _ 4 _ 6 __ 3 __ 5 ___ 2 ftp:// 0 ftps:// 0 http:// 0 https:// 0 mailto: 0

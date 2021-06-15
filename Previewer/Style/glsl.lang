@@ -1,12 +1,344 @@
-Name = "glsl"
+Name = "GLSL"
 Ext = .vert .frag .glsl
 Delimiter = DQuote "\"" "\\" "\""
 Delimiter = SQuote "'" "\\" "'"
-LineComment ="//"
-BlockComment = "/*" "*/"
 Operators = "-><|^%&!~"
 Punctuation ="?.,][$@\`"
-KeyStart = "#abcdefghimnoprsuvw" 
-KeyContinue = "0123456789ABCDEFGHILMNOPQRSTUVWX_abcdefghijklmnopqrstuvwxyz" 
-Group =  Prefix Numbers suffixes Operator Keywords1 Keywords2 Keywords3 Keywords4 Keywords5
-Keyword =  #line 0 #version 0 gl_MaxAtomicCounterBindings 2 gl_MaxAtomicCounterBufferSize 2 gl_MaxCombinedAtomicCounterBuffers 2 gl_MaxCombinedAtomicCounters 2 gl_MaxCombinedImageUnitsAndFragmentOutputs 2 gl_MaxImageSamples 2 gl_MaxVertexImageUniforms 2 gl_MaxTessControlImageUniforms 2 gl_MaxTessEvaluationImageUniforms 2 gl_MaxGeometryImageUniforms 2 gl_MaxFragmentImageUniforms 2 gl_MaxCombinedImageUniforms 2 gl_MaxFragmentUniformComponents 2 gl_MaxDrawBuffers 2 gl_MaxClipDistances 2 gl_MaxGeometryTextureImageUnits 2 gl_MaxGeometryOutputVertices gl_MaxGeometryTotalOutputComponents 2 gl_MaxGeometryUniformComponents 2 gl_MaxGeometryVaryingComponents 2 gl_MaxTessControlInputComponents 2 gl_MaxFragmentAtomicCounterBuffers 2 gl_MaxFragmentAtomicCounters 2 gl_MaxFragmentUniformVectors 2  gl_MaxGeometryAtomicCounterBuffers 2 gl_MaxGeometryAtomicCounters 2 gl_MaxPatchVertices 2 gl_MaxProgramTexelOffset 2 gl_MaxTessControlAtomicCounterBuffers 2 gl_MaxTessControlAtomicCounters 2 gl_MaxTessControlOutputComponents 2 gl_MaxTessControlTextureImageUnits 2 gl_MaxTessControlTotalOutputComponents 2 gl_MaxTessControlUniformComponents 2 gl_MaxTessEvaluationAtomicCounterBuffers 2 gl_MaxTessEvaluationAtomicCounters 2 gl_MaxTessEvaluationInputComponents 2  gl_MaxTessEvaluationOutputComponents 2 gl_MaxTessEvaluationTextureImageUnits 2 gl_MaxTessEvaluationUniformComponents 2 gl_MaxTessGenLevel 2 gl_MaxTessPatchComponents 2 gl_MaxVaryingVectors 2 gl_MaxVertexAtomicCounterBuffers 2 gl_MaxVertexAtomicCounters 2 gl_MaxVertexUniformVectors 2 gl_MaxViewports 2 gl_MinProgramTexelOffset 2 gl_Position gl_PointSize 2 gl_ClipDistance 2 gl_in 2 gl_PrimitiveIDIn 2 gl_InvocationID 2 gl_Layer 2 gl_ViewportIndex 2 gl_PatchVerticesIn 2 gl_InvocationID 2 gl_out 2 gl_TessLevelOuter 2 gl_TessLevelInner 2 gl_PatchVerticesIn 2 gl_PrimitiveID 2 gl_TessCoord 2 gl_FragCoord 2 gl_FrontFacing 2 gl_ClipDistance 2 gl_PointCoord 2 gl_PrimitiveID 2 gl_SampleID 2 gl_SamplePosition 2 gl_SampleMaskIn 2 gl_Layer 2 gl_ViewportIndex 2 gl_FragDepth 2 gl_SampleMask 2 if 5  packDouble2x32 3 unpackDouble2x32 3 packHalf2x5 3 unpackHalf2x5 3 length 4 distance 4 dot 4 cross 4  normalize 4 faceforward 4 reflect 4 refract 4 matrixCompMult 4 outerProduct 4 transpose 4 determinant 4 inverse 4 lessThan 4 lessThanEqual 4 greaterThan 4 greaterThanEqual 4 equal 4 notEqual 4 any 4 all 4 not 4 uaddCarry 4 usubBorrow umulExtended 4 imulExtended 4 bitfieldExtract 4 bitfieldInsert 4 bitfieldReverse 4 findLSB 4 bitCount 4 findMSB 4 textureSize 4 textureQueryLod 4 textureQueryLevels 4 texture 4 textureProj 4 textureLod 4 textureOffset 4 texelFetch 4 texelFetchOffset 4 textureProjOffset 4 textureLodOffset 4 textureProjLod 4 textureProjLodOffset 4 textureGrad 4 textureGradOffset 4 textureProjGrad 4 textureProjGradOffset 4 textureGather 4 textureGatherOffset 4  textureGatherOffsets 5 texture1D 5 texture1DProj 5 texture1DLod 5 texture1DProjLod 5 texture2D 5 texture2DProj 5 texture2DLod 5 texture2DProjLod 5 texture3D 5 texture3DProj 5 texture3DLod 5 texture3DProjLod 5 textureCube 5 textureCubeLod 5 shadow1D 5 shadow2D 5 shadow1DProj 5 shadow2DProj 5 shadow1DLod 5 shadow2DLod 5 shadow1DProjLod 5 shadow2DProjLod 5 atomicCounterIncrement 5 atomicCounterDecrement 5 atomicCounter 5 atomicAdd 5 atomicMin 5  atomicMax 5 atomicAnd 5 atomicOr 5 atomicXor 5 atomicExchange 5 atomicCompSwap 5 imageSize 5 imageLoad 5 imageStore 5 imageAtomicAdd 5 imageAtomicMin 5 imageAtomicMax 5 imageAtomicAnd 5 imageAtomicOr 5 imageAtomicXor 5  imageAtomicExchange  3 imageAtomicCompSwap  3 dFdx  3 dFdy  3 fwidth  3 interpolateAtCentroid  3 interpolateAtSample  3 interpolateAtOffset  3 noise1  3 noise2  3 noise3  3 noise4  3 EmitStreamVertex  3 EndStreamPrimitive  3 EmitVertex  3 EndPrimitive  3 barrier  3 memoryBarrier  3 memoryBarrierAtomicCounter  3 memoryBarrierBuffer  3 memoryBarrierShared  3 memoryBarrierImage  3 groupMemoryBarrier uint 2 #define 0 #undef 0 #if 0 #ifdef 0 #ifndef 0 #else 0 #elif 0 #endif 0 #error 0 #pragma 0 #extension 0 attribute 5 bool 3 buffer 5 bvec2 3 bvec3 3 bvec4 3 case 5 const 5 continue 5 default 5 dmat2 3 dmat2x2 3 dmat2x3 3 dmat2x4 3 mat3x2 3 dmat3 3 dmat3x2 3 dmat3x3 3 dmat3x4 3 mat4x2 3 dmat4 3 mat2x2 3 dmat4x2 3 dmat4x3 3 dmat4x4 3 vec2 3 do 5 double 3 dvec2 3 dvec3 3 dvec4 3 else 2 subroutine 3 in 1 false 2 invariant 2 discard 5 flat 5 float 3 for 5 gl_MaxComputeWorkGroupCount 5 gl_MaxComputeWorkGroupSize 2 gl_MaxComputeUniformComponents 2 gl_MaxComputeTextureImageUnits 2 gl_MaxComputeImageUniforms 2 gl_MaxComputeAtomicCounters 2 gl_MaxComputeAtomicCounterBuffers 2 gl_MaxVertexAttribs 2 gl_MaxVertexUniformComponents 2 gl_MaxVaryingComponents 2 gl_MaxVertexOutputComponents 2 gl_MaxGeometryInputComponents 2 gl_MaxGeometryOutputComponents 2 gl_MaxFragmentInputComponents 2 gl_MaxVertexTextureImageUnits 2 gl_MaxCombinedTextureImageUnits 2 gl_MaxTextureImageUnits 2 gl_MaxImageUnits 2 gl_NumWorkGroups 2 gl_WorkGroupSize 2 gl_WorkGroupID 2 gl_LocalInvocationID 2 gl_GlobalInvocationID 2 gl_LocalInvocationIndex 2 gl_VertexID 2 gl_InstanceID gl_PerVertex 2 highp 5 iimage1D 3 iimage1DArray 3 iimage2D 3 iimage2DArray 3 iimage2DMS 3 iimage2DMSArray 3 iimage2DRect 3 iimage3D 3 iimageBuffer 3 iimageCube 3 iimageCubeArray 3 inout 3 true 5 int 3 isampler2D 3 isampler2DArray 3 usampler1D 3 isampler2DMS 3 isampler2DMSArray 3 isampler2DRect 3 isampler3D 3 isamplerBuffer 3 isamplerCube 3 isampler1DArray 3 isamplerCubeArray 3 ivec2 3 ivec3 3 ivec4 3 mat2x3 3 mat2x4 3 mat3 3 mat3x3 3 mat3x4 3 mat4 3 mat4x3 3 mat4x4 3 mediump 5 noperspective 3 patch 5 out 5 precision 5 radians 5 degrees 4 sin 4 cos 4 tan 4 asin 4 acos 4 atan 4 sinh 4 cosh 4 tanh 4 asinh 4 acosh 4 atanh 4 pow 4 exp 4 log 4 exp2 4 log2 4 sqrt 4 inversqrt 4 abs 4 sign 4 floor 4 trunc 4 round 4 roundEven 4 ceil 4 fract 4 mod 4 modf 4 min 4 max 4 clamp 4 mix 4 step 4 smoothstep 4 isnan 4 isinf 4 floatBitsToInt 4 floatBitsToUInt 4 intBitsToFloat 4 uintBitsToFloat 4 fma 4 frexp 4 ldexp 4 packUnorm2x5 4 packSnorm2x5 4 packUnorm4x8 4 packSnorm4x8 4 unpackUnorm2x5 4 unpackSnorm2x5 4 unpackUnorm4x8 4  unpackSnorm4x8 21 readonly 5 restrict 5 return 2 lowp 5 sample 2 break 5 sampler1D 3 sampler2D 3 sampler2DArray 2 sampler1DArrayShadow 3 sampler2DArrayShadow isampler1D 3 sampler2DRectShadow 3 sampler2DShadow 3 sampler3D 3 samplerCube 3  sampler1DShadow 3 samplerCubeArrayShadow 3 samplerCubeShadow 3 sampler1DArray 3 shared3coherent 5 smooth 5 switch 5 uimage1D3image2D 3 uimage1DArray3image2DArray 3 uimage2D3image3D 3 uimage2DArray3imageCubeArray 3 uimage2DMS3image2DMSArray 3 uimage2DMSArray3atomic_uint3mat2 3 uimage2DRect3imageCube 3 uimage3D3image2DRect 3 uimageBuffer3image1DArray 3 uimageCube3imageBuffer 3 uimageCubeArray3image2DMS 3 uniform 5 usampler2D 3 usampler2DArray3sampler2DRect 3 usampler2DMS3sampler2DMSArray 3 usampler2DMSArray3samplerCubeArray 3 usampler2DRect3samplerBuffer 3 usampler3D 3 usamplerBuffer3sampler2DMS 3 usamplerCube3usampler1DArray 3 usamplerCubeArray3image1D 3 uvec2 3 uvec3 3 uvec4 3 varying 5 vec3 3 vec4 3 void 3 volatile 5 while 5 writeonly3struct3layout 3 centroid 5 
+KeyStart = "#()+012:;=abcdefghimnoprsuvw{}" 
+KeyContinue = "
+"#*/0123456789;ABCDEFGHILMNOPQRSTUVWX_abcdefghijklmnopqrstuvwxyz" 
+Group =  Comments Numbers, additional Numbers, prefixes Numbers, extras with prefixes Numbers, suffixes Operators1 Operators2 Folders in code1, open Folders in code1, middle Folders in code1, close Folders in code2, open Folders in code2, middle Folders in code2, close Folders in comment, open Folders in comment, middle Folders in comment, close Keywords1 Keywords2 Keywords3 Keywords4 Keywords5 Keywords6 Keywords7 Keywords8 Delimiters
+Keyword =  
+#line
+ 18 
+#version 18 
+gl_MaxAtomicCounterBindings 20 
+gl_MaxAtomicCounterBufferSize 20 
+gl_MaxCombinedAtomicCounterBuffers 20 
+gl_MaxCombinedAtomicCounters 20 
+gl_MaxCombinedImageUnitsAndFragmentOutputs
+gl_MaxImageSamples
+gl_MaxVertexImageUniforms
+gl_MaxTessControlImageUniforms
+gl_MaxTessEvaluationImageUniforms
+gl_MaxGeometryImageUniforms
+gl_MaxFragmentImageUniforms
+gl_MaxCombinedImageUniforms
+gl_MaxFragmentUniformComponents
+gl_MaxDrawBuffers
+gl_MaxClipDistances
+gl_MaxGeometryTextureImageUnits
+gl_MaxGeometryOutputVertices
+gl_MaxGeometryTotalOutputComponents
+gl_MaxGeometryUniformComponents
+gl_MaxGeometryVaryingComponents
+gl_MaxTessControlInputComponents 20 
+gl_MaxFragmentAtomicCounterBuffers 20 
+gl_MaxFragmentAtomicCounters 20 
+gl_MaxFragmentUniformVectors 20 
+gl_MaxGeometryAtomicCounterBuffers 20 
+gl_MaxGeometryAtomicCounters 20 
+gl_MaxPatchVertices 20 
+gl_MaxProgramTexelOffset 20 
+gl_MaxTessControlAtomicCounterBuffers 20 
+gl_MaxTessControlAtomicCounters 20 
+gl_MaxTessControlOutputComponents 20 
+gl_MaxTessControlTextureImageUnits 20 
+gl_MaxTessControlTotalOutputComponents 20 
+gl_MaxTessControlUniformComponents 20 
+gl_MaxTessEvaluationAtomicCounterBuffers 20 
+gl_MaxTessEvaluationAtomicCounters 20 
+gl_MaxTessEvaluationInputComponents 20 
+gl_MaxTessEvaluationOutputComponents 20 
+gl_MaxTessEvaluationTextureImageUnits 20 
+gl_MaxTessEvaluationUniformComponents 20 
+gl_MaxTessGenLevel 20 
+gl_MaxTessPatchComponents 20 
+gl_MaxVaryingVectors 20 
+gl_MaxVertexAtomicCounterBuffers 20 
+gl_MaxVertexAtomicCounters 20 
+gl_MaxVertexUniformVectors 20 
+gl_MaxViewports 20 
+gl_MinProgramTexelOffset 20 
+gl_Position
+gl_PointSize
+gl_ClipDistance
+gl_in
+gl_PrimitiveIDIn
+gl_InvocationID
+gl_Layer
+gl_ViewportIndex
+gl_PatchVerticesIn
+gl_InvocationID
+gl_out
+gl_TessLevelOuter
+gl_TessLevelInner
+gl_PatchVerticesIn
+gl_PrimitiveID
+gl_TessCoord
+gl_FragCoord
+gl_FrontFacing
+gl_ClipDistance
+gl_PointCoord
+gl_PrimitiveID
+gl_SampleID
+gl_SamplePosition
+gl_SampleMaskIn
+gl_Layer
+gl_ViewportIndex
+gl_FragDepth
+gl_SampleMask 19 
+if 16 
+packDouble2x32
+unpackDouble2x32
+packHalf2x16
+unpackHalf2x16
+length
+distance
+dot
+cross
+normalize
+faceforward
+reflect
+refract
+matrixCompMult
+outerProduct
+transpose
+determinant
+inverse
+lessThan
+lessThanEqual
+greaterThan
+greaterThanEqual
+equal
+notEqual
+any
+all
+not
+uaddCarry
+usubBorrow
+umulExtended
+imulExtended
+bitfieldExtract
+bitfieldInsert
+bitfieldReverse
+findLSB
+bitCount
+findMSB
+textureSize
+textureQueryLod
+textureQueryLevels
+texture
+textureProj
+textureLod
+textureOffset
+texelFetch
+texelFetchOffset
+textureProjOffset
+textureLodOffset
+textureProjLod
+textureProjLodOffset
+textureGrad
+textureGradOffset
+textureProjGrad
+textureProjGradOffset
+textureGather
+textureGatherOffset
+textureGatherOffsets
+texture1D 21 
+texture1DProj
+texture1DLod
+texture1DProjLod
+texture2D
+texture2DProj
+texture2DLod
+texture2DProjLod
+texture3D
+texture3DProj
+texture3DLod
+texture3DProjLod
+textureCube
+textureCubeLod
+shadow1D
+shadow2D
+shadow1DProj
+shadow2DProj
+shadow1DLod
+shadow2DLod
+shadow1DProjLod
+shadow2DProjLod
+atomicCounterIncrement
+atomicCounterDecrement
+atomicCounter
+atomicAdd
+atomicMin
+atomicMax
+atomicAnd
+atomicOr
+atomicXor
+atomicExchange
+atomicCompSwap
+imageSize
+imageLoad
+imageStore
+imageAtomicAdd
+imageAtomicMin
+imageAtomicMax
+imageAtomicAnd
+imageAtomicOr
+imageAtomicXor
+imageAtomicExchange
+imageAtomicCompSwap
+dFdx
+dFdy
+fwidth
+interpolateAtCentroid
+interpolateAtSample
+interpolateAtOffset
+noise1
+noise2
+noise3
+noise4
+EmitStreamVertex
+EndStreamPrimitive
+EmitVertex
+EndPrimitive
+barrier
+memoryBarrier
+memoryBarrierAtomicCounter
+memoryBarrierBuffer
+memoryBarrierShared
+memoryBarrierImage
+groupMemoryBarrier 21 
+uint 17 #
+#define
+#undef
+#if
+#ifdef
+#ifndef
+#else
+#elif
+#endif
+#error
+#pragma
+#extension 18 ( 5 ) 5 + 5 00" 24 00// 0 01 0 01 24 02 0 02" 24 03 24 03/* 0 04 24 04*/ 0 05 24 06 24 07 24 08 24 09 24 10 24 11 24 12 24 13 24 14 24 15 24 16 24 17 24 18 24 19 24 20 24 21 24 22 24 23 24 : 5 ; 5 = 5 attribute 16 bool 17 buffer 16 bvec2 17 bvec3 17 bvec4 17 case 16 const 16 continue 16 default 16 dmat2 17 dmat2x2 17 dmat2x3 17 dmat2x4
+mat3x2 17 dmat3 17 dmat3x2 17 dmat3x3 17 dmat3x4
+mat4x2 17 dmat4
+mat2x2 17 dmat4x2 17 dmat4x3 17 dmat4x4
+vec2 17 do 16 double 17 dvec2 17 dvec3 17 dvec4 17 else
+subroutine
+in 16 false
+invariant
+discard 16 flat 16 float 17 for 16 gl_MaxComputeWorkGroupCount
+gl_MaxComputeWorkGroupSize
+gl_MaxComputeUniformComponents
+gl_MaxComputeTextureImageUnits
+gl_MaxComputeImageUniforms
+gl_MaxComputeAtomicCounters
+gl_MaxComputeAtomicCounterBuffers
+gl_MaxVertexAttribs
+gl_MaxVertexUniformComponents
+gl_MaxVaryingComponents
+gl_MaxVertexOutputComponents
+gl_MaxGeometryInputComponents
+gl_MaxGeometryOutputComponents
+gl_MaxFragmentInputComponents
+gl_MaxVertexTextureImageUnits
+gl_MaxCombinedTextureImageUnits
+gl_MaxTextureImageUnits
+gl_MaxImageUnits 20 gl_NumWorkGroups
+gl_WorkGroupSize
+gl_WorkGroupID
+gl_LocalInvocationID
+gl_GlobalInvocationID
+gl_LocalInvocationIndex
+gl_VertexID
+gl_InstanceID
+gl_PerVertex 19 highp 16 iimage1D 17 iimage1DArray 17 iimage2D 17 iimage2DArray 17 iimage2DMS 17 iimage2DMSArray 17 iimage2DRect 17 iimage3D 17 iimageBuffer 17 iimageCube 17 iimageCubeArray 17 inout
+true 16 int 17 isampler2D 17 isampler2DArray
+usampler1D 17 isampler2DMS 17 isampler2DMSArray 17 isampler2DRect 17 isampler3D 17 isamplerBuffer 17 isamplerCube
+isampler1DArray 17 isamplerCubeArray 17 ivec2 17 ivec3 17 ivec4 17 mat2x3 17 mat2x4 17 mat3 17 mat3x3 17 mat3x4 17 mat4 17 mat4x3 17 mat4x4 17 mediump 16 noperspective
+patch 16 out 16 precision 16 radians
+degrees
+sin
+cos
+tan
+asin
+acos
+atan
+sinh
+cosh
+tanh
+asinh
+acosh
+atanh
+pow
+exp
+log
+exp2
+log2
+sqrt
+inversqrt
+abs
+sign
+floor
+trunc
+round
+roundEven
+ceil
+fract
+mod
+modf
+min
+max
+clamp
+mix
+step
+smoothstep
+isnan
+isinf
+floatBitsToInt
+floatBitsToUInt
+intBitsToFloat
+uintBitsToFloat
+fma
+frexp
+ldexp
+packUnorm2x16
+packSnorm2x16
+packUnorm4x8
+packSnorm4x8
+unpackUnorm2x16
+unpackSnorm2x16
+unpackUnorm4x8
+unpackSnorm4x8 21 readonly 16 restrict 16 return
+
+lowp 16 sample
+break 16 sampler1D 17 sampler2D 17 sampler2DArray
+sampler1DArrayShadow 17 sampler2DArrayShadow
+isampler1D 17 sampler2DRectShadow 17 sampler2DShadow 17 sampler3D 17 samplerCube
+sampler1DShadow 17 samplerCubeArrayShadow 17 samplerCubeShadow
+sampler1DArray 17 shared
+coherent 16 smooth 16 switch 16 uimage1D
+image2D 17 uimage1DArray
+image2DArray 17 uimage2D
+image3D 17 uimage2DArray
+imageCubeArray 17 uimage2DMS
+image2DMSArray 17 uimage2DMSArray
+atomic_uint
+mat2 17 uimage2DRect
+imageCube 17 uimage3D
+image2DRect 17 uimageBuffer
+image1DArray 17 uimageCube
+imageBuffer 17 uimageCubeArray
+image2DMS 17 uniform 16 usampler2D 17 usampler2DArray
+sampler2DRect 17 usampler2DMS
+sampler2DMSArray 17 usampler2DMSArray
+samplerCubeArray 17 usampler2DRect
+samplerBuffer 17 usampler3D 17 usamplerBuffer
+sampler2DMS 17 usamplerCube
+usampler1DArray 17 usamplerCubeArray
+image1D 17 uvec2 17 uvec3 17 uvec4 17 varying 16 vec3 17 vec4 17 void 17 volatile 16 while 16 writeonly
+struct
+layout
+centroid 16 { 5 { 7 } 5 } 9 }; 9

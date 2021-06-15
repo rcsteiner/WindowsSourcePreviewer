@@ -3,10 +3,11 @@ Ext = .g .grammar .err .lst .production .lstraw
 LineComment ="//"
 Delimiter = DQuote "\"" "\\" "\""
 Delimiter = SQuote "'" "\\" "'"
-Delimiter = EQuote "`" "" "`"
 Operators = "-+=><|^%*&/!~"
-Punctuation =":;?.,][{})($#@\"
+Punctuation =":;?.,][{})($#@\`"
 KeyStart = "ACDEFGIKLMNOPSTUVWY" 
-KeyContinue = "CDEFGKLMNOPSTYabcdefghiklmnoprstuwxyz" 
+KeyContinue = "
+"CDEFGKLMNOPSTYabcdefghiklmnoprstuwxyz" 
 Group =  Keywords1 Keywords2 Keywords3 Keywords4 Keywords5 Keywords6 Keywords7 Keywords8
-Keyword =  ANY 6 Alias 0 Author 4 Comment 6 Date 4 EMPTY 2 EOF 6 EOL 6 Enum 2 Eol 6 Error 1 Extension 4 Extensions 4 Fatal 5 FunctionDef 0 Grammar 0 Identifier 6 Info 3 Keyword 6 LexMode 4 Lexical 0 Loaded" 7 Map 2 MaxChar 4 Namespace 4 Note 1 Operato 6 Operator 6 Public 4 Punctuation 6 SOF 6 Stages 7 Start 4 SubGrammar 0 Syntax 0 TOKEN 2 TabSize 4 Token 4 Tokenizer 0 Use 2 Version 4 Warn 1 Whitespace 6 Yes Compiler 7
+Keyword =  ANY 6 Alias 0 Author 4 Comment 6 Date 4 EMPTY 2 EOF 6 EOL 6 Enum 2 Eol 6 Error 1 Extension 4 Extensions 4 Fatal 5 FunctionDef 0 Grammar 0 Identifier 6 Info 3 Keyword 6 LexMode 4 Lexical 0 Loaded" 7 Map 2 MaxChar 4 Namespace 4 Note 1 Operato 6 Operator 6 Public 4 Punctuation 6 SOF 6 Stages 7 Start 4 SubGrammar 0 Syntax 0 TOKEN 2 TabSize 4 Token 4 Tokenizer 0 Use 2 Version 4 Warn 1 Whitespace 6 Yes
+"Compiler 7
