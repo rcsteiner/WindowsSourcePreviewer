@@ -1,4 +1,4 @@
-Name = "javascript.js"
+Name = "js"
 Ext = .js .jsm .jsx .ts .tsx
 LineComment ="//"
 BlockComment = "/*" "*/"

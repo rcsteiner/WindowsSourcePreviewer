@@ -233,7 +233,7 @@
     <EmbeddedResource Include="Previewer\Style\ini.lang" />
     <EmbeddedResource Include="Previewer\Style\inno.lang" />
     <EmbeddedResource Include="Previewer\Style\java.lang" />
-    <EmbeddedResource Include="Previewer\Style\javascript.lang" />
+    <EmbeddedResource Include="Previewer\Style\js.lang" />
     <EmbeddedResource Include="Previewer\Style\json.lang" />
     <EmbeddedResource Include="Previewer\Style\jsp.lang" />
     <EmbeddedResource Include="Previewer\Style\kix.lang" />

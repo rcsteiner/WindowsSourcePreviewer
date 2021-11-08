@@ -1,6 +1,8 @@
 Name = "Markdown"
 Ext = .md .markdown
 LineComment ="#"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
 Operators = "+><|^%&!~"
 Punctuation =";?.,][{})$#@\`"
 KeyStart = "(*-/=_fhm" 
