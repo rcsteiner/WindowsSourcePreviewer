@@ -1,6 +1,7 @@
 ﻿Name = "kaitai_struct"
 Ext = .ksy
-LineComment = ""
+LineComment = "#"
+DocComment = "doc"
 Delimiter = DQuote "\"" ""  "\""
 Delimiter = SQuote "'"  ""  "'"
 Operators = "-+=><|^%*&/!~"
