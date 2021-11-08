@@ -1,0 +1,13 @@
+Name = "scala"
+Ext = .scala
+LineComment ="//"
+BlockComment = "/*" "*/"
+Delimiter = DQuote "\"" "\\" "\""
+Delimiter = SQuote "'" "\\" "'"
+Operators = ":-+=><|^%*&/!~"
+Punctuation =";?.,][{})($#@\`"
+KeyStart = "abcdefgilmnoprstuvwx" 
+KeyContinue = "abcdefghiklmnopqrstuvwxyz" 
+Group =  instre1 type1
+Keyword =abstract 1 case 0 catch 0 class 1 def 1 do 0 else 0 extends 2 false 3 final 0 finally 0 for 0 forSome 0 if 0 implicit 0 import 0 lazy 0 match 0 new 3 null 3 object 1 override 2 package 2 private 2 protected 2 return 0 sealed 0 super 0 this 3 throw 0 trait 0 true 3 try 0 type 1 val 0 var 1 while 0 with 0 yield 1 
+

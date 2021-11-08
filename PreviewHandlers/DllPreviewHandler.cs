@@ -15,12 +15,12 @@ namespace SourcePreview
     ///  The Zip Preview Handler Class definition.
     /// </summary>
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    [PreviewHandler("RCS ZIP Preview Handler", ".zip;.jar;.gadget;.vsix", "{D694DE84-EE56-46E2-8EEC-69B44C86BDA6}")]
-    [ProgId("RCS.ZipPreviewHandler")]
-    [Guid("AC73332B-6C6F-4250-957A-2B2813CC3FD2")]
+    [PreviewHandler("RCS DLL Preview Handler", ".dll;.exe", "{D694DE84-EE56-46E2-8EEC-69B44C86BDA7}")]
+    [ProgId("RCS.DllPreviewHandler")]
+    [Guid("AC73332B-6C6F-4250-957A-2B2813CC3FDE")]
     [ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
-    public  class ZipPreviewHandler : FileBasedPreviewHandler
+    public  class DllPreviewHandler : FileBasedPreviewHandler
     {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,11 +33,11 @@ namespace SourcePreview
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         protected override PreviewHandlerControl CreatePreviewHandlerControl()
         {
-            Trace.WriteLine("ZIP Control Create");
+            Trace.WriteLine("DLL Control Create");
 
             try
             {
-                return new ZipPreviewHandlerControl();
+                return new DllPreviewHandlerControl();
             }
             catch (Exception e)
             {
@@ -52,7 +52,7 @@ namespace SourcePreview
     ///  The Zip Preview Handler Control Class definition.
     /// </summary>
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public class ZipPreviewHandlerControl : FileBasedPreviewHandlerControl
+    public class DllPreviewHandlerControl : FileBasedPreviewHandlerControl
     {
         private FileTypeIconProvider _iconProvider = new FileTypeIconProvider();
 
@@ -64,7 +64,7 @@ namespace SourcePreview
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public override void Load(FileInfo file)
         {
-            Trace.WriteLine("PreviewHandler Load Start");
+            Trace.WriteLine("Dll Load Start");
 
             var folderView                = new TreeView();
             folderView.ImageList          = _iconProvider.Icons;

@@ -1,0 +1,11 @@
+﻿Name = "kaitai_struct"
+Ext = .ksy
+LineComment = ""
+Delimiter = DQuote "\"" ""  "\""
+Delimiter = SQuote "'"  ""  "'"
+Operators = "-+=><|^%*&/!~"
+Punctuation =":;?.,][{})($@\`"
+KeyStart = "?abcdefghijklmnopqrstuvwy" 
+KeyContinue = "abcdefghijklmnopqrstuvwxyz-12480"  
+Group =  Gen Com Char Type
+Keyword =  meta 0 title 0 application 0 file-extension  0 pronom  0 wikidata 0 license  0 ks-version 0 endian 0 doc-ref 0 xref 0 seq 2 id 2 pos 2 type 2 enums 2 instances 2 contents 2 size 2 enum 1 repeat 1 repeat-expr 1 if 1 value 1 encoding 2 eos 2 body 2 orig-id 2 doc 3 ascii 3 utf-8 3 utf8-16 3 pad-right 4 u1 4 u2 4 u4 4 u8 4 s1 4 s2 4 s4 4 s8 4 str 4
